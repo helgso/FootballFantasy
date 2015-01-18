@@ -6,6 +6,13 @@
 
 http://api.football-data.org/index
 
-Ég sótti um API lykil og hann er 311bb4210f3440cdb289518ebdd3e85e
+Náið í JSON viewer til að einfalda lestur JSON gagnanna.
+Fyrir Chrome: https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en
+Fyrir Firefox: https://addons.mozilla.org/en-us/firefox/addon/jsonview/
 
-Þegar við höfum fattað hvernig við sækjum gögnin getum við farið að byrja að setja þetta í einn gagnagrunn sem forritið okkar sækir í og farið að byrja almennilega.
+Hérna eru t.d. 32 lið úr Premier League sem við getum valið úr:
+http://api.football-data.org/alpha/soccerseasons/362/teams
+
+Þurfum að lágmarki 10 fyrir verkefnið. Hægt að ýta á "Players" til að fá upplýsingar um alla leikmenn liða
+
+Hendum upplýsingum um þessa leikmenn inn í sqlite gagnagrunn sem forritið okkar mun hafa samband við. Get tekið það að mér, lærði smá um þetta í vefforritun. Þurfum bara að sameinast um hvernig við byggjum upp gagnagrunninn og hvaða lið við veljum
