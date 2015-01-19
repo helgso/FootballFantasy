@@ -16,3 +16,7 @@ http://api.football-data.org/alpha/soccerseasons/362/teams
 Þurfum að lágmarki 10 fyrir verkefnið. Hægt að ýta á "Players" til að fá upplýsingar um alla leikmenn liða
 
 Hendum upplýsingum um þessa leikmenn inn í sqlite gagnagrunn sem forritið okkar mun hafa samband við. Get tekið það að mér, lærði smá um þetta í vefforritun. Þurfum bara að sameinast um hvernig við byggjum upp gagnagrunninn og hvaða lið við veljum
+
+19/01 Helgi:
+32 lið til að velja úr og upplýaingar um leikmenn og þess háttar: http://api.football-data.org/alpha/soccerseasons/362/teams
+Niðurstöður leikja: http://api.football-data.org/alpha/soccerseasons/354/fixtures
