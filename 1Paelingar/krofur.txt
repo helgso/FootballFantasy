@@ -1,0 +1,18 @@
+requirements:
+	1) öll gögn um leikmenn
+	2) myndir
+	3) verð út frá tölfræði sem við fáum (t.d. mörk skoruð í fortiðinni,...)
+	4) stiga kerfi fyrir leikmenn (algrím)
+		- eftir stöðum (varna menn, sóknarmenn)
+		- mörk, stoðsendingar, halda hreinu, o.s.fl
+		- spjöld gefin
+		- timi inná velli
+		- 
+	5) vinsældir hækkar verð leikmanna
+	6) gera initial verð útfrá gögnum (t.d. staða) sem við fáum og síðan breytist það með tima
+	7) simulation fyrir leiki eins nákvæmt og við teljum nauðsyn
+	8) allir byrja með 0 stig
+	9) 
+	
+
+		
