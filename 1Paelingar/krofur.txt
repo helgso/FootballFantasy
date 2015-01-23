@@ -91,7 +91,7 @@ requirements:
 			  
 				
 	
-	7) Sjá viðmiðunar reglur á heimasíðu premier league.
-	
+	7) Sjá viðmiðunar reglur á heimasíðu premier league við uppbyggingu lógíkar
+		http://fantasy.premierleague.com/rules/
 
-		
+
