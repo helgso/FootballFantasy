@@ -1,97 +1,105 @@
-requirements:
+Requirements
 	
 	
-	1) ÷ll gˆgn um leikmenn
-		- Staa · vellinum 		-> GK,DF,MF,FW (breytist ekkert · mean leikur spilast)
-		- aukenni 				-> Nafn leikmanns (getur lÌka veri me treyjun˙mer sem vÊri auka)		
-		- LÌkur · 				-> meisli, spjaldi o.frv.	
-		- Timi inn· velli 		-> n˙verandi leik og Ì ˆllum leikjum samanlagt
-		- Stig					-> n˙verandi leik og Ì ˆllum leikjum samanlagt (byrja Ì n˙lli)
-		- Brot					-> gult og rau spjˆld
-		- vinsÊldir				-> byrja Ì n˙lli
-		
-	
-	
-	
-	2) Myndir
-		- Logo li.
-		- Mynd af leikmanni ea treyju.
-		- Jafnvel mynd af vÌgvˆllunum.
-	
-	
-	3) Ver ˙t fr· tˆlfrÊi sem vi f·um fr· gˆgnum
-		- Skoru mˆrk
-			* · andstÊingin
-			* Sj·lfsmark
-		- stosendingar
-		- Timi inn· velli
-		
-	
-	
-	4) stiga kerfi fyrir leikmenn (algrÌm)
-		
-		- Eftir stˆum · vellinum
-			+ Mark
-				* ¡ andstÊingin
-				* Sj·lfsmark
-				* Halda hreinu
-				* Vari mark
-			+ Stosendingar
-		
-		- Brot
-			+ Gult spjald
-			+ Rautt spjald
-		
-		- timi inn· velli
-		
-	
-		
-		
-	5) Vinna ˙r gˆgnum sem gefin eru Ì byrjun
-		- Finna ˙t
-			+ Me hvaa lii hver leikmaur spilar me.
-			+ Myndir
-				* Passa vi leikmenn
-				* Passa vi leikfÈlag
-				* Passa vi leikvˆllinn (mˆguleiki)
+1) Finna og s√¶kja √∂ll g√∂gn um leikmenn ( 5 dagar )
+
+	- Sta√∞a √° vellinum     	-> GK,DF,MF,FW (breytist ekkert √° me√∞an leikur spilast)
+    	- au√∞kenni    		-> Nafn leikmanns
+	- L√≠kur √°     		-> mei√∞sli, spjaldi o.frv.	
+	- Timi inn√° velli     	-> n√∫verandi leik og √≠ √∂llum leikjum samanlagt
+	- Stig    		-> n√∫verandi leik og √≠ √∂llum leikjum samanlagt (byrja √≠ n√∫lli)
+	- Brot    		-> gult og rau√∞ spj√∂ld
+	- vins√¶ldir   	 	-> byrja √≠ n√∫lli
+	- Myndir 
+	    	+ Logo li√∞.
+	    	+ Mynd af leikmanni e√∞a treyju.
+		        * Passa vi√∞ leikmenn
+		        * Passa vi√∞ leikf√©lag
+		        * Passa vi√∞ leikv√∂llinn (m√∂guleiki)
+	    	+ Jafnvel mynd af v√≠gv√∂llunum.
+
+
+2) Uppbygging √° k√≥√∞a ( 15 dagar )
+	- Meginklasi Football Fantasy sem r√¶sir leikinn (vi√∞ getum nota√∞ hann sem TEST klasa)
+		+ Player.java 	- Einstaka leikma√∞ur √∫r ensku √∫rvalsdeildinni
+		+ Team.java	- Tekur g√∂gn fr√° Player.java
+		+ Match.java	- B√∫i√∞ til √æegar eitt stykki match √° s√©r sta√∞
+		+ Sql.java	- Hefur samband vi√∞ DB til a√∞ f√° g√∂gn
+			- N√°√∞ √≠ alla leikmenn - nafn
+			- N√°√∞ √≠ alla leikmenn √∫r einhverju li√∞i
+			- Uppf√¶ra stig
+			- N√°√∞ √≠ eftirfarandi hj√° leikmanni
+				* Spj√∂ld
+				* M√∂rk
+				* Stig
+				* Sto√∞sendingar ETC
+		+ rounds.java - fer √≠ gegnum 5 leiki og breytir grunninum skv. √æv√≠
+		+ USERTeam.java er li√∞i√∞ sem notandinn velur
+					
 	
 	
 	
-	
-	6) Simulation
-		-  Eins n·kvÊmt og vi teljum nausyn.
+3) Simulation ( 30 dagar )
+   
+    - Sj√° vi√∞mi√∞unar reglur √° heimas√≠√∞u premier league vi√∞ uppbyggingu l√≥g√≠kar
+      http://fantasy.premierleague.com/rules/
+      
+    -  Eins n√°kv√¶mt og vi√∞ teljum nau√∞syn.
+    	
+    	* Umfer√∞ir
+	        > Hvert li√∞ spilar einu sinni √≠ hverri umfer√∞
+			1. umfer√∞
+			* Dregi√∞ handah√≥fskennt - D√¶mi: Set √≠ tv√∂ fykli -> fj√∂gur li√∞
+				[1,2,3,4]
+				[3,4,1,2] (handah√≥fskennt)
+			2. umfer√∞
+				[1,2,3,4]
+				[2,3,4,1]
+			3. umfer√∞
+				[1,2,3,4]
+				[4,1,2,3]
+			4. umfer√∞
+				[1,2,3,4]
+				[3,4,1,2]
+			5. umfer√∞
+				[1,2,3,4]
+				[2,3,4,1]
+			6. umfer√∞
+				[1,2,3,4]
+				[4,1,2,3]
+	            
+        
+	        > Keppnisleikur
+		        + Byggist √° l√≠kum
+		            	* L√≠kur breytast vi√∞
+			            	- Leikmannaskipti
+			                		+ breyting √° leikskipulagi.
+			                		+ Li√∞s stu√∞ull h√¶kkar.
+			            	
+			            	- Leikma√∞ur f√¶r rautt spjald
+			                		+ Fer √∫taf, li√∞i√∞ er einum f√¶rri.
+			                		+ Li√∞s stu√∞ull l√¶kkar.
+			            	
+			            	- √ûegar leikma√∞ur mei√∞ist
+			                		+ Leikmannaskipti vi√∞ leikmann sem spilar s√∂mu st√∂√∞u.
+			                		+ Li√∞s stu√∞ull l√¶kkar l√≠ti√∞.
 			
-			* Umferir
-				> Hvert li spilar einu sinni Ì hverri umfer
-					+ 1. umfer
-						* Dregi handahÛfskennt
-					+ 2. umfer
-						* 
-						...
-						...
-						...
-				
-				> Keppnisleikur
-					+ Byggist · lÌkum
-						* LÌkur breytast vi
-							- Leikmannaskipti
-								+ breyting · leikskipulagi.
-								+ Lis stuull hÊkkar.
-							
-							- Leikmaur fÊr rautt spjald
-								+ Fer ˙taf, lii er einum fÊrri.
-								+ Lis stuull lÊkkar.
-							
-							- ﬁegar leikmaur meiist
-								+ Leikmannaskipti vi leikmann sem spilar sˆmu stˆu.
-								+ Lis stuull lÊkkar lÌti.
-	
-			* A leik loknu hefur hvert li spila 2 leiki vi hvert li Ì deildinni
-			  Alls 18 umferir -> 18 leikir · li.
-			  
-				
-	
-	7) Sj· vimiunar reglur · heimasÌu premier league vi uppbyggingu lÛgÌkar
-		http://fantasy.premierleague.com/rules/
-
-
+			    	* A√∞ leik loknu hefur hvert li√∞ spila√∞ 2 leiki vi√∞ hvert li√∞ √≠ deildinni
+			    	  Alls 18 umfer√∞ir -> 18 leikir √° li√∞.
+    	  
+    	
+    	  
+4) Stiga kerfi fyrir leikmenn (algr√≠m) ( 10 dagar )
+	- Eftir st√∂√∞um √° vellinum
+		+ Mark
+        		* √Å andst√¶√∞ingin
+		        * Sj√°lfsmark
+		        * Halda hreinu
+		        * Vari√∞ mark
+    		+ Sto√∞sendingar
+    
+    	- Brot
+    		+ Gult spjald
+    		+ Rautt spjald
+    
+    	- timi inn√° velli
