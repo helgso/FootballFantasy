@@ -1,4 +1,4 @@
-package Java.Interf;
+package trunk.Java.Interf;
 
 public interface SQLI {
 	
