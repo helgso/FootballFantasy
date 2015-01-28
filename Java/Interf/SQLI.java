@@ -1,4 +1,5 @@
-public interface SQL {
-	
+package Java.Interf;
 
+public interface SQLI {
+	
 }
