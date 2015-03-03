@@ -1,4 +1,5 @@
-package trunk.Java;
+package trunk.java.Impl;
+
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;

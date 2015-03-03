@@ -1,4 +1,4 @@
-package Java;
+package trunk.java.Impl;
 
 public class MatchSimulation {
 	private FootballTeam[] homeTeam;

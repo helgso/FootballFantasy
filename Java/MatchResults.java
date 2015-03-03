@@ -1,4 +1,4 @@
-package Java;
+package trunk.java.Impl;
 
 import java.util.LinkedList;
 
@@ -14,10 +14,8 @@ public class MatchResults {
 	public MatchResults( String homeTeamName, String awayTeamName ){
 		//this.homeScoringPlayers = new LinkedList();
 		
-		
 		//Kannski gera eitthvað hér ? enda svo á að gefa stig og segja
 		//hvað leikurin fór.
-		
 		
 		this.homeScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool"));
 		this.awayScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool"));
@@ -61,16 +59,41 @@ public class MatchResults {
 		this.awayGoals = goals;
 	}
 	
-	/*public FootballPlayers[] getHomeScoringPlayers( ){
-		LinkedList footballPayers = new LinkedList(); 
-		return footballPlayers;
+	//
+	//Put every home scoring player into 
+	//one array and return it
+	//
+	public FootballPlayer[] getHomeScoringPlayers( ){ 
+		int size = this.homeScoringPlayers.size();
+		FootballPlayer[] player = new FootballPlayer[ size ];
+		for(int i=0;  i<size; i++){
+			player[i] = this.homeScoringPlayers.removeFirst();
+		}
+		return player;
 	}
-	public LinkedList getAwayScoringPlayers( ){
-		
-	}*/
+	
+	
+	
+	//
+	//Put every away scoring player into 
+	//one array and return it
+	//
+	public FootballPlayer[] getAwayScoringPlayers( ){
+		int listSize = this.awayScoringPlayers.size();
+		FootballPlayer[] player = new FootballPlayer[ listSize ];
+		for(int i=0;  i<listSize; i++){
+			player[i] = this.awayScoringPlayers.removeFirst();
+		}
+		return player;
+	}
+	
+	
 	public String getMatchName( ){
 		return this.matchName;
 	}
+	
+	
+	//LAGA
 	public void displayResults( ){
 		
 	}
