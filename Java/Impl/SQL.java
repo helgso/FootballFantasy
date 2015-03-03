@@ -1,11 +1,11 @@
-package trunk.Java.;
-	import java.sql.Connection;
-	import java.sql.Statement;
-	import java.sql.DriverManager;
-	import java.sql.ResultSet;
-	import java.sql.ResultSetMetaData;
-	import java.sql.DatabaseMetaData;
-	import java.lang.Object;
+package Java.Impl;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.DatabaseMetaData;
+import java.lang.Object;
 
 public class SQL implements SQL{
 	
