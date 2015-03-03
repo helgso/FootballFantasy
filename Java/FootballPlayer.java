@@ -1,4 +1,4 @@
-package Java;
+package trunk.Java;
 
 public class FootballPlayer {
 	
@@ -31,6 +31,12 @@ public class FootballPlayer {
 	//Það þarf kannski að búa til klasa sem býr finnur út pickProbability ??
 	
 	
+	public void setPicturePath( String picturePath ){
+		this.picturePath = picturePath;
+	}
+	public void setPosition( String position ){
+		this.position = position;
+	}
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded = goalsConceded;
 	}
