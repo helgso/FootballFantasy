@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import trunk.Database.org.sqlite.*;
 
  
 public class SQL
@@ -190,8 +191,8 @@ public class SQL
     	FootballTeam[] teams = new FootballTeam[10];
     	FootballTeam Arsenal = createFootballTeams("Arsenal");
     	teams[0] = Arsenal;
-    	FootballTeam Chealsea = createFootballTeams("Chealsea");
-    	teams[1] = Chealsea;
+    	FootballTeam Chelsea = createFootballTeams("Chealsea");
+    	teams[1] = Chelsea;
     	FootballTeam Liverpool = createFootballTeams("Liverpool");
     	teams[2] = Liverpool;
     	FootballTeam ManCity = createFootballTeams("Man City");
