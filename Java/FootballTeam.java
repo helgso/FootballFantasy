@@ -21,6 +21,10 @@ public class FootballTeam {
 		return this.players;
 	}
 	
+	public String getName(){
+		return this.name;
+	}
+	
 	public String getPath( ){
 		return "test";
 	}
