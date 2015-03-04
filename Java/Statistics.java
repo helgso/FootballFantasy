@@ -1,4 +1,4 @@
-package Java;
+package trunk.Java;
 
 public class Statistics {
 	

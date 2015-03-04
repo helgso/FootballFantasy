@@ -1,4 +1,4 @@
-package trunk.java.Impl;
+package trunk.Java;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 
  
-public class HelloDatabase
+public class SQL
 {	
 	
 	public static FootballTeam createFootballTeams( String teamName )throws Exception{

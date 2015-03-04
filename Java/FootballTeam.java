@@ -1,4 +1,4 @@
-package trunk.java.Impl;
+package trunk.Java;
 
 public class FootballTeam {
 	private int numPlayers;

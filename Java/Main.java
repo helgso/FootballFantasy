@@ -1,4 +1,4 @@
-package trunk.java.Impl;
+package trunk.Java;
 
 public class Main {
 	public static void main(String[] args) {
