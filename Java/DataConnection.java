@@ -1,7 +1,7 @@
 package trunk.Java;
 import java.util.LinkedList;
 
-public class SQL
+public class DataConnection
 {   
     
     public static FootballTeam[] createFootballTeams( ){
