@@ -1,4 +1,4 @@
-package trunk.Java;
+package trunk.JSON;
 
 /**
  * The <code>JSONString</code> interface allows a <code>toJSONString()</code>

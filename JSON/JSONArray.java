@@ -1,4 +1,4 @@
-package trunk.Java;
+package trunk.JSON;
 
 /*
  Copyright (c) 2002 JSON.org
