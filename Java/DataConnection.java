@@ -1,4 +1,7 @@
 package trunk.Java;
+
+import trunk.JSON.JSONObject;
+import trunk.JSON.JSON;
 import java.util.LinkedList;
 
 public class DataConnection
