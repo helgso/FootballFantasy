@@ -20,8 +20,10 @@ public class DataConnection
         	
             String name = data[i].getString("first_name") + " " + data[i].getString("second_name"); 
             String team = data[i].getString("team_name");
+            String pos = data[i].getString("type_name");
             
-        	FootballPlayer player = new FootballPlayer(name ,team);
+            
+        	FootballPlayer player = new FootballPlayer(name ,team, pos);
             leikmenn[i] = player;
             
             int assists = data[i].getInt("assists");
@@ -53,7 +55,6 @@ public class DataConnection
             int YC = data[i].getInt("yellow_cards");
             leikmenn[i].setYellowCards(YC);
             
-            leikmenn[i].setPosition(data[i].getString("type_name"));
         	
         	
         }
@@ -154,14 +155,6 @@ public class DataConnection
 	}
 	
 	
-	
-    public static void main (String[] args) throws Exception
-    {	
-    	FootballTeam[] nyttlid = createFootballTeams();
-        FootballPlayer[] ja = nyttlid[0].getPlayers();
-
-    	
-    }
     
     
 }
