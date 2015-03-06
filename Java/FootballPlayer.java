@@ -22,14 +22,13 @@ public class FootballPlayer {
 	private int 	 saves;
 	
 
-	
 	//Constructor
-	public FootballPlayer( String name, String teamName, Position position ){
+	public FootballPlayer( String name, String teamName, String position ){
 		this.teamName = teamName;
 		this.name 	  = name;
-		this.position = Position.position;
-		
+		this.position = new Position( position );
 	}
+	
 	
 	//Það þarf kannski að búa til klasa sem býr finnur út pickProbability ??
 	
@@ -93,7 +92,7 @@ public class FootballPlayer {
 	public String getTeamName( ){
 		return this.teamName;
 	}
-	public enum getPosition( ){
+	public Position getPosition( ){
 		return this.position;
 	}
 	public int getRedCards( ){

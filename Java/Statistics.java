@@ -2,8 +2,6 @@ package trunk.Java;
 
 public class Statistics {
 	
-	//Ég sleppti tilviksbreytunni form allir sammála því ?
-	
 	private boolean cleanSheet;
 	private int goalsConceded;
 	private int yellowCards;
@@ -14,6 +12,10 @@ public class Statistics {
 	private int assists;
 	private int goals;
 	private int saves;
+	
+	public Statistics(){
+		
+	}
 	
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded= goalsConceded;

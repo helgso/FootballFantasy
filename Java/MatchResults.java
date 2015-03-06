@@ -17,8 +17,8 @@ public class MatchResults {
 		//Kannski gera eitthvað hér ? enda svo á að gefa stig og segja
 		//hvað leikurin fór.
 		
-		this.homeScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool"));
-		this.awayScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool"));
+		this.homeScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool", "MF"));
+		this.awayScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool", "MF"));
 		this.setHomeGoals(0);
 		this.setAwayGoals(0);
 		this.setMatchName( homeTeamName, awayTeamName );
