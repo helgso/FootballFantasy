@@ -34,4 +34,7 @@ public class FootballTeam {
 		return "test";
 	}
 	
+	public int getFootballPlayerAmount() {
+		return players.length;
+	}
 }

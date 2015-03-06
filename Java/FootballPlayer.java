@@ -21,7 +21,6 @@ public class FootballPlayer {
 	private int 	 goals;
 	private int 	 saves;
 	
-
 	//Constructor
 	public FootballPlayer( String name, String teamName, String position ){
 		this.teamName = teamName;

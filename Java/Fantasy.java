@@ -8,8 +8,8 @@ public class Fantasy {
 	private MatchResults[] matchResults;
 	
 	public Fantasy( ){
-		System.out.println("inn i fantasy");
-		roundsDone = 0;
+<<<<<<< .mine=======		System.out.println("inn i fantasy");
+>>>>>>> .theirs		roundsDone = 0;
 		teamTotal = DataConnection.createFootballTeams();
 		schedule = new Scheduler(teamTotal);
 		matchResults = new MatchResults[90];
@@ -35,6 +35,9 @@ public class Fantasy {
 		return schedule;
 	}
 	
+	public FootballTeam[] getTeamTotal() {
+		return teamTotal;
+	}
 	
 	private MatchResults simulateMatch( FootballTeam homeTeam, FootballTeam awayTeam ){
 		

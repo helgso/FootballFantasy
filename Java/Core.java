@@ -47,9 +47,16 @@ public class Core {
 		fantasy.simulateNextRound();
 	}
 	
-	public FootballPlayer[] getAllFootballPlayers() {
-		return null;
-	}
+	/*public FootballPlayer[] getAllFootballPlayers() {
+		FootballTeam[] allTeams = fantasy.getTeamTotal();
+		FootballPlayer[] allPlayers = new FootballPlayer[240];
+		
+		for (int i = 0, k = 0; i < 10; i++) {
+			for (int j = 0; j < allTeams[i].getFootballPlayerAmount(); j++, k++) {
+				allPlayers[k] = 
+			}
+		}
+	}*/
 	
 	public MatchResults getMatchResults(int matchNumber) {
 		return fantasy.getMatchResults(matchNumber);
