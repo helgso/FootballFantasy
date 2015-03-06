@@ -11,7 +11,7 @@ public class Core {
 	
 	// post: Returns five pairs of FootballTeams that will play the
 	//       next round. Example:
-	//       {"Arsenal - Chelsea", "Stoke - Southampton", ...}
+	//       {"Arsenal - Chelsea", "Stoke - Southampton", ...} 5 strings.
 	public String[] getNextRoundSchedule() {
 		FootballTeam[][] nextRoundSchedule = schedule.getNextRoundSchedule();
 		
@@ -26,21 +26,24 @@ public class Core {
 	}
 	
 	// post: Same as getNextRoundSchedule but returns 90 pairs. All Matches.
-	public String[][] getTotalSchedule() {
+	//       Example: {"Arsenal - Chelsea", "Stoke - Southampton", ...} 90 strings.
+	public String[] getTotalSchedule() {
 		FootballTeam[][][] allRoundsSchedule = schedule.getTotalSchedule();
 		
 		String[] totalSchedule = new String[90];
-		for (int i = 0; i < 90; i++) {
-			String homeTeam = allRoundsSchedule[i][0].getName();
-			String awayTeam = allRoundsSchedule[i][1].getName();
-			totalSchedule[i] = homeTeam + " - " + awayTeam;
+		for (int i = 0; i < 18; i++) {
+			for (int j = 0; j < 5; j++) {
+				String homeTeam = allRoundsSchedule[i][j][0].getName();
+				String awayTeam = allRoundsSchedule[i][j][1].getName();
+				totalSchedule[i] = homeTeam + " - " + awayTeam;
+			}
 		}
 		
 		return totalSchedule;
 	}
 	
 	public void simulateNextRound() {
-		
+		fantasy.simulateNextRound();
 	}
 	
 	public FootballPlayer[] getAllFootballPlayers() {
@@ -48,7 +51,7 @@ public class Core {
 	}
 	
 	public MatchResults getMatchResults(int matchNumber) {
-		return null;
+		return fantasy.getMatchResults(matchNumber);
 	}
 	
 }

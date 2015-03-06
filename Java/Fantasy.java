@@ -7,12 +7,22 @@ public class Fantasy {
 	private MatchResults[] matchResults;
 	
 	public Fantasy( ){
+		roundsDone = 0;
+		teamTotal = DataConnection.createFootballTeams();
+		schedule = new Scheduler(teamTotal);
+		matchResults = new MatchResults[90];
+	}
+	
+	public void simulateNextRound( ){
 		
 	}
 	
-	
-	public MatchResults[] simulateNextRound( ){
-		return this.matchResults;
+	// pre:  0 <= matchNumber <= 89
+	// post: Returns MatchResults from the game matchNumber.
+	public MatchResults getMatchResults(int matchNumber) {
+		if (0 <= matchNumber && matchNumber <= 89)
+			return matchResults[matchNumber];
+		return null;
 	}
 	
 	public int getRoundsDone(){
