@@ -5,26 +5,29 @@ public class FootballPlayer {
 	private final String teamName;
 	private final String name;
 	
-	//public Statistics[] stats;
+	public Statistics[] stats;
 	
-	private double 	pickProbability; //how likely is this player to be in final team squad.
-	private int 	goalsConceded;
-	private String 	teamFolder;
-	private int 	marketValue;
-	private int 	yellowCards;
-	private String 	position;
-	private String 	picturePath;
-	private int		ownGoals;
-	private int 	redCards;
-	private int 	minutes;
-	private int 	assists;
-	private int 	goals;
-	private int 	saves;
+	private double 	 pickProbability; //how likely is this player to be in final team squad.
+	private int 	 goalsConceded;
+	private String 	 teamFolder;
+	private int 	 marketValue;
+	private int 	 yellowCards;
+	private Position position;
+	private String 	 picturePath;
+	private int		 ownGoals;
+	private int 	 redCards;
+	private int 	 minutes;
+	private int 	 assists;
+	private int 	 goals;
+	private int 	 saves;
+	
+
 	
 	//Constructor
-	public FootballPlayer( String name, String teamName ){
+	public FootballPlayer( String name, String teamName, Position position ){
 		this.teamName = teamName;
 		this.name 	  = name;
+		this.position = Position.position;
 		
 	}
 	
@@ -34,9 +37,7 @@ public class FootballPlayer {
 	public void setPicturePath( String picturePath ){
 		this.picturePath = picturePath;
 	}
-	public void setPosition( String position ){
-		this.position = position;
-	}
+	
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded = goalsConceded;
 	}
@@ -92,7 +93,7 @@ public class FootballPlayer {
 	public String getTeamName( ){
 		return this.teamName;
 	}
-	public String getPosition( ){
+	public enum getPosition( ){
 		return this.position;
 	}
 	public int getRedCards( ){
