@@ -21,6 +21,10 @@ public class FootballTeam {
 		return this.players;
 	}
 	
+	public FootballPlayer[] getPlayers(){
+		return players;
+	}
+	
 	public String getName(){
 		return this.name;
 	}

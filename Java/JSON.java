@@ -28,7 +28,7 @@ public class JSON {
 	  
     	JSONObject[] gogn = new JSONObject[updateIDs.length];
 	
-    	for (int i = 0; i < 1; i++) {
+    	for (int i = 0; i < 240; i++) {
     		gogn[i] = readJsonFromUrl("http://fantasy.premierleague.com/web/api/elements/"+updateIDs[i]+"/");
     	}
 	

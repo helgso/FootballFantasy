@@ -5,18 +5,25 @@ public class DataConnection
 {   
     
     public static FootballTeam[] createFootballTeams( ){
-        
-    	JSONObject[] data = Json.fetchData();
+    	JSONObject[] data = null;
+    	try{
+    		data = JSON.fetchData();
+    	}catch (Exception e) {
+    		
+    	}
+    	
 
         
         FootballPlayer[] leikmenn = new FootballPlayer[240];
 
-        for(int i = 0; i < 1; i++ ){
-            String name = data[i].getString("first_name") + " " + data[i].getString("last_name"); 
+        for(int i = 0; i < 240; i++ ){
+        	
+            String name = data[i].getString("first_name") + " " + data[i].getString("second_name"); 
             String team = data[i].getString("team_name");
+            
         	FootballPlayer player = new FootballPlayer(name ,team);
             leikmenn[i] = player;
-
+            
             int assists = data[i].getInt("assists");
             leikmenn[i].setAssists(assists);
             
@@ -46,33 +53,32 @@ public class DataConnection
             int YC = data[i].getInt("yellow_cards");
             leikmenn[i].setYellowCards(YC);
             
-            leikmenn[i].setPosition(data[i].getInt("type_name"));
+            leikmenn[i].setPosition(data[i].getString("type_name"));
         	
         	
         }
 
-        
-        LinkedList ArsenalTemp = new LinkedList();
-        LinkedList ChelseaTemp = new LinkedList();
-        LinkedList ManCityTemp = new LinkedList();
-        LinkedList ManUtdTemp = new LinkedList();
-        LinkedList SouthamptonTemp = new LinkedList();
-        LinkedList SpursTemp = new LinkedList();
-        LinkedList StokeTemp = new LinkedList();
-        LinkedList SwanseaTemp = new LinkedList();
-        LinkedList WestHamTemp = new LinkedList();
-        LinkedList LiverpoolTemp = new LinkedList();
+        LinkedList<FootballPlayer> ArsenalTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> ChelseaTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> ManCityTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> ManUtdTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> SouthamptonTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> SpursTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> StokeTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> SwanseaTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> WestHamTemp = new LinkedList<FootballPlayer>();
+        LinkedList<FootballPlayer> LiverpoolTemp = new LinkedList<FootballPlayer>();
 
         
 
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < 240; i++){
             String team = data[i].getString("team_name");
 
             if(team.equals("Arsenal")){ArsenalTemp.add(leikmenn[i]);}
             else if(team.equals("Chelsea")){ChelseaTemp.add(leikmenn[i]);}
             else if(team.equals("Liverpool")){LiverpoolTemp.add(leikmenn[i]);}
-            else if(team.equals("ManCity")){ManCityTemp.add(leikmenn[i]);}
-            else if(team.equals("ManUtd")){ManUtdTemp.add(leikmenn[i]);}
+            else if(team.equals("Man City")){ManCityTemp.add(leikmenn[i]);}
+            else if(team.equals("Man Utd")){ManUtdTemp.add(leikmenn[i]);}
             else if(team.equals("Southampton")){SouthamptonTemp.add(leikmenn[i]);}
             else if(team.equals("Spurs")){SpursTemp.add(leikmenn[i]);}
             else if(team.equals("Stoke")){StokeTemp.add(leikmenn[i]);}
@@ -81,7 +87,7 @@ public class DataConnection
         }
 
         FootballPlayer[] Arsenal = new FootballPlayer[27] ;
-        /*FootballPlayer[] Chelsea = new FootballPlayer[21] ;
+        FootballPlayer[] Chelsea = new FootballPlayer[21] ;
         FootballPlayer[] Liverpool = new FootballPlayer[25];
         FootballPlayer[] ManCity = new FootballPlayer[23];
         FootballPlayer[] ManUtd = new FootballPlayer[28];
@@ -89,50 +95,61 @@ public class DataConnection
         FootballPlayer[] Spurs = new FootballPlayer[23];
         FootballPlayer[] Stoke = new FootballPlayer[21];
         FootballPlayer[] Swansea = new FootballPlayer[25];
-        FootballPlayer[] WestHam = new FootballPlayer[23];*/
+        FootballPlayer[] WestHam = new FootballPlayer[23];
 
-        for(int i = 0; i < 1/* Arsenal.length*/; i++){
-            Arsenal[i] = ArsenalTemp.pop();
+        for(int i = 0; i < Arsenal.length; i++){
+            Arsenal[i] = (FootballPlayer)ArsenalTemp.pop();
         }
 
-      /*  for(int i = 0; i < Chelsea.length; i++){
-            Chelsea[i] = ChelseaTemp.pop();
+        for(int i = 0; i < Chelsea.length; i++){
+            Chelsea[i] = (FootballPlayer)ChelseaTemp.pop();
         }
 
         for(int i = 0; i < Liverpool.length; i++){
-            Liverpool[i] = LiverpoolTemp.pop();
+            Liverpool[i] = (FootballPlayer)LiverpoolTemp.pop();
         }
 
         for(int i = 0; i < ManCity.length; i++){
-            ManCity[i] = ManCityTemp.pop();
+            ManCity[i] = (FootballPlayer)ManCityTemp.pop();
         }
 
         for(int i = 0; i < ManUtd.length; i++){
-            ManUtd[i] = ManUtdTemp.pop();
+            ManUtd[i] = (FootballPlayer)ManUtdTemp.pop();
         }
 
         for(int i = 0; i < Southampton.length; i++){
-            Southampton[i] = SouthamptonTemp.pop();
+            Southampton[i] = (FootballPlayer)SouthamptonTemp.pop();
         }
 
         for(int i = 0; i < Spurs.length; i++){
-            Spurs[i] = SpursTemp.pop();
+            Spurs[i] = (FootballPlayer)SpursTemp.pop();
         }
 
         for(int i = 0; i < Stoke.length; i++){
-            Stoke[i] = StokeTemp.pop();
+            Stoke[i] = (FootballPlayer)StokeTemp.pop();
         }
 
         for(int i = 0; i < Swansea.length; i++){
-            Swansea[i] = SwanseaTemp.pop();
+            Swansea[i] = (FootballPlayer)SwanseaTemp.pop();
         }
 
         for(int i = 0; i < WestHam.length; i++){
-            WestHam[i] = WestHamTemp.pop();
+            WestHam[i] = (FootballPlayer)WestHamTemp.pop();
         }
 
-*/
-        return new FootballTeam[] {Arsenal/*,Chelsea,Liverpool,ManCity,ManUtd,Southampton,Spurs,Stoke,Swansea,WestHam*/};
+
+        FootballTeam arsenal = new FootballTeam(Arsenal);
+        FootballTeam chelsea = new FootballTeam(Chelsea);
+        FootballTeam liverpool = new FootballTeam(Liverpool);
+        FootballTeam manCity = new FootballTeam(ManCity);
+        FootballTeam manUtd = new FootballTeam(ManUtd);
+        FootballTeam southampton = new FootballTeam(Southampton);
+        FootballTeam spurs = new FootballTeam(Spurs);
+        FootballTeam stoke = new FootballTeam(Stoke);
+        FootballTeam swansea = new FootballTeam(Swansea);
+        FootballTeam westHam = new FootballTeam(WestHam);
+        
+        return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};
 		
 	}
 	
@@ -141,7 +158,7 @@ public class DataConnection
     public static void main (String[] args) throws Exception
     {	
     	FootballTeam[] nyttlid = createFootballTeams();
-        FootballPlayer[] ja = nyttlid[0].getSimulationTeam();
+        FootballPlayer[] ja = nyttlid[0].getPlayers();
 
     	
     }
