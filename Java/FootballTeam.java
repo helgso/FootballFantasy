@@ -8,8 +8,9 @@ public class FootballTeam {
 	
 	
 	//Constructor
-	public FootballTeam( FootballPlayer[] players ){
+	public FootballTeam( FootballPlayer[] players, String teamName ){
 		this.players = players;
+		this.name = teamName;
 	}
 	
 	

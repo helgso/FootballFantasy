@@ -5,6 +5,7 @@ public class Core {
 	private Scheduler schedule;
 	
 	public Core() {
+		System.out.println("inn i core");
 		fantasy = new Fantasy();
 		schedule = fantasy.getScheduler();
 	}

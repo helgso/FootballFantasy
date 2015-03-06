@@ -1,5 +1,6 @@
 package trunk.Java;
 
+
 public class Fantasy {
 	private int roundsDone;
 	private FootballTeam[] teamTotal;
@@ -7,7 +8,7 @@ public class Fantasy {
 	private MatchResults[] matchResults;
 	
 	public Fantasy( ){
-
+		System.out.println("inn i fantasy");
 		roundsDone = 0;
 		teamTotal = DataConnection.createFootballTeams();
 		schedule = new Scheduler(teamTotal);

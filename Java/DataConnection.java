@@ -142,22 +142,24 @@ public class DataConnection
         }
 
 
-        FootballTeam arsenal = new FootballTeam(Arsenal);
-        FootballTeam chelsea = new FootballTeam(Chelsea);
-        FootballTeam liverpool = new FootballTeam(Liverpool);
-        FootballTeam manCity = new FootballTeam(ManCity);
-        FootballTeam manUtd = new FootballTeam(ManUtd);
-        FootballTeam southampton = new FootballTeam(Southampton);
-        FootballTeam spurs = new FootballTeam(Spurs);
-        FootballTeam stoke = new FootballTeam(Stoke);
-        FootballTeam swansea = new FootballTeam(Swansea);
-        FootballTeam westHam = new FootballTeam(WestHam);
+        FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal");
+        FootballTeam chelsea = new FootballTeam(Chelsea, "Chelsea");
+        FootballTeam liverpool = new FootballTeam(Liverpool, "Liverpool");
+        FootballTeam manCity = new FootballTeam(ManCity, "ManCity");
+        FootballTeam manUtd = new FootballTeam(ManUtd, "ManUtd");
+        FootballTeam southampton = new FootballTeam(Southampton, "Southampton");
+        FootballTeam spurs = new FootballTeam(Spurs, "Spurs");
+        FootballTeam stoke = new FootballTeam(Stoke, "Stoke");
+        FootballTeam swansea = new FootballTeam(Swansea,"Swansea");
+        FootballTeam westHam = new FootballTeam(WestHam,"WestHam");
         
+        System.out.println("inn i dataconnection");
+        System.out.println(arsenal.getName());
         return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};
 		
 	}
 	
-	
+	public static void main(String [] args){}
     
     
 }
