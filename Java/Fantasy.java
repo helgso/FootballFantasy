@@ -2,8 +2,8 @@ package trunk.Java;
 
 public class Fantasy {
 	private int roundsDone;
-	//private FootballTeam[] teamTotal;
-	//private FootballTeam[][][] schedule;
+	private FootballTeam[] teamTotal;
+	private Scheduler schedule;
 	private MatchResults[] matchResults;
 	
 	public Fantasy( ){
@@ -17,6 +17,10 @@ public class Fantasy {
 	
 	public int getRoundsDone(){
 		return this.roundsDone;
+	}
+	
+	public Scheduler getScheduler() {
+		return schedule;
 	}
 	
 	
