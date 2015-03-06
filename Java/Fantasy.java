@@ -7,6 +7,7 @@ public class Fantasy {
 	private MatchResults[] matchResults;
 	
 	public Fantasy( ){
+
 		roundsDone = 0;
 		teamTotal = DataConnection.createFootballTeams();
 		schedule = new Scheduler(teamTotal);
