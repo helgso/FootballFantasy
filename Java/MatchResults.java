@@ -46,7 +46,7 @@ public class MatchResults {
 		int size = this.homeScoringPlayers.size();
 		FootballPlayer[] player = new FootballPlayer[ size ];
 		for(int i=0;  i<size; i++){
-			player[i] = this.homeScoringPlayers.removeFirst();
+			player[i] = this.homeScoringPlayers.get(i);
 		}
 		return player;
 	}
@@ -59,7 +59,7 @@ public class MatchResults {
 		int listSize = this.awayScoringPlayers.size();
 		FootballPlayer[] player = new FootballPlayer[ listSize ];
 		for(int i=0;  i<listSize; i++){
-			player[i] = this.awayScoringPlayers.removeFirst();
+			player[i] = this.awayScoringPlayers.get(i);
 		}
 		return player;
 	}
