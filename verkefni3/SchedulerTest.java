@@ -1,6 +1,5 @@
 package trunk.verkefni3;
 import static org.junit.Assert.*;
-import trunk.Java.FootballPlayer;
 import trunk.Java.Scheduler;
 import trunk.Java.DataConnection;
 import trunk.Java.FootballTeam;
@@ -9,9 +8,6 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
 
 public class SchedulerTest {
 	
@@ -51,7 +47,7 @@ public class SchedulerTest {
 		
 	@After
 	public void tearDown(){
-		this.ei = null;
+		ei = null;
 	}
 		
 }

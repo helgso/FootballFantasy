@@ -34,7 +34,7 @@ public class SimulateTest {
 		this.results  = null;
 	}
 	
-	//Just test if Simulation.match can take two teams as a argument
+	//Test if Simulation.match can take two teams as a argument and
 	//let both teams score (see more test in "MatchResultTest.java")
 	@Test
 	public void testSimulation(){
@@ -46,7 +46,4 @@ public class SimulateTest {
 		assertNotNull(results.getHomeScoringPlayers());
 		assertNotNull(results.getAwayScoringPlayers());	
 	}
-	
-
-	
 }

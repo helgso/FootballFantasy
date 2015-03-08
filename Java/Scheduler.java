@@ -3,6 +3,9 @@ package trunk.Java;
 public class Scheduler {
 	public FootballTeam[][][] teamSchedule;
 	public FootballTeam[][]   nextRound;
+	private int numMatchInRound = 5;
+	private int numRounds = 18;
+	private int numTeams = 10;
 	private int index;
 	
 	public Scheduler( FootballTeam[] teamTotal ){
@@ -29,24 +32,24 @@ public class Scheduler {
 		// we rotate the letters A-I but not J to get the next round.
 		//by doing this we ensure that each team plays each other.
 		
-		FootballTeam[] lid = new FootballTeam [10];
-		boolean[] check = new boolean[10];
-		for(int i = 0; i<10; i++){
+		FootballTeam[] lid = new FootballTeam [numTeams];
+		boolean[] check = new boolean[numTeams];
+		for(int i = 0; i<numTeams; i++){
 			
-			int index = (int)(Math.random()*10);
+			int index = (int)(Math.random()*numTeams);
 			
 			while(check[index]){
-				index = (int)(Math.random()*10);
+				index = (int)(Math.random()*numTeams);
 			}
 			
 			lid[i] = teamTotal[index];
 			check[index] = true;
 		}
 		
-		FootballTeam[][][] shcedule = new FootballTeam[18][5][2];
+		FootballTeam[][][] shcedule = new FootballTeam[numRounds][numMatchInRound][2];
 		
 		//initialize the matches for each round
-		for(int i = 0; i < 18; i++){
+		for(int i = 0; i < numRounds; i++){
 			shcedule[i][0][0] = lid[0];
 			shcedule[i][0][1] = lid[9];
 			shcedule[i][1][0] = lid[1];
@@ -62,7 +65,7 @@ public class Scheduler {
 			//When the round has been set. we shift the lid array to 
 			//get a new combination of teams to play;
 			
-			FootballTeam[] aux = new FootballTeam[10];
+			FootballTeam[] aux = new FootballTeam[numTeams];
 			for(int u = 0; u<8; u++){
 				aux[u+1] = lid[u];
 			}
@@ -81,10 +84,10 @@ public class Scheduler {
 	
 	public FootballTeam[][] getNextRoundSchedule( ){
 		
-		FootballTeam[][] round = new FootballTeam[5][2];
+		FootballTeam[][] round = new FootballTeam[numMatchInRound][2];
 		
 		//load the next round into the round array
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < numMatchInRound; i++){
 			
 			round[i][0] = this.teamSchedule[this.index][i][0];
 			round[i][1] = this.teamSchedule[this.index][i][1];
@@ -97,10 +100,10 @@ public class Scheduler {
 	}
 	
 	private void printSchedule(){
-		for(int i = 0; i<18; i++){
+		for(int i = 0; i<numRounds; i++){
 			System.out.println();
 			System.out.println("round "+i);
-			for(int u = 0; u<5; u++){
+			for(int u = 0; u<numMatchInRound; u++){
 				System.out.println(this.teamSchedule[i][u][0].getName()+" VS. "+this.teamSchedule[i][u][1].getName());
 			}
 			
@@ -116,12 +119,16 @@ public class Scheduler {
 		
 		System.out.println("round "+this.index);
 		
-			
-			for(int u = 0; u<5; u++){
+			for(int u = 0; u<numMatchInRound ; u++){
 				System.out.println(this.teamSchedule[this.index][u][0].getName()+" VS. "+this.teamSchedule[this.index][u][1].getName());
 			}
-			
-		
+	}
+	
+	public int getNumMatchInRound (){
+		return this.numMatchInRound;
+	}
+	public int getNumRounds (){
+		return this.numRounds;
 	}
 	
 }

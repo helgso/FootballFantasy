@@ -6,12 +6,19 @@ public class Fantasy {
 	private FootballTeam[] teamTotal;
 	private Scheduler schedule;
 	private MatchResults[] matchResults;
+	private int numAllMatches = 90;
+	private int numRounds;
+	private int numRoundMatches;
 	
+	//Gets all teams and creates scheduler out of them.
+	//initialize roundsDone and matchResults
 	public Fantasy( ){
 		roundsDone = 0;
 		teamTotal = DataConnection.createFootballTeams();
 		schedule = new Scheduler(teamTotal);
-		matchResults = new MatchResults[90];
+		matchResults = new MatchResults[ this.numAllMatches ];
+		numRoundMatches = schedule.getNumMatchInRound();
+		numRounds = schedule.getNumRounds();
 	}
 	
 	public Scheduler getScheduler() {
@@ -24,8 +31,9 @@ public class Fantasy {
 	
 	public void simulateNextRound( ){
 		FootballTeam[][] teams = schedule.getNextRoundSchedule();
-		for (int i = 0; i < 5; i++) {
-			matchResults[roundsDone+i] = Simulate.match(teams[i][0], teams[i][1]);
+		int numMatch = numRoundMatches;
+		for (int i = 0; i < numMatch; i++) {
+			matchResults[roundsDone*numMatch+i]=Simulate.match(teams[i][0],teams[i][1]);
 		}
 		roundsDone++;
 	}
@@ -34,9 +42,17 @@ public class Fantasy {
 	// pre:  0 <= matchNumber <= 89
 	// post: Returns MatchResults from the game matchNumber.
 	public MatchResults getMatchResults(int matchNumber) {
-		if (0 <= matchNumber && matchNumber <= 89)
+		if (0 <= matchNumber && matchNumber <= numAllMatches-1)
 			return matchResults[matchNumber];
 		return null;
+	}
+	
+	public int getNumAllMatches(){
+		return this.numAllMatches;
+	}
+	
+	public int getNumRounds(){
+		return this.numRounds;
 	}
 	
 	public int getRoundsDone(){
