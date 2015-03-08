@@ -1,29 +1,27 @@
 package trunk.Java;
 
 public class MatchSimulation {
-	private FootballTeam[] homeTeam;
-	private FootballTeam[] awayTeam;
-	private MatchResults results;
+	private static FootballTeam homeTeam;
+	private static FootballTeam awayTeam;
 	
-	public MatchSimulation( ){
+	
+	public static MatchResults MatchSimulation(FootballTeam home, FootballTeam away ){
 		
-		this.storeResults( this.results );
-	}
-	
-	private void playMatch( ){
+		homeTeam = home;
+		awayTeam = away;
+			
+		MatchResults result = new MatchResults( homeTeam, awayTeam );
+		
+		
+		
+		
 		/*
-		 * Play match, store result 
+		 * SIMULATE
+		 * 	put infotmation into result
 		 */
-		System.out.println("Test playMatch method" + this.homeTeam + this.awayTeam);
-	}
-	
-	public void build( FootballTeam[] homeTeam, FootballTeam[] awayTeam ){
-		this.homeTeam = homeTeam;
-		this.awayTeam = awayTeam;
-		this.playMatch();
-	}
-	
-	private void storeResults( MatchResults result ){
-		this.results = result;
+		
+		
+		
+		return result;
 	}
 }

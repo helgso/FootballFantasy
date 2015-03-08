@@ -25,26 +25,11 @@ public class Fantasy {
 	public void simulateNextRound( ){
 		FootballTeam[][] teams = schedule.getNextRoundSchedule();
 		for (int i = 0; i < 5; i++) {
-			simulateMatch(teams[i][0], teams[i][1]);
+			matchResults[roundsDone+i] = Simulate.match(teams[i][0], teams[i][1]);
 		}
 		roundsDone++;
 	}
 	
-	private MatchResults simulateMatch( FootballTeam homeTeam, FootballTeam awayTeam ){
-		
-		//initialize MatchResults object
-		MatchResults result = new MatchResults( homeTeam, awayTeam );
-		
-		
-		//
-		//SIMULATE
-		//
-		
-		
-		
-		//result.matchFinish();
-		return result;
-	}
 	
 	// pre:  0 <= matchNumber <= 89
 	// post: Returns MatchResults from the game matchNumber.

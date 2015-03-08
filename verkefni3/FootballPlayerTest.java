@@ -11,8 +11,10 @@ import org.junit.Test;
 
 
 //TEST CASES:
-// 	Test position on two football players.
-//	Updates method tested.
+// 	- Test position on two football players.
+//		+ Position enum is tested throw those players
+//	- Test Updates method on football player A.
+//  - get- and set methods in FootballPlayer is not tested, they are to simple.
 
 public class FootballPlayerTest {
 
@@ -43,7 +45,7 @@ public class FootballPlayerTest {
 	}
 	
 	// check if FootballPlayer A have object
-	// position equal to MF.
+	// position equal to MF ("Midfielder").
 	//
 	@Test
 	public void testPositionA(){
@@ -52,7 +54,7 @@ public class FootballPlayerTest {
 	
 
 	// check if FootballPlayer B have object
-	// position equal to FW.
+	// position equal to FW ("Forward"). 
 	//
 	@Test
 	public void testPositionB(){
