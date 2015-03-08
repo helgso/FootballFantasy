@@ -5,58 +5,37 @@ import java.util.LinkedList;
 public class MatchResults {
 	
 	private String matchName;
-	private int homeGoals;
-	private int awayGoals;
-	
+	private int homeTeamGoals;
+	private int awayTeamGoals;
+	private FootballTeam homeTeam;
+	private FootballTeam awayTeam;
 	private LinkedList<FootballPlayer> homeScoringPlayers;
 	private LinkedList<FootballPlayer> awayScoringPlayers;
 	
-	public MatchResults( String homeTeamName, String awayTeamName ){
-		//this.homeScoringPlayers = new LinkedList();
-		
-		//Kannski gera eitthvað hér ? enda svo á að gefa stig og segja
-		//hvað leikurin fór.
-		
-		this.homeScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool", "MF"));
-		this.awayScoringPlayers.add(new FootballPlayer("Gerrard", "Liverpool", "MF"));
-		this.setHomeGoals(0);
-		this.setAwayGoals(0);
-		this.setMatchName( homeTeamName, awayTeamName );
-	}
-	public void increaseGoalHomeTeam( FootballPlayer[] scorer ){
-		
-	}
-	public void increaseGoalAwayTeam( FootballPlayer[] scorer ){
-		
-	}
-	public int getHomeGoals( ){
-		return this.homeGoals;		
-	}
-	public int getAwayGoals( ){ 
-		return this.awayGoals;
-	}
-	public String getHomeTeam( ){		
-		return "test getHomeTeam metod:MatchResult";
-	}
-	public String getAwayTeam( ){
-		return "test getAwayTeam metod:MatchResult";
-	}
-
-	private void setMatchName( String homeTeamName, String awayTeamName ){
-		String homeGoals   = Integer.toString( this.getHomeGoals() );
-		String awayGoals   = Integer.toString( this.getAwayGoals() );
-		String space 	   = " ";
-		String connectSign = "-";
-		String center 	   = space + connectSign + space;
-		this.matchName = homeTeamName + space + homeGoals + center + awayGoals + space + awayTeamName;
+	public MatchResults( FootballTeam homeTeam, FootballTeam awayTeam ){
+		this.matchName = homeTeam.getName() + " - " + awayTeam.getName();
+		this.homeTeamGoals = 0;
+		this.awayTeamGoals = 0;
+		this.homeTeam = homeTeam;
+		this.awayTeam = awayTeam;		
+		this.homeScoringPlayers = new LinkedList<FootballPlayer>();
+		this.awayScoringPlayers = new LinkedList<FootballPlayer>();
 	}
 	
-	private void setHomeGoals( int goals ){
-		this.homeGoals = goals;
+	public int getHomeGoals( ){
+		return this.homeTeamGoals;
 	}
-
-	private void setAwayGoals( int goals ){
-		this.awayGoals = goals;
+	
+	public int getAwayGoals( ){ 
+		return this.awayTeamGoals;
+	}
+	
+	public FootballTeam getHomeTeam( ){		
+		return this.homeTeam;
+	}
+	
+	public FootballTeam getAwayTeam( ){
+		return this.awayTeam;
 	}
 	
 	//
@@ -72,8 +51,6 @@ public class MatchResults {
 		return player;
 	}
 	
-	
-	
 	//
 	//Put every away scoring player into 
 	//one array and return it
@@ -87,16 +64,37 @@ public class MatchResults {
 		return player;
 	}
 	
-	
 	public String getMatchName( ){
 		return this.matchName;
+	}	
+	
+	public void increaseGoalHomeTeam( FootballPlayer scorer ){
+		this.homeTeamGoals++;
+		this.homeScoringPlayers.add(scorer);
 	}
 	
-	
-	//LAGA
-	public void displayResults( ){
-		
+	public void increaseGoalAwayTeam( FootballPlayer scorer ){
+		this.awayTeamGoals++;
+		this.awayScoringPlayers.add(scorer);
 	}
 	
+	public void setHomeTeamGoals(int amount) {
+		this.homeTeamGoals = amount;
+	}
 	
+	public void setAwayTeamGoals(int amount) {
+		this.awayTeamGoals = amount;
+	}
+	
+	public String displayResults( ){
+		String homeTeamName = this.homeTeam.getName();
+		String awayTeamName = this.awayTeam.getName();
+		int homeGoals = this.homeTeamGoals;
+		int awayGoals = this.awayTeamGoals;
+		String space  = " ";
+		String dash   = "-";
+		String center = space + dash + space;
+		return homeTeamName + space + homeGoals + center + awayGoals + space + awayTeamName;
+	}
 }
+
