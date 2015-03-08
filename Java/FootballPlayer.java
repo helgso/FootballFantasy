@@ -60,12 +60,12 @@ public class FootballPlayer {
 	
 	//LAGA
 	private void scoreUpdate(){
-		this.score += 2;
+		this.setScore( this.score + 1 );
 	}
 	
 	//LAGA
 	private void pickProbabilityUpdate(){
-		this.pickProbability += 0.01;
+		this.setPickProbability( this.pickProbability + 0.01 );
 	}
 	
 	
@@ -75,6 +75,9 @@ public class FootballPlayer {
 	
 	public void setPicturePath( String picturePath ){
 		this.picturePath = picturePath;
+	}
+	public void setPickProbability( double pickProbability ){
+		this.pickProbability = pickProbability;
 	}
 	
 	public void setGoalsConceded( int goalsConceded ){
@@ -116,12 +119,15 @@ public class FootballPlayer {
 	//
 	//GET METHODS
 	//
-	
+
 	public double getPickProbability( ){
 		return this.pickProbability;
 	}
 	public int getGoalsConceded( ){
 		return this.goalsConceded;
+	}
+	public Statistics[] getStats( ){
+		return this.stats;
 	}
 	public int getMarketValue( ){
 		return this.marketValue;

@@ -1,16 +1,18 @@
 package trunk.verkefni3;
 
+import trunk.Java.Position;
 import trunk.Java.FootballPlayer;
-
 import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 
-import trunk.Java.Position;
 
 //TEST CASES:
-//	
+// 	Test position on two football players.
+//	Updates method tested.
 
 public class FootballPlayerTest {
 
@@ -24,13 +26,17 @@ public class FootballPlayerTest {
 	private final String teamNameB = "Manchester United";
 	private final String positionB = "Forward";
 	
-	
+	@Before
 	public void setUp(){
 		this.A = new FootballPlayer(this.nameA, this.teamNameA, this.positionA);
 		this.B = new FootballPlayer(this.nameB, this.teamNameB, this.positionB);
+		
+		this.A.setScore(40);
+		this.A.setMarketValue(10);
+		this.A.setPickProbability(0.7);		
 	}
 	
-	
+	@After
 	public void tearUp(){
 		this.A = null;
 		this.B = null;
@@ -40,7 +46,7 @@ public class FootballPlayerTest {
 	// position equal to MF.
 	//
 	@Test
-	public void testPosition(){
+	public void testPositionA(){
 		assertEquals(Position.MF, A.getPosition());
 	}
 	
@@ -49,15 +55,18 @@ public class FootballPlayerTest {
 	// position equal to FW.
 	//
 	@Test
-	public void testPosition(){
+	public void testPositionB(){
 		assertEquals(Position.FW, B.getPosition());
 	}
 	
-	  
 	
+	//Testing updates method in football player A
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testAUpdates(){
+		this.A.updateFootballPlayer();
+		
+		assertEquals(  41, this.A.getScore()                );
+		assertEquals(  11, this.A.getMarketValue()          );
+		assertEquals( 0.71, this.A.getPickProbability(), 0.0);
 	}
-
 }
