@@ -14,8 +14,36 @@ public class Fantasy {
 		matchResults = new MatchResults[90];
 	}
 	
+	public Scheduler getScheduler() {
+		return schedule;
+	}
+	
+	public FootballTeam[] getTeamTotal() {
+		return teamTotal;
+	}
+	
 	public void simulateNextRound( ){
+		FootballTeam[][] teams = schedule.getNextRoundSchedule();
+		for (int i = 0; i < 5; i++) {
+			simulateMatch(teams[i][0], teams[i][1]);
+		}
+		roundsDone++;
+	}
+	
+	private MatchResults simulateMatch( FootballTeam homeTeam, FootballTeam awayTeam ){
 		
+		//initialize MatchResults object
+		MatchResults result = new MatchResults( homeTeam, awayTeam );
+		
+		
+		//
+		//SIMULATE
+		//
+		
+		
+		
+		//result.matchFinish();
+		return result;
 	}
 	
 	// pre:  0 <= matchNumber <= 89
@@ -28,31 +56,5 @@ public class Fantasy {
 	
 	public int getRoundsDone(){
 		return this.roundsDone;
-	}
-	
-	public Scheduler getScheduler() {
-		return schedule;
-	}
-	
-	public FootballTeam[] getTeamTotal() {
-		return teamTotal;
-	}
-	
-	private MatchResults simulateMatch( FootballTeam homeTeam, FootballTeam awayTeam ){
-		
-		//initialize MatchResults object
-		String homeName = homeTeam.getName();
-		String awayName = awayTeam.getName();
-		MatchResults result = new MatchResults( homeName, awayName );
-		
-		
-		//
-		//SIMULATE
-		//
-		
-		
-		
-		//result.matchFinish();
-		return result;
 	}
 }
