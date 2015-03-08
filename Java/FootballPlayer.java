@@ -11,6 +11,7 @@ public class FootballPlayer {
 	private int 	 goalsConceded;
 	private String 	 teamFolder;
 	private int 	 marketValue;
+	private int		 score;
 	private int 	 yellowCards;
 	private Position position;
 	private String 	 picturePath;
@@ -21,13 +22,17 @@ public class FootballPlayer {
 	private int 	 goals;
 	private int 	 saves;
 	
-	//Constructor
+	//
+	//CONSTUCTOR
+	//
 	public FootballPlayer( String name, String teamName, String pos ){
 		this.teamName = teamName;
 		this.name 	  = name;
 		
-		//this.position gets object from enum Position
-		//that match with String value pos.
+		//FIND POSITION
+		//	this.position gets object from enum Position
+		//	that match with String value pos.
+		
 		for(Position position : Position.values() ){
 			if( position.getPos().equals( pos ) ){
 				this.position = position;
@@ -36,8 +41,37 @@ public class FootballPlayer {
 	}
 	
 	
-	//Það þarf kannski að búa til klasa sem býr finnur út pickProbability ??
+
+	//
+	//UPDATE METHODS
+	//
 	
+	public void updateFootballPlayer(){
+		this.pickProbabilityUpdate();
+		this.marketValueUpdate();
+		this.scoreUpdate();
+	}
+	
+	//LAGA
+	private void marketValueUpdate(){
+		this.marketValue += 1;
+		this.setMarketValue( this.marketValue );
+	}
+	
+	//LAGA
+	private void scoreUpdate(){
+		this.score += 2;
+	}
+	
+	//LAGA
+	private void pickProbabilityUpdate(){
+		this.pickProbability += 0.01;
+	}
+	
+	
+	//
+	//SET METHODS
+	//
 	
 	public void setPicturePath( String picturePath ){
 		this.picturePath = picturePath;
@@ -73,8 +107,15 @@ public class FootballPlayer {
 	public void setSaves( int saves ){
 		this.saves = saves;
 	}
+	public void setScore(int score) {
+		this.score = score;
+	}
 	
 
+
+	//
+	//GET METHODS
+	//
 	
 	public double getPickProbability( ){
 		return this.pickProbability;
@@ -120,5 +161,9 @@ public class FootballPlayer {
 	}
 	public int getSaves( ){
 		return this.saves;
+	}
+
+	public int getScore() {
+		return this.score;
 	}
 }
