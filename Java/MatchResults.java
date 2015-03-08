@@ -5,8 +5,8 @@ import java.util.LinkedList;
 public class MatchResults {
 	
 	private String matchName;
-	private int homeTeamGoals;
-	private int awayTeamGoals;
+	private int homeGoals;
+	private int awayGoals;
 	private FootballTeam homeTeam;
 	private FootballTeam awayTeam;
 	private LinkedList<FootballPlayer> homeScoringPlayers;
@@ -14,8 +14,8 @@ public class MatchResults {
 	
 	public MatchResults( FootballTeam homeTeam, FootballTeam awayTeam ){
 		this.matchName = homeTeam.getName() + " - " + awayTeam.getName();
-		this.homeTeamGoals = 0;
-		this.awayTeamGoals = 0;
+		this.homeGoals = 0;
+		this.awayGoals = 0;
 		this.homeTeam = homeTeam;
 		this.awayTeam = awayTeam;		
 		this.homeScoringPlayers = new LinkedList<FootballPlayer>();
@@ -23,11 +23,11 @@ public class MatchResults {
 	}
 	
 	public int getHomeGoals( ){
-		return this.homeTeamGoals;
+		return this.homeGoals;
 	}
 	
 	public int getAwayGoals( ){ 
-		return this.awayTeamGoals;
+		return this.awayGoals;
 	}
 	
 	public FootballTeam getHomeTeam( ){		
@@ -69,28 +69,26 @@ public class MatchResults {
 	}	
 	
 	public void increaseGoalHomeTeam( FootballPlayer scorer ){
-		this.homeTeamGoals++;
+		this.homeGoals++;
 		this.homeScoringPlayers.add(scorer);
 	}
 	
 	public void increaseGoalAwayTeam( FootballPlayer scorer ){
-		this.awayTeamGoals++;
+		this.awayGoals++;
 		this.awayScoringPlayers.add(scorer);
 	}
 	
 	public void setHomeTeamGoals(int amount) {
-		this.homeTeamGoals = amount;
+		this.homeGoals = amount;
 	}
 	
 	public void setAwayTeamGoals(int amount) {
-		this.awayTeamGoals = amount;
+		this.awayGoals = amount;
 	}
 	
 	public String displayResults( ){
 		String homeTeamName = this.homeTeam.getName();
 		String awayTeamName = this.awayTeam.getName();
-		int homeGoals = this.homeTeamGoals;
-		int awayGoals = this.awayTeamGoals;
 		String space  = " ";
 		String dash   = "-";
 		String center = space + dash + space;
