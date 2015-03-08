@@ -22,10 +22,17 @@ public class FootballPlayer {
 	private int 	 saves;
 	
 	//Constructor
-	public FootballPlayer( String name, String teamName, String position ){
+	public FootballPlayer( String name, String teamName, String pos ){
 		this.teamName = teamName;
 		this.name 	  = name;
-		this.position = new Position( position );
+		
+		//this.position gets object from enum Position
+		//that match with String value pos.
+		for(Position position : Position.values() ){
+			if( position.getPos().equals( pos ) ){
+				this.position = position;
+			}
+		}
 	}
 	
 	
@@ -66,7 +73,6 @@ public class FootballPlayer {
 	public void setSaves( int saves ){
 		this.saves = saves;
 	}
-	
 	
 
 	
@@ -115,6 +121,4 @@ public class FootballPlayer {
 	public int getSaves( ){
 		return this.saves;
 	}
-	
-	
 }
