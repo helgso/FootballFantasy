@@ -36,7 +36,7 @@ public class Core {
 			for (int j = 0; j < 5; j++) {
 				String homeTeam = allRoundsSchedule[i][j][0].getName();
 				String awayTeam = allRoundsSchedule[i][j][1].getName();
-				totalSchedule[i] = homeTeam + " - " + awayTeam;
+				totalSchedule[(i*5)+j] = homeTeam + " - " + awayTeam;
 			}
 		}
 		
