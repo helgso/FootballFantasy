@@ -68,21 +68,21 @@ public class MatchResults {
 		return this.matchName;
 	}	
 	
-	public void increaseGoalHomeTeam( FootballPlayer scorer ){
+	public void incrementHomeGoals( FootballPlayer scorer ){
 		this.homeGoals++;
 		this.homeScoringPlayers.add(scorer);
 	}
 	
-	public void increaseGoalAwayTeam( FootballPlayer scorer ){
+	public void incrementAwayGoals( FootballPlayer scorer ){
 		this.awayGoals++;
 		this.awayScoringPlayers.add(scorer);
 	}
 	
-	public void setHomeTeamGoals(int amount) {
+	public void setHomeGoals(int amount) {
 		this.homeGoals = amount;
 	}
 	
-	public void setAwayTeamGoals(int amount) {
+	public void setAwayGoals(int amount) {
 		this.awayGoals = amount;
 	}
 	
