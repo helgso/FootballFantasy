@@ -21,6 +21,11 @@ public class FootballPlayer {
 	private int 	 assists;
 	private int 	 goals;
 	private int 	 saves;
+	//private int 	 coe = 5;
+	private int 	 minimumValue = 100;
+/*	private int[]    	A;
+	private String[]    B;*/
+	
 	
 	//
 	//CONSTUCTOR
@@ -28,6 +33,10 @@ public class FootballPlayer {
 	public FootballPlayer( String name, String teamName, String pos ){
 		this.teamName = teamName;
 		this.name 	  = name;
+		
+	/*	this.A = new int[50];
+		this.B = new String[50];*/
+		
 		
 		//FIND POSITION
 		//	this.position gets object from enum Position
@@ -51,6 +60,8 @@ public class FootballPlayer {
 		this.pickProbabilityUpdate();
 		this.marketValueUpdate();
 		this.scoreUpdate();
+		
+		
 	}
 	
 	//DONE
@@ -59,21 +70,52 @@ public class FootballPlayer {
 			this.minutes = 1;
 		}
 		
-		int marketValue = 50;
-		if(this.position == Position.FW){
-			marketValue = 50 + 40*goals + 100*saves + 20*assists + (int ) (( 1000*goals)/minutes) - 30*redCards - 20*yellowCards - 10*goalsConceded- ownGoals*20;
-		}else if(this.position == Position.DF){
-			marketValue = 50 + 70*goals + 40*saves + 40*assists + (int ) (( 10000*goals)/minutes) - 20*redCards - 10*yellowCards - 10*goalsConceded- ownGoals*20;
-		}else if(this.position == Position.GK){
-			marketValue = 50 + 200*goals + saves + 150*assists + (int ) (( 100000*goals)/minutes) - 60*redCards - 30*yellowCards - 10*goalsConceded- ownGoals*20;
-		}else if(this.position == Position.MF){
-			marketValue = 50+ 60*goals + 80*saves + 10*assists + (int ) (( 2000*goals)/minutes) - 10*redCards - 10*yellowCards - 10*goalsConceded- ownGoals*20 ;
-		}
+		//Different coefficient Value for each position
+		double GKCoefficient = 1.3;
+		double DFCoefficient = 1.4;
+		double MFCoefficient = 1.5;
+		double FWCoefficient = 1.7;
 		
-		this.setMarketValue( marketValue );
+		//			goals  saves	assists	goals/min  redC 	yellowC 	goalsC		ownG
+		int[] GK = { 15,  	1, 		4, 		10000*1, 	5, 		2, 			1/15, 		0 };
+		int[] DF = { 15,  	0,  	4,  	1000*1, 	5, 		2, 			1/20, 		0 };
+		int[] MF = { 6,  	0,  	4,   	200*1, 		5, 		2, 			1/20, 		0 };
+		int[] FW = { 5, 	0,  	4,   	200*1, 		5, 		2, 			1/30, 		0 };
+		
+		int marketValue = minimumValue;
+		if(this.position == Position.GK){
+			marketValue *= GKCoefficient;
+			marketValue += calcMarketValue( GK );
+		} else if(this.position == Position.DF){
+			marketValue *= DFCoefficient;
+			marketValue += calcMarketValue( DF );
+		} else if(this.position == Position.MF){			
+			marketValue *= MFCoefficient;
+			marketValue += calcMarketValue( MF );	
+		} else if(this.position == Position.FW){
+			marketValue *= FWCoefficient;
+			marketValue += calcMarketValue( FW );
+		}
+		marketValue = (int) Math.floor( marketValue );
+		this.setMarketValue( marketValue  );
 	}
 	
-	//DONE
+	//Algorithm for to calculate value for footballPlayer
+	private int calcMarketValue( int[] a ){
+		int goals_per_min = (int)((goals)/minutes);
+		int marketValue=(int)	(a[0]*goals
+								+a[1]*saves
+								+a[2]*assists
+								+a[3]*goals_per_min
+								-a[4]*redCards
+								-a[5]*yellowCards
+								-a[6]*goalsConceded
+								-a[7]*ownGoals);		
+		return marketValue;
+	}
+	
+	
+	//LAGA
 	private void scoreUpdate(){
 		if(this.minutes == 0){
 			this.minutes = 1;
