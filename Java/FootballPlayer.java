@@ -61,22 +61,44 @@ public class FootballPlayer {
 		
 		int marketValue = 50;
 		if(this.position == Position.FW){
-			marketValue = 50 + 40*goals + 100*saves + 20*assists + (int ) (( 1000*goals)/minutes) - 30*redCards - 20*yellowCards + 10*goalsConceded;
+			marketValue = 50 + 40*goals + 100*saves + 20*assists + (int ) (( 1000*goals)/minutes) - 30*redCards - 20*yellowCards - 10*goalsConceded- ownGoals*20;
 		}else if(this.position == Position.DF){
-			marketValue = 50 + 70*goals + 40*saves + 40*assists + (int ) (( 10000*goals)/minutes) - 20*redCards - 10*yellowCards + 10*goalsConceded;
+			marketValue = 50 + 70*goals + 40*saves + 40*assists + (int ) (( 10000*goals)/minutes) - 20*redCards - 10*yellowCards - 10*goalsConceded- ownGoals*20;
 		}else if(this.position == Position.GK){
-			marketValue = 50 + 200*goals + saves + 150*assists + (int ) (( 100000*goals)/minutes) - 60*redCards - 30*yellowCards + 10*goalsConceded;
+			marketValue = 50 + 200*goals + saves + 150*assists + (int ) (( 100000*goals)/minutes) - 60*redCards - 30*yellowCards - 10*goalsConceded- ownGoals*20;
 		}else if(this.position == Position.MF){
-			marketValue = 50+ 60*goals + 80*saves + 10*assists + (int ) (( 2000*goals)/minutes) - 10*redCards - 10*yellowCards + 10*goalsConceded;
+			marketValue = 50+ 60*goals + 80*saves + 10*assists + (int ) (( 2000*goals)/minutes) - 10*redCards - 10*yellowCards - 10*goalsConceded- ownGoals*20 ;
 		}
 		
 		this.setMarketValue( marketValue );
 	}
 	
-	//LAGA
+	//DONE
 	private void scoreUpdate(){
+		if(this.minutes == 0){
+			this.minutes = 1;
+		}
 		
-		this.setScore( this.score + 1 );
+		int score = 1;
+		if(this.position == Position.FW){
+			score = 4*goals + 3*assists - 3*redCards - yellowCards + (minutes/60) - 2*ownGoals;
+		}else if(this.position == Position.DF){
+			score = 6*goals + 3*assists - 3*redCards - yellowCards - (goalsConceded/2) - 2*ownGoals + (minutes/60);
+			if(this.goalsConceded == 0){
+				score += 4;
+			}
+		}else if(this.position == Position.GK){
+			score = 6*goals + (saves/3) + 3*assists - 3*redCards - yellowCards + (goalsConceded/2) + (minutes/60) - 2*ownGoals;
+			if(this.goalsConceded == 0){
+				score += 4;
+			}
+		}else if(this.position == Position.MF){
+			score = 5*goals + 3*assists - 3*redCards - yellowCards  + (minutes/60) - 2*ownGoals;
+			if(this.goalsConceded == 0){
+				score += 1;
+			}
+		}
+		this.setScore( score );
 	}
 	
 	//LAGA
