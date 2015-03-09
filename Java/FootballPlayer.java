@@ -38,6 +38,7 @@ public class FootballPlayer {
 				this.position = position;
 			}
 		}
+		
 	}
 	
 	
@@ -52,14 +53,29 @@ public class FootballPlayer {
 		this.scoreUpdate();
 	}
 	
-	//LAGA
+	//DONE
 	private void marketValueUpdate(){
-		this.marketValue += 1;
-		this.setMarketValue( this.marketValue );
+		if(this.minutes == 0){
+			this.minutes = 1;
+		}
+		
+		int marketValue = 50;
+		if(this.position == Position.FW){
+			marketValue = 50 + 40*goals + 100*saves + 20*assists + (int ) (( 1000*goals)/minutes) - 30*redCards - 20*yellowCards + 10*goalsConceded;
+		}else if(this.position == Position.DF){
+			marketValue = 50 + 70*goals + 40*saves + 40*assists + (int ) (( 10000*goals)/minutes) - 20*redCards - 10*yellowCards + 10*goalsConceded;
+		}else if(this.position == Position.GK){
+			marketValue = 50 + 200*goals + saves + 150*assists + (int ) (( 100000*goals)/minutes) - 60*redCards - 30*yellowCards + 10*goalsConceded;
+		}else if(this.position == Position.MF){
+			marketValue = 50+ 60*goals + 80*saves + 10*assists + (int ) (( 2000*goals)/minutes) - 10*redCards - 10*yellowCards + 10*goalsConceded;
+		}
+		
+		this.setMarketValue( marketValue );
 	}
 	
 	//LAGA
 	private void scoreUpdate(){
+		
 		this.setScore( this.score + 1 );
 	}
 	

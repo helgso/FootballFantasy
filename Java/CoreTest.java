@@ -40,7 +40,6 @@ public class CoreTest {
 		assertEquals(total.length, 90);
 		for(int u = 0; u <90; u++){
 			String team1 = total[u];
-			System.out.println(team1+" "+u);
 			assertNotNull(team1);
 			assertNotEquals(team1, "");
 		}

@@ -62,4 +62,14 @@ public class Core {
 		return fantasy.getMatchResults(matchNumber);
 	}
 	
+	public void buyPlayer(FootballPlayer player){
+		int price = player.getMarketValue();
+		player.setMarketValue(price+50);
+	}
+	
+	public void sellPlayer(FootballPlayer player){
+		int price = player.getMarketValue();
+		player.setMarketValue(price-50);
+	}
+	
 }
