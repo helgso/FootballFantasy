@@ -6,13 +6,11 @@ public class FootballTeam {
 	private FootballPlayer[] players;
 	private String name;
 	
-	
 	//Constructor
 	public FootballTeam( FootballPlayer[] players, String teamName ){
 		this.players = players;
 		this.name = teamName;
 	}
-	
 	
 	public FootballPlayer[] getSimulationTeam( ){
 		System.out.println( this.name );
