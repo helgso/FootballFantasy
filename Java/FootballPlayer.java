@@ -21,10 +21,7 @@ public class FootballPlayer {
 	private int 	 assists;
 	private int 	 goals;
 	private int 	 saves;
-	//private int 	 coe = 5;
-	private int 	 minimumValue = 100;
-/*	private int[]    	A;
-	private String[]    B;*/
+	private int 	 minimumValue;
 	
 	
 	//
@@ -34,9 +31,8 @@ public class FootballPlayer {
 		this.teamName = teamName;
 		this.name 	  = name;
 		
-	/*	this.A = new int[50];
-		this.B = new String[50];*/
-		
+		this.score = 0;
+		this.minimumValue = 100;
 		
 		//FIND POSITION
 		//	this.position gets object from enum Position
@@ -56,12 +52,10 @@ public class FootballPlayer {
 	//UPDATE METHODS
 	//
 	
-	public void updateFootballPlayer(){
+	public void updateFootballPlayer( int numRound ){
 		this.pickProbabilityUpdate();
 		this.marketValueUpdate();
-		this.scoreUpdate();
-		
-		
+		this.scoreUpdate( numRound );	
 	}
 	
 	//DONE
@@ -113,34 +107,56 @@ public class FootballPlayer {
 								-a[7]*ownGoals);		
 		return marketValue;
 	}
+
 	
-	
-	//LAGA
-	private void scoreUpdate(){
+	private void scoreUpdate( int numRound ){
 		if(this.minutes == 0){
 			this.minutes = 1;
 		}
 		
-		int score = 1;
-		if(this.position == Position.FW){
-			score = 4*goals + 3*assists - 3*redCards - yellowCards + (minutes/60) - 2*ownGoals;
-		}else if(this.position == Position.DF){
-			score = 6*goals + 3*assists - 3*redCards - yellowCards - (goalsConceded/2) - 2*ownGoals + (minutes/60);
-			if(this.goalsConceded == 0){
-				score += 4;
-			}
-		}else if(this.position == Position.GK){
-			score = 6*goals + (saves/3) + 3*assists - 3*redCards - yellowCards + (goalsConceded/2) + (minutes/60) - 2*ownGoals;
-			if(this.goalsConceded == 0){
-				score += 4;
-			}
+		//		goals|saves|assists|min|redC|yellowC|goalsC|ownG|bonusGoalsC
+		int[] GK={6,	3, 	  3,	60,  3, 	 1, 	 2, 	2,	 4};
+		int[] DF={6,    0,    3,    60,  3, 	 1, 	 2, 	2,	 4};
+		int[] MF={5,    0,    3,    60,  3, 	 1, 	 1, 	2, 	 1};
+		int[] FW={4,	0,    3,    60,  3, 	 1, 	 1, 	2,	 0};
+		
+		int newScore = this.score;
+		if(this.position == Position.GK){
+			newScore += this.calcScore(numRound, GK);
+		} else if(this.position == Position.DF){
+			newScore += this.calcScore(numRound, DF);
 		}else if(this.position == Position.MF){
-			score = 5*goals + 3*assists - 3*redCards - yellowCards  + (minutes/60) - 2*ownGoals;
-			if(this.goalsConceded == 0){
-				score += 1;
-			}
+			newScore += this.calcScore(numRound, MF);
+		}else if(this.position == Position.FW){
+			newScore += this.calcScore(numRound, FW);
 		}
-		this.setScore( score );
+		
+		this.setScore( this.score + newScore );
+	}
+	
+	// returns calculate score from LAST match
+	private int calcScore(int lastMatch, int[] a ){
+		
+		//Get last match statistics
+		Statistics lastGame = stats[ lastMatch ];
+		
+		int newScore = 1;
+		
+		//Bonus score if player has no goals conceded
+		if(this.goalsConceded == 0){
+			newScore += a[ a.length-1 ];
+		}
+		
+		//main calculation
+		newScore =(int)(   a[0]*lastGame.getGoals()
+						+1/a[1]*lastGame.getSaves()
+						+  a[2]*lastGame.getAssists()
+						+1/a[3]*lastGame.getMinutes()
+						-  a[4]*lastGame.getRedCards()
+						-  a[5]*lastGame.getYellowCards()
+						-1/a[6]*lastGame.getGoalsConceded()
+						-  a[7]*lastGame.getOwnGoals());
+		return newScore;
 	}
 	
 	//LAGA

@@ -65,7 +65,7 @@ public class FootballPlayerTest {
 	//Testing updates method in football player A
 	@Test
 	public void testAUpdates(){
-		this.A.updateFootballPlayer();
+		this.A.updateFootballPlayer( 0 );
 		
 		assertEquals(  41, this.A.getScore()                );
 		assertEquals(  11, this.A.getMarketValue()          );

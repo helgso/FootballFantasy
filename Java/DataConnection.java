@@ -58,7 +58,7 @@ public class DataConnection
             int YC = data[i].getInt("yellow_cards");
             leikmenn[i].setYellowCards(YC);
             
-        	leikmenn[i].updateFootballPlayer();
+        	leikmenn[i].updateFootballPlayer(0);
         	
         }
 
