@@ -47,7 +47,7 @@ public class CoreTest {
 		
 	@After
 	public void tearDown(){
-		this.ei = null;
+		ei = null;
 	}
 
 }

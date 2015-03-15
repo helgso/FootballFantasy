@@ -21,14 +21,6 @@ public class Fantasy {
 		numRounds = schedule.getNumRounds();
 	}
 	
-	public Scheduler getScheduler() {
-		return schedule;
-	}
-	
-	public FootballTeam[] getTeamTotal() {
-		return teamTotal;
-	}
-	
 	public void simulateNextRound( ){
 		Simulate simulate = new Simulate();
 		FootballTeam[][] teams = schedule.getNextRoundSchedule();
@@ -44,8 +36,20 @@ public class Fantasy {
 	// post: Returns MatchResults from the game matchNumber.
 	public MatchResults getMatchResults(int matchNumber) {
 		if (0 <= matchNumber && matchNumber <= numAllMatches-1)
-			return matchResults[matchNumber];
+			return this.matchResults[matchNumber];
 		return null;
+	}
+	
+	public Scheduler getScheduler() {
+		return this.schedule;
+	}
+	
+	public FootballTeam[] getTeamTotal() {
+		return this.teamTotal;
+	}
+
+	public MatchResults[] getMatchResults() {
+		return this.matchResults;
 	}
 	
 	public int getNumAllMatches(){

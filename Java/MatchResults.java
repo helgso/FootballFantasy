@@ -17,7 +17,7 @@ public class MatchResults {
 		this.homeGoals = 0;
 		this.awayGoals = 0;
 		this.homeTeam = homeTeam;
-		this.awayTeam = awayTeam;		
+		this.awayTeam = awayTeam;
 		this.homeScoringPlayers = new LinkedList<FootballPlayer>();
 		this.awayScoringPlayers = new LinkedList<FootballPlayer>();
 	}
@@ -40,7 +40,7 @@ public class MatchResults {
 	
 	//
 	//Put every home scoring player into 
-	//one array and return it
+	//one array and return the player
 	//
 	public FootballPlayer[] getHomeScoringPlayers( ){ 
 		int size = this.homeScoringPlayers.size();
@@ -53,7 +53,7 @@ public class MatchResults {
 	
 	//
 	//Put every away scoring player into 
-	//one array and return it
+	//one array and return the player
 	//
 	public FootballPlayer[] getAwayScoringPlayers( ){
 		int listSize = this.awayScoringPlayers.size();

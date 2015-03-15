@@ -1,8 +1,10 @@
 package trunk.Java;
 
+//
 //Takes in two football teams (homeTeam and awayTeam).
 //homeTeam wins with two goals against one goal.
 //Returns the match results.
+//
 public class MockSimulate implements GameMatchInterFace{
 	public MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam ){
 		MatchResults results = new MatchResults( homeTeam, awayTeam );

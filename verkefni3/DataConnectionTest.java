@@ -2,7 +2,6 @@ package trunk.verkefni3;
 
 import static org.junit.Assert.*;
 import trunk.Java.FootballPlayer;
-import trunk.Java.Scheduler;
 import trunk.Java.DataConnection;
 import trunk.Java.FootballTeam;
 
@@ -12,19 +11,24 @@ import org.junit.Test;
 
 public class DataConnectionTest {
 	
-	public static FootballTeam[] ei;
+	public static FootballTeam[] ei, test;
+	//public static FootballTeam[] test;
 	
 	@Before
 	public void setUp() {
-		FootballTeam[] test;
-		test = DataConnection.createFootballTeams();
-		ei = test;
+		
 	}
 	
-	//here we check whether there are players in all teams
-	//and whether they are not just "nulls"
+	//Check if DataConnection gets information from internet
+	//and can create FootballTeam's. Also we check whether there are
+	//players in all teams and whether they are not just "nulls"
 	@Test
 	public void test() {
+		test = DataConnection.createFootballTeams();
+		assertNotEquals(null, test);
+		
+		ei = test;
+		
 		int sumPlayers=0;
 		for(int i = 0; i < 10; i++){
 			FootballPlayer[] testurinn = ei[i].getPlayers();
@@ -35,15 +39,12 @@ public class DataConnectionTest {
 				assertNotEquals(player, null);
 			}
 		}
-		System.out.print(sumPlayers);
 		assertEquals(sumPlayers, 240);
-		
-		
 	}
 
 	@After
 	public void tearDown(){
-		this.ei = null;
+		ei = null;
+		test = null;
 	}
-	
 }

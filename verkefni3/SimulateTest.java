@@ -1,11 +1,8 @@
 package trunk.verkefni3;
-
 import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import trunk.Java.FootballTeam;
 import trunk.Java.DataConnection;
 import trunk.Java.MatchResults;
@@ -46,5 +43,7 @@ public class SimulateTest {
 		assertEquals(1, results.getAwayGoals());
 		assertNotNull(results.getHomeScoringPlayers());
 		assertNotNull(results.getAwayScoringPlayers());	
+		assertEquals(2, results.getHomeScoringPlayers().length);
+		assertEquals(1, results.getAwayScoringPlayers().length);
 	}
 }

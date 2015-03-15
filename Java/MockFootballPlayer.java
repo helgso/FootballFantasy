@@ -1,6 +1,7 @@
 package trunk.Java;
 
-public class FootballPlayer {
+public class MockFootballPlayer implements Player{
+
 	
 	private final String teamName;
 	private final String name;
@@ -12,7 +13,7 @@ public class FootballPlayer {
 	private String 	 teamFolder;
 	private int 	 marketValue;
 	private int		 score;
-	private int 	 yellowCards;
+	private int 	 yellowCards;	
 	private Position position;
 	private String 	 picturePath;
 	private int		 ownGoals;
@@ -27,7 +28,7 @@ public class FootballPlayer {
 	//
 	//CONSTUCTOR
 	//
-	public FootballPlayer( String name, String teamName, String pos ){
+	public MockFootballPlayer( String name, String teamName, String pos ){
 		this.teamName = teamName;
 		this.name 	  = name;
 		
@@ -46,118 +47,39 @@ public class FootballPlayer {
 		
 	}
 	
+	
 	//
 	//UPDATE METHODS
 	//
-	
 	public void updateFootballPlayer( ){
 		this.pickProbabilityUpdate();
 		this.marketValueUpdate();
-		//this.scoreUpdate( );	
+		this.scoreUpdate( );	
 	}
 	
-	//DONE
 	private void marketValueUpdate(){
-		if(this.minutes == 0){
-			this.minutes = 1;
-		}
-		
-		//Different coefficient Value for each position
-		double GKCoefficient = 1.3;
-		double DFCoefficient = 1.4;
-		double MFCoefficient = 1.5;
-		double FWCoefficient = 1.7;
-		
-		//			goals  saves	assists	goals/min  redC 	yellowC 	goalsC		ownG
-		int[] GK = { 15,  	1, 		4, 		10000*1, 	5, 		2, 			1/15, 		0 };
-		int[] DF = { 15,  	0,  	4,  	1000*1, 	5, 		2, 			1/20, 		0 };
-		int[] MF = { 6,  	0,  	4,   	200*1, 		5, 		2, 			1/20, 		0 };
-		int[] FW = { 5, 	0,  	4,   	200*1, 		5, 		2, 			1/30, 		0 };
-		
-		int marketValue = minimumValue;
-		if(this.position == Position.GK){
-			marketValue *= GKCoefficient;
-			marketValue += calcMarketValue( GK );
-		} else if(this.position == Position.DF){
-			marketValue *= DFCoefficient;
-			marketValue += calcMarketValue( DF );
-		} else if(this.position == Position.MF){			
-			marketValue *= MFCoefficient;
-			marketValue += calcMarketValue( MF );	
-		} else if(this.position == Position.FW){
-			marketValue *= FWCoefficient;
-			marketValue += calcMarketValue( FW );
-		}
-		marketValue = (int) Math.floor( marketValue );
-		this.setMarketValue( marketValue  );
+		int marketValue = calcMarketValue( 3, 1 );
+		this.setMarketValue( this.marketValue + marketValue );
 	}
 	
 	//Algorithm for to calculate value for footballPlayer
-	private int calcMarketValue( int[] a ){
-		int goals_per_min = (int)((goals)/minutes);
-		int marketValue=(int)	(a[0]*goals
-								+a[1]*saves
-								+a[2]*assists
-								+a[3]*goals_per_min
-								-a[4]*redCards
-								-a[5]*yellowCards
-								-a[6]*goalsConceded
-								-a[7]*ownGoals);		
+	private int calcMarketValue( int a, int b ){
+		int marketValue = a + b;
 		return marketValue;
 	}
 
 	
 	private void scoreUpdate( ){
-		if(this.minutes == 0){
-			this.minutes = 1;
-		}
-		
-		//		goals|saves|assists|min|redC|yellowC|goalsC|ownG|bonusGoalsC
-		int[] GK={6,	3, 	  3,	60,  3, 	 1, 	 2, 	2,	 4};
-		int[] DF={6,    0,    3,    60,  3, 	 1, 	 2, 	2,	 4};
-		int[] MF={5,    0,    3,    60,  3, 	 1, 	 1, 	2, 	 1};
-		int[] FW={4,	0,    3,    60,  3, 	 1, 	 1, 	2,	 0};
-		
-		int newScore = this.score;
-		if(this.position == Position.GK){
-			newScore += this.calcScore(GK);
-		} else if(this.position == Position.DF){
-			newScore += this.calcScore(DF);
-		}else if(this.position == Position.MF){
-			newScore += this.calcScore(MF);
-		}else if(this.position == Position.FW){
-			newScore += this.calcScore(FW);
-		}
-		
+		int newScore = calcScore(1,2);
 		this.setScore( this.score + newScore );
 	}
 	
-	// returns calculate score from LAST match
-	private int calcScore(int[] a ){
-		
-		//Get last match statistics
-		Statistics lastGame = stats[1]; //LAGA!!!!!!!!!!!!!!!!!!!
-		
-		int newScore = 1;
-		
-		//Bonus score if player has no goals conceded
-		if(this.goalsConceded == 0){
-			newScore += a[ a.length-1 ];
-		}
-		
-		//main calculation
-		newScore =(int)(   a[0]*lastGame.getGoals()
-						+1/a[1]*lastGame.getSaves()
-						+  a[2]*lastGame.getAssists()
-						+1/a[3]*lastGame.getMinutes()
-						-  a[4]*lastGame.getRedCards()
-						-  a[5]*lastGame.getYellowCards()
-						-1/a[6]*lastGame.getGoalsConceded()
-						-  a[7]*lastGame.getOwnGoals());
+	
+	private int calcScore(int a, int b ){
+		int newScore = a + b;
 		return newScore;
 	}
 	
-	//LAGA
 	private void pickProbabilityUpdate(){
 		this.setPickProbability( this.pickProbability + 0.01 );
 	}
@@ -166,7 +88,6 @@ public class FootballPlayer {
 	//
 	//SET METHODS
 	//
-	
 	public void setPicturePath( String picturePath ){
 		this.picturePath = picturePath;
 	}
@@ -213,7 +134,6 @@ public class FootballPlayer {
 	//
 	//GET METHODS
 	//
-
 	public double getPickProbability( ){
 		return this.pickProbability;
 	}
