@@ -17,6 +17,32 @@ public class Statistics {
 		
 	}
 	
+	
+	public void incGoalsConceded( ){
+		this.goalsConceded++;
+	}
+	
+	public void incYellowCards(){
+		this.yellowCards++ ;
+	}
+	public void incRedCards(){
+		this.redCards++;
+	}
+	public void incOwnGoals(){
+		this.ownGoals++;
+	}
+	public void incAssists(){
+		this.assists++;
+	}
+	public void incGoals(){
+		this.goals++;
+	}
+	public void incSaves(){
+		this.saves++;
+	}
+	
+	
+	
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded= goalsConceded;
 	}

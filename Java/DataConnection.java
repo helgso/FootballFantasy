@@ -142,16 +142,16 @@ public class DataConnection
         }
 
 
-        FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal");
-        FootballTeam chelsea = new FootballTeam(Chelsea, "Chelsea");
-        FootballTeam liverpool = new FootballTeam(Liverpool, "Liverpool");
-        FootballTeam manCity = new FootballTeam(ManCity, "ManCity");
-        FootballTeam manUtd = new FootballTeam(ManUtd, "ManUtd");
-        FootballTeam southampton = new FootballTeam(Southampton, "Southampton");
-        FootballTeam spurs = new FootballTeam(Spurs, "Spurs");
-        FootballTeam stoke = new FootballTeam(Stoke, "Stoke");
-        FootballTeam swansea = new FootballTeam(Swansea,"Swansea");
-        FootballTeam westHam = new FootballTeam(WestHam,"WestHam");
+        FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal",0.5865385);
+        FootballTeam chelsea = new FootballTeam(Chelsea, "Chelsea",0.640776);
+        FootballTeam liverpool = new FootballTeam(Liverpool, "Liverpool",0.5480769);
+        FootballTeam manCity = new FootballTeam(ManCity, "ManCity",0.6442308);
+        FootballTeam manUtd = new FootballTeam(ManUtd, "ManUtd",0.5961538);
+        FootballTeam southampton = new FootballTeam(Southampton, "Southampton",0.3750000);
+        FootballTeam spurs = new FootballTeam(Spurs, "Spurs",0.5480769);
+        FootballTeam stoke = new FootballTeam(Stoke, "Stoke",0.3269231);
+        FootballTeam swansea = new FootballTeam(Swansea,"Swansea",0.3173077);
+        FootballTeam westHam = new FootballTeam(WestHam,"WestHam",0.3173077);
         
         System.out.println("inn i dataconnection");
         System.out.println(arsenal.getName());

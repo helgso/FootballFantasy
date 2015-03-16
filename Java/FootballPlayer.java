@@ -34,6 +34,12 @@ public class FootballPlayer {
 		this.score = 0;
 		this.minimumValue = 100;
 		
+		this.stats = new Statistics[18];
+		
+		for(int i = 0; i<18; i++){
+			this.stats[i] = new Statistics();
+		}
+		
 		//FIND POSITION
 		//	this.position gets object from enum Position
 		//	that match with String value pos.

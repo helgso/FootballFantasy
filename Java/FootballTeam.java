@@ -5,11 +5,13 @@ public class FootballTeam {
 	private String teamPath;
 	private FootballPlayer[] players;
 	private String name;
+	private double factor;
 	
 	//Constructor
-	public FootballTeam( FootballPlayer[] players, String teamName ){
+	public FootballTeam( FootballPlayer[] players, String teamName, double fact ){
 		this.players = players;
 		this.name = teamName;
+		this.factor = fact;
 	}
 	
 	public FootballPlayer[] getSimulationTeam( ){
@@ -18,6 +20,10 @@ public class FootballTeam {
 		System.out.println( this.teamPath );
 		System.out.println( this.name );
 		return this.players;
+	}
+	
+	public double getFactor(){
+		return this.factor;
 	}
 	
 	public FootballPlayer[] getPlayers(){
