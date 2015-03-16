@@ -1,6 +1,8 @@
 package trunk.Java;
 
-public class MockFootballPlayer implements Player{
+import trunk.verkefni3.PlayerInterFace;
+
+public class MockFootballPlayer implements PlayerInterFace{
 
 	
 	private final String teamName;
