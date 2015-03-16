@@ -1,6 +1,6 @@
 package trunk.Java;
 
-public class Simulate implements GameMatchInterFace{
+public class Simulate {
 	
 	public MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam ){
 			
