@@ -12,6 +12,14 @@
  * (3) Random.yellowCards() returns the yellowCards of any FootballTeam
  * (4) Random.redCards() returns the redCards of any FootballTeam
  * 
+ * ==========
+ * DISCLAIMER
+ * ==========
+ * 
+ * A prob array consisting of the values {0.3, 0.45, 0.25} means that it is
+ * 0.3 likely that the number 0 should be returned, 0.45 likely that 1 is
+ * returned and 0.25 likely that 2 is returned
+ * 
  */
 
 package trunk.Java;
