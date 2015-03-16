@@ -2,7 +2,7 @@ package trunk.Java;
 
 public class Simulate {
 	
-	public MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam ){
+	public static MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam ){
 			
 		MatchResults results = new MatchResults( homeTeam, awayTeam );
 		
