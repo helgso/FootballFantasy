@@ -22,11 +22,10 @@ public class Fantasy {
 	}
 	
 	public void simulateNextRound( ){
-		Simulate simulate = new Simulate();
 		FootballTeam[][] teams = schedule.getNextRoundSchedule();
 		int numMatch = numRoundMatches;
 		for (int i = 0; i < numMatch; i++) {
-			matchResults[roundsDone*numMatch+i]= simulate.match(teams[i][0],teams[i][1]);
+			matchResults[roundsDone*numMatch+i]= Simulate.match(teams[i][0],teams[i][1]);
 		}
 		roundsDone++;
 	}
