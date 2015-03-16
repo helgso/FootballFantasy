@@ -15,5 +15,4 @@ public enum Position {
 	public String getPos(){
 		return pos;
 	}
-	
 }
