@@ -16,8 +16,6 @@
 
 package trunk.Java;
 
-import trunk.Java.FootballTeam;
-
 public class Random {
 	// post: Returns a suitable amount of homeGoals based on the DELTA_FACTOR
 	//       which is equal to homeTeam.getFactor() - awayTeam.getFactor()
