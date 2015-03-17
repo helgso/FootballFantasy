@@ -1,24 +1,20 @@
 package trunk.Java;
 
 public class FootballTeam {
-	private int numPlayers;
-	private String teamPath;
 	private FootballPlayer[] players;
 	private String name;
 	private double factor;
+	private String logoPath;
 	
 	//Constructor
-	public FootballTeam( FootballPlayer[] players, String teamName, double fact ){
+	public FootballTeam( FootballPlayer[] players, String teamName, double fact, String logoPath ){
 		this.players = players;
 		this.name = teamName;
 		this.factor = fact;
+		this.logoPath = logoPath;
 	}
 	
 	public FootballPlayer[] getSimulationTeam( ){
-		System.out.println( this.name );
-		System.out.println( this.numPlayers );
-		System.out.println( this.teamPath );
-		System.out.println( this.name );
 		return this.players;
 	}
 	
@@ -26,7 +22,7 @@ public class FootballTeam {
 		return this.factor;
 	}
 	
-	public FootballPlayer[] getPlayers(){
+	public FootballPlayer[] getFootballPlayers(){
 		return players;
 	}
 	
@@ -34,8 +30,8 @@ public class FootballTeam {
 		return this.name;
 	}
 	
-	public String getPath( ){
-		return "test";
+	public String getLogoPath( ){
+		return logoPath;
 	}
 	
 	public int getFootballPlayerAmount() {

@@ -5,7 +5,6 @@ public class Core {
 	private Scheduler schedule;
 	
 	public Core() {
-		System.out.println("inn i core");
 		fantasy = new Fantasy();
 		schedule = fantasy.getScheduler();
 	}
@@ -39,24 +38,37 @@ public class Core {
 				totalSchedule[(i*5)+j] = homeTeam + " - " + awayTeam;
 			}
 		}
-		
 		return totalSchedule;
+	}
+	
+	// post: getTeamLogo("Arsenal") would return "trunk/Pictures/Arsenal/Arsenal.png"
+	public String getTeamLogo(String FootballTeam) {
+		FootballTeam[] teamTotal = fantasy.getTeamTotal();
+		
+		for (FootballTeam team : teamTotal) {
+			if (team.getName().equals(FootballTeam)) {				
+				return team.getLogoPath();
+			}
+		}
+		return "";
 	}
 	
 	public void simulateNextRound() {
 		fantasy.simulateNextRound();
 	}
 	
-	/*public FootballPlayer[] getAllFootballPlayers() {
+	public FootballPlayer[] getAllFootballPlayers() {
 		FootballTeam[] allTeams = fantasy.getTeamTotal();
 		FootballPlayer[] allPlayers = new FootballPlayer[240];
 		
 		for (int i = 0, k = 0; i < 10; i++) {
-			for (int j = 0; j < allTeams[i].getFootballPlayerAmount(); j++, k++) {
-				allPlayers[k] = 
+			FootballPlayer[] playersInTeam = allTeams[i].getFootballPlayers();
+			for (int j = 0; j < playersInTeam.length; j++, k++) {
+				allPlayers[k] = playersInTeam[j];
 			}
 		}
-	}*/
+		return allPlayers;
+	}
 	
 	public MatchResults getMatchResults(int matchNumber) {
 		return fantasy.getMatchResults(matchNumber);
@@ -72,4 +84,13 @@ public class Core {
 		player.setMarketValue(price-50);
 	}
 	
+	public static void main(String[] args) {
+		Core core = new Core();
+		
+		FootballPlayer[] total = core.getAllFootballPlayers();
+		
+		for (FootballPlayer player : total) {
+			System.out.println(player.getName());
+		}
+	}
 }

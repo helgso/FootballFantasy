@@ -9,7 +9,6 @@ public class FootballPlayer {
 	
 	private double 	 pickProbability; //how likely is this player to be in final team squad.
 	private int 	 goalsConceded;
-	private String 	 teamFolder;
 	private int 	 marketValue;
 	private int		 score;
 	private int 	 yellowCards;
@@ -189,9 +188,6 @@ public class FootballPlayer {
 	public void setMarketValue( int marketValue ){
 		this.marketValue  = marketValue;
 	}
-	public void setTeamFolder( String teamFolder ){
-		this.teamFolder = teamFolder;
-	}
 	public void setOwnGoals( int ownGoals ){
 		this.ownGoals = ownGoals;
 	}
@@ -234,9 +230,6 @@ public class FootballPlayer {
 	}
 	public String getPicturePath( ){
 		return this.picturePath;
-	}
-	public String getTeamFolder( ){
-		return this.teamFolder;
 	}
 	public int getYellowCards( ){
 		return this.yellowCards;

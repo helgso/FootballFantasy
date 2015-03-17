@@ -14,8 +14,6 @@ public class DataConnection
     	}catch (Exception e) {
     		
     	}
-    	
-
         
         FootballPlayer[] leikmenn = new FootballPlayer[240];
 
@@ -25,8 +23,8 @@ public class DataConnection
             String team = data[i].getString("team_name");
             String pos = data[i].getString("type_name");
             
-            
         	FootballPlayer player = new FootballPlayer(name ,team, pos);
+        	player.setPicturePath("trunk/Pictures/" + team.replaceAll(" ", "") + "/" + unformatName(name) + ".png");
             leikmenn[i] = player;
             
             int assists = data[i].getInt("assists");
@@ -53,8 +51,6 @@ public class DataConnection
             int saves = data[i].getInt("saves");
             leikmenn[i].setSaves(saves);
             
-            leikmenn[i].setTeamFolder("");
-            
             int YC = data[i].getInt("yellow_cards");
             leikmenn[i].setYellowCards(YC);
             
@@ -72,8 +68,6 @@ public class DataConnection
         LinkedList<FootballPlayer> SwanseaTemp = new LinkedList<FootballPlayer>();
         LinkedList<FootballPlayer> WestHamTemp = new LinkedList<FootballPlayer>();
         LinkedList<FootballPlayer> LiverpoolTemp = new LinkedList<FootballPlayer>();
-
-        
 
         for(int i = 0; i < 240; i++){
             String team = data[i].getString("team_name");
@@ -141,26 +135,29 @@ public class DataConnection
             WestHam[i] = (FootballPlayer)WestHamTemp.pop();
         }
 
+        FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal", 0.5865385, "trunk/Pictures/Arsenal/Arsenal.png");
+        FootballTeam chelsea = new FootballTeam(Chelsea, "Chelsea", 0.640776, "trunk/Pictures/Chelsea/Chelsea.png");
+        FootballTeam liverpool = new FootballTeam(Liverpool, "Liverpool", 0.5480769, "trunk/Pictures/Liverpool/Liverpool.png");
+        FootballTeam manCity = new FootballTeam(ManCity, "Manchester City", 0.6442308, "trunk/Pictures/ManCity/ManCity.png");
+        FootballTeam manUtd = new FootballTeam(ManUtd, "Manchester United", 0.5961538, "trunk/Pictures/ManUtd/ManUtd.png");
+        FootballTeam southampton = new FootballTeam(Southampton, "Southampton", 0.3750000, "trunk/Pictures/Southampton/Southampton.png");
+        FootballTeam spurs = new FootballTeam(Spurs, "Spurs", 0.5480769, "trunk/Pictures/Spurs/Spurs.png");
+        FootballTeam stoke = new FootballTeam(Stoke, "Stoke", 0.3269231, "trunk/Pictures/Stoke/Stoke.png");
+        FootballTeam swansea = new FootballTeam(Swansea, "Swansea", 0.3173077, "trunk/Pictures/Swansea/Swansea.png");
+        FootballTeam westHam = new FootballTeam(WestHam, "West Ham", 0.3173077, "trunk/Pictures/WestHam/WestHam.png");
 
-        FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal",0.5865385);
-        FootballTeam chelsea = new FootballTeam(Chelsea, "Chelsea",0.640776);
-        FootballTeam liverpool = new FootballTeam(Liverpool, "Liverpool",0.5480769);
-        FootballTeam manCity = new FootballTeam(ManCity, "ManCity",0.6442308);
-        FootballTeam manUtd = new FootballTeam(ManUtd, "ManUtd",0.5961538);
-        FootballTeam southampton = new FootballTeam(Southampton, "Southampton",0.3750000);
-        FootballTeam spurs = new FootballTeam(Spurs, "Spurs",0.5480769);
-        FootballTeam stoke = new FootballTeam(Stoke, "Stoke",0.3269231);
-        FootballTeam swansea = new FootballTeam(Swansea,"Swansea",0.3173077);
-        FootballTeam westHam = new FootballTeam(WestHam,"WestHam",0.3173077);
-        
-        System.out.println("inn i dataconnection");
-        System.out.println(arsenal.getName());
-        return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};
-		
+        return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};		
 	}
-	
-	public static void main(String [] args){}
     
-    
+    // post: Makes the names of players more suitable as filenames. "Jussi Jääskeläinen" would turn into "Jussi-Jaaskelainen"
+    public static String unformatName(String name) {
+    	String[] find    = {"Ö", "á", "é", "ü", "à", "ï", "ë", "í", "á", "Á", "è", "'", "ä", " "};
+    	String[] replace = {"O", "a", "e", "u", "a", "i", "e", "i", "a", "A", "e", "",  "a", "-"};
+    	
+    	for (int i = 0; i < find.length; i++) {
+    		name = name.replaceAll(find[i], replace[i]);
+    	}
+    	return name;
+    }
 }
     
