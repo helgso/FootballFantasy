@@ -55,7 +55,6 @@ public class DataConnection
             leikmenn[i].setYellowCards(YC);
             
         	leikmenn[i].updateFootballPlayer();
-        	
         }
 
         LinkedList<FootballPlayer> ArsenalTemp = new LinkedList<FootballPlayer>();

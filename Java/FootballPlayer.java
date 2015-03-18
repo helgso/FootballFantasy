@@ -30,8 +30,7 @@ public class FootballPlayer {
 		this.teamName = teamName;
 		this.name 	  = name;
 		
-		this.score = 0;
-		this.minimumValue = 100;
+		this.reset();
 		
 		this.stats = new Statistics[18];
 		
@@ -48,20 +47,40 @@ public class FootballPlayer {
 				this.position = position;
 			}
 		}
-		
+	}
+	
+	private void reset(){
+		this.score = 0;
+		this.minimumValue = 100;
 	}
 	
 	//
 	//UPDATE METHODS
 	//
-	
-	public void updateFootballPlayer( ){
-		this.pickProbabilityUpdate();
-		this.marketValueUpdate();
-		//this.scoreUpdate( );	
+	public void updateFootballPlayer( int roundNumber){
+		this.statsUpdate( roundNumber );
+		this.scoreUpdate( roundNumber );
 	}
 	
-	//DONE
+	public void updateFootballPlayer(){
+		this.marketValueUpdate();
+	}
+	
+	
+	private void statsUpdate( int roundNumber ){
+		this.setGoalsConceded( this.stats[roundNumber].getGoalsConceded() + this.goalsConceded );
+		this.setYellowCards( this.stats[roundNumber].getYellowCards() + this.yellowCards );
+		this.setOwnGoals( this.stats[roundNumber].getOwnGoals() + this.ownGoals );
+		this.setRedCards( this.stats[roundNumber].getRedCards() + this.redCards );
+		this.setMinutes( this.stats[roundNumber].getMinutes() + this.minutes );
+		this.setAssists( this.stats[roundNumber].getAssists() + this.assists );
+		this.setGoals( this.stats[roundNumber].getGoals() + this.goals ); 
+		this.setSaves( this.stats[roundNumber].getSaves() + this.saves );
+	}
+	
+	
+	
+	//Calculate football player value from all his statistics
 	private void marketValueUpdate(){
 		if(this.minutes == 0){
 			this.minutes = 1;
@@ -111,37 +130,36 @@ public class FootballPlayer {
 		return marketValue;
 	}
 
-	
-	private void scoreUpdate( ){
+	//Calculate football player score from last game statistics
+	private void scoreUpdate( int roundNumber ){
 		if(this.minutes == 0){
 			this.minutes = 1;
 		}
 		
 		//		goals|saves|assists|min|redC|yellowC|goalsC|ownG|bonusGoalsC
-		int[] GK={6,	3, 	  3,	60,  3, 	 1, 	 2, 	2,	 4};
-		int[] DF={6,    0,    3,    60,  3, 	 1, 	 2, 	2,	 4};
-		int[] MF={5,    0,    3,    60,  3, 	 1, 	 1, 	2, 	 1};
-		int[] FW={4,	0,    3,    60,  3, 	 1, 	 1, 	2,	 0};
+		int[] GK={6,	3, 	  3,	45,  3, 	 1, 	 2, 	2,	 4};
+		int[] DF={6,    0,    3,    45,  3, 	 1, 	 2, 	2,	 4};
+		int[] MF={5,    0,    3,    45,  3, 	 1, 	 1, 	2, 	 1};
+		int[] FW={4,	0,    3,    45,  3, 	 1, 	 1, 	2,	 0};
 		
 		int newScore = this.score;
 		if(this.position == Position.GK){
-			newScore += this.calcScore(GK);
+			newScore += this.calcScore(GK, roundNumber);
 		} else if(this.position == Position.DF){
-			newScore += this.calcScore(DF);
+			newScore += this.calcScore(DF, roundNumber);
 		}else if(this.position == Position.MF){
-			newScore += this.calcScore(MF);
+			newScore += this.calcScore(MF, roundNumber);
 		}else if(this.position == Position.FW){
-			newScore += this.calcScore(FW);
+			newScore += this.calcScore(FW, roundNumber);
 		}
-		
 		this.setScore( this.score + newScore );
 	}
 	
 	// returns calculate score from LAST match
-	private int calcScore(int[] a ){
+	private int calcScore(int[] a, int roundNumber ){
 		
 		//Get last match statistics
-		Statistics lastGame = stats[1]; //LAGA!!!!!!!!!!!!!!!!!!!
+		Statistics lastGame = stats[ roundNumber ];
 		
 		int newScore = 1;
 		
@@ -162,16 +180,10 @@ public class FootballPlayer {
 		return newScore;
 	}
 	
-	//LAGA
-	private void pickProbabilityUpdate(){
-		this.setPickProbability( this.pickProbability + 0.01 );
-	}
-	
 	
 	//
 	//SET METHODS
 	//
-	
 	public void setPicturePath( String picturePath ){
 		this.picturePath = picturePath;
 	}
@@ -215,7 +227,6 @@ public class FootballPlayer {
 	//
 	//GET METHODS
 	//
-
 	public double getPickProbability( ){
 		return this.pickProbability;
 	}

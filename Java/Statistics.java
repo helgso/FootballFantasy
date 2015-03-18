@@ -5,7 +5,6 @@ public class Statistics {
 	private boolean cleanSheet;
 	private int goalsConceded;
 	private int yellowCards;
-	private int marketValue;
 	private int ownGoals;
 	private int redCards;
 	private int minutes;
@@ -52,9 +51,6 @@ public class Statistics {
 	public void setYellowCards( int yellowCards ){
 		this.yellowCards  = yellowCards ;
 	}
-	public void setMarketValue( int marketValue ){
-		this.marketValue  = marketValue ;
-	}
 	public void setRedCards( int redCards ){
 		this.redCards = redCards;
 	}
@@ -79,9 +75,6 @@ public class Statistics {
 	}
 	public int getGoalsConceded( ){
 		return this.goalsConceded;
-	}
-	public int getMarketValue( ){
-		return this.marketValue;
 	}
 	public int getYellowCards( ){
 		return this.yellowCards;

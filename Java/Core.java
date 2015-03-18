@@ -20,7 +20,7 @@ public class Core {
 			String homeTeam = nextRoundSchedule[i][0].getName();
 			String awayTeam = nextRoundSchedule[i][1].getName();
 			results[i] = homeTeam + " - " + awayTeam;
-		}
+		}	
 		
 		return results;
 	}
@@ -73,17 +73,6 @@ public class Core {
 	public MatchResults getMatchResults(int matchNumber) {
 		return fantasy.getMatchResults(matchNumber);
 	}
-	
-	public void buyPlayer(FootballPlayer player){
-		int price = player.getMarketValue();
-		player.setMarketValue(price+50);
-	}
-	
-	public void sellPlayer(FootballPlayer player){
-		int price = player.getMarketValue();
-		player.setMarketValue(price-50);
-	}
-	
 	public static void main(String[] args) {
 		Core core = new Core();
 		

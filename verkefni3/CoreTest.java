@@ -1,10 +1,12 @@
-package trunk.Java;
+package trunk.verkefni3;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import trunk.Java.Core;
 
 public class CoreTest {
 
