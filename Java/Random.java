@@ -68,7 +68,7 @@ public class Random {
 	
 	// A helper function for all of the probability functions.
 	// post: Returns a suitable amount of entities based on a given probability array
-	private static int determineValue(double[] probs) {
+	public static int determineValue(double[] probs) {
 		double prob = Math.random();
 		for (int i = 0; i < probs.length; i++) {
 			if (prob <= sumProbs(probs, 0, i+1)) {
