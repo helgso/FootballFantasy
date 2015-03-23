@@ -12,43 +12,42 @@ public class Simulate {
 		
 		// Next, using probability, assign each goal to the likeliest
 		// FootballPlayer of the corresponding team
-		results = pickScorers(results, homeTeam, results.getHomeGoals(), roundNum, true);
-		results = pickScorers(results, awayTeam, results.getAwayGoals(), roundNum, false);
+		FootballPlayer[] simulationHome = homeTeam.getSimulationTeam();
+		FootballPlayer[] simulationAway = awayTeam.getSimulationTeam();
+		
+		results = pickScorers(results, simulationHome, results.getHomeGoals(), roundNum, true);
+		results = pickScorers(results, simulationAway, results.getAwayGoals(), roundNum, false);
 		
 		return results;
 	}
 	
-	public static MatchResults pickScorers(MatchResults res, FootballTeam team, int goals, int numRound,boolean isHome){
-		double sum_goalsAndMinutes = 0;
+	public static MatchResults pickScorers(MatchResults res, FootballPlayer[] team, int goals, int numRound,boolean isHome){
+		double sum_goals = 0;
 		double chances[] = new double[11];
 		
-		FootballPlayer[] home = team.getFootballPlayers(); 
+		FootballPlayer[] home = team; 
 		for(FootballPlayer x : home){
-			sum_goalsAndMinutes += x.getGoals();
-			//sum_goalsAndMinutes += x.getMinutes();
+			sum_goals += x.getGoals();
 		}
-		System.out.println();
 		
 		double x=0;
 		for(int i = 0; i < 11; i++){
-			chances[i] =  (home[i].getGoals())/sum_goalsAndMinutes;
-			/*if(chances[i] == 0){
-				chances[i] = 0.1;
-			}*/
+			chances[i] =  (home[i].getGoals())/sum_goals;
 			x += chances[i];
 		}
 		
-		System.out.println("sum of chances = "+x);
 		int index = 0;
 		
-		while(goals > 0 ){
+		//EKKI BREYTA NEINU ER ÆTLA AÐ LAGA ÞETTA SEINNA
+		/*while(goals > 0 ){
 			//System.out.println("what the poop");
+			int i = Random.determineValue(chances);
 			double random = Math.random();
 			if(random < chances[index]){
 				if(isHome){
-					res.addHomeScorer(home[index]);
+					res.addHomeScorer(home[i]);
 				}else{
-					res.addAwayScorer(home[index]);
+					res.addAwayScorer(home[i]);
 				}
 				Statistics[] temp = home[index].getStats();
 				temp[0].incGoals();
@@ -60,7 +59,7 @@ public class Simulate {
 				index = 0;
 			}
 			
-		}
+		}*/
 		return res;
 	}
 }
