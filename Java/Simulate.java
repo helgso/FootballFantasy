@@ -18,6 +18,7 @@ public class Simulate {
 		results = pickScorers(results, simulationHome, results.getHomeGoals(), roundNum, true);
 		results = pickScorers(results, simulationAway, results.getAwayGoals(), roundNum, false);
 		
+		
 		return results;
 	}
 	
@@ -38,28 +39,19 @@ public class Simulate {
 		
 		int index = 0;
 		
-		//EKKI BREYTA NEINU ER ÆTLA AÐ LAGA ÞETTA SEINNA
-		/*while(goals > 0 ){
+		while(goals > 0 ){
 			//System.out.println("what the poop");
 			int i = Random.determineValue(chances);
-			double random = Math.random();
-			if(random < chances[index]){
-				if(isHome){
-					res.addHomeScorer(home[i]);
-				}else{
-					res.addAwayScorer(home[i]);
-				}
-				Statistics[] temp = home[index].getStats();
-				temp[0].incGoals();
-				
-				goals--;
+			if(isHome){
+				res.addHomeScorer(home[i]);
+			}else{
+				res.addAwayScorer(home[i]);
 			}
-			index++;
-			if(index == 11){
-				index = 0;
-			}
+			Statistics[] temp = home[index].getStats();
+			temp[0].incGoals();
 			
-		}*/
+			goals--;	
+		}
 		return res;
 	}
 }
