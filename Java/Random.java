@@ -117,9 +117,5 @@ public class Random {
 			} else probShiftResidue = 0;
 		}
 		
-		for (double value : probs) {
-			System.out.println(value + ", ");
-		}
-		System.out.println("\n" + sumProbs(probs, 0, probs.length) + "\n");
 	}
 }

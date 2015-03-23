@@ -68,13 +68,13 @@ public class MatchResults {
 		return this.matchName;
 	}	
 	
-	public void incrementHomeGoals( FootballPlayer scorer ){
-		this.homeGoals++;
+	public void addHomeScorer( FootballPlayer scorer ){
+		//this.homeGoals++;
 		this.homeScoringPlayers.add(scorer);
 	}
 	
-	public void incrementAwayGoals( FootballPlayer scorer ){
-		this.awayGoals++;
+	public void addAwayScorer( FootballPlayer scorer ){
+		//this.awayGoals++;
 		this.awayScoringPlayers.add(scorer);
 	}
 	

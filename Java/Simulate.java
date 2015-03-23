@@ -19,22 +19,26 @@ public class Simulate {
 	}
 	
 	public static MatchResults pickScorers(MatchResults res, FootballTeam team, int goals, int numRound,boolean isHome){
-		int sum_goals = 0;
+		double sum_goalsAndMinutes = 0;
 		double chances[] = new double[11];
 		
 		FootballPlayer[] home = team.getFootballPlayers(); 
 		for(FootballPlayer x : home){
-			sum_goals += x.getGoals();
+			sum_goalsAndMinutes += x.getGoals();
+			//sum_goalsAndMinutes += x.getMinutes();
 		}
+		System.out.println();
 		
-		
+		double x=0;
 		for(int i = 0; i < 11; i++){
-			chances[i] =  home[i].getGoals()/sum_goals;
-			if(chances[i] == 0){
+			chances[i] =  (home[i].getGoals())/sum_goalsAndMinutes;
+			/*if(chances[i] == 0){
 				chances[i] = 0.1;
-			}
+			}*/
+			x += chances[i];
 		}
 		
+		System.out.println("sum of chances = "+x);
 		int index = 0;
 		
 		while(goals > 0 ){
@@ -42,9 +46,9 @@ public class Simulate {
 			double random = Math.random();
 			if(random < chances[index]){
 				if(isHome){
-					res.incrementHomeGoals(home[index]);
+					res.addHomeScorer(home[index]);
 				}else{
-					res.incrementAwayGoals(home[index]);
+					res.addAwayScorer(home[index]);
 				}
 				Statistics[] temp = home[index].getStats();
 				temp[0].incGoals();
