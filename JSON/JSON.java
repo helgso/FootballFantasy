@@ -13,7 +13,7 @@ public class JSON {
 	// Usage: k = JSON.fetchData()
 	// Post:  k is an array of every 240 FootballPlayer
 	//        that will then be parsed by the caller.
-    public static JSONObject[] fetchData() throws IOException, JSONException {
+    public static JSONObject[] fetchData() {
     	int[] updateIDs = {1,2,4,5,6,7,9,10,11,12,13,14,15,16,20,21,23,24,25,27,28,77,78,79,80,81,82,
 	            84,86,87,89,90,91,94,95,96,99,100,176,200,202,203,205,209,211,214,215,216,217,218,219,220,
 	            224,225,226,227,229,230,231,232,233,235,236,237,240,241,242,244,245,246,247,249,250,252,253,
@@ -29,7 +29,9 @@ public class JSON {
     	JSONObject[] gogn = new JSONObject[updateIDs.length];
 	
     	for (int i = 0; i < 240; i++) {
-    		gogn[i] = readJsonFromUrl("http://fantasy.premierleague.com/web/api/elements/"+updateIDs[i]+"/");
+    		try {
+    			gogn[i] = readJsonFromUrl("http://fantasy.premierleague.com/web/api/elements/"+updateIDs[i]+"/");
+    		} catch (Exception e) {}
     	}
 	
     	return gogn;

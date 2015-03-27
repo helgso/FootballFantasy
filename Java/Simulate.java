@@ -31,7 +31,7 @@ public class Simulate {
 			sum_goals += x.getGoals();
 		}
 		
-		double x=0;
+		double x = 0;
 		for(int i = 0; i < 11; i++){
 			chances[i] =  (home[i].getGoals())/sum_goals;
 			x += chances[i];

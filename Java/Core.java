@@ -14,7 +14,6 @@ public class Core {
 	//       {{Arsenal, helsea}, {Stoke, Southampton}, ...}.
 	public FootballTeam[][] getScheduleForNextRound() {
 		return schedule.getNextRoundSchedule();
-		
 	}
 	
 	// post: Same as getNextRoundSchedule but returns 90 pairs. All Matches.

@@ -6,12 +6,21 @@ import java.util.LinkedList;
 
 public class DataConnection {   
     public static FootballTeam[] createFootballTeams( ){
-    	JSONObject[] data = null;
-    	try{
-    		data = JSON.fetchData();
-    	}catch (Exception e) {
-    		
-    	}
+    	// For a corresponding i of the loop below, a 0 in this array
+    	// means that no picture is available for that particular
+    	// FootballPlayer. A 1 means there exists a picture.
+    	int[] thereExistsAPicture = {0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1,
+    			1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 1, 1, 0,
+    			1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0,
+    			1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0,
+    			0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0,
+    			1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+    			1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 1,
+    			1, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0,
+    			1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    			0, 0, 0, 0};
+
+    	JSONObject[] data = JSON.fetchData();
         
         FootballPlayer[] leikmenn = new FootballPlayer[240];
 
@@ -21,9 +30,15 @@ public class DataConnection {
             String team = data[i].getString("team_name");
             String pos = data[i].getString("type_name");
             
-        	FootballPlayer player = new FootballPlayer(name ,team, pos);
-        	player.setPicturePath("trunk/Pictures/" + team.replaceAll(" ", "") + "/" + unformatName(name) + ".png");
-            leikmenn[i] = player;
+        	FootballPlayer player = new FootballPlayer(name, team, pos);
+        	
+        	if (thereExistsAPicture[i] == 1) {
+        		player.setPicturePath("trunk/Pictures/" + team.replaceAll(" ", "") + "/" + unformatName(name) + ".jpg");
+        	} else {
+        		player.setPicturePath("trunk/Pictures/AnonymousPlayer.jpg");
+        	}
+            
+        	leikmenn[i] = player;
             
             int assists = data[i].getInt("assists");
             leikmenn[i].setAssists(assists);
@@ -143,7 +158,7 @@ public class DataConnection {
         FootballTeam swansea = new FootballTeam(Swansea, "Swansea", 0.3173077, "trunk/Pictures/Swansea/Swansea.png");
         FootballTeam westHam = new FootballTeam(WestHam, "West Ham", 0.3173077, "trunk/Pictures/WestHam/WestHam.png");
 
-        return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};		
+        return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};
 	}
     
     // post: Makes the names of players more suitable as filenames. "Jussi J‰‰skel‰inen" would turn into "Jussi-Jaaskelainen"

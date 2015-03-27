@@ -1,7 +1,5 @@
 package trunk.Java;
 
-import java.util.LinkedList;
-
 public class FootballTeam {
 	private FootballPlayer[] players;
 	private String name;
