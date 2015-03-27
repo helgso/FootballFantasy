@@ -57,13 +57,4 @@ public class JSON {
 	}
 	return sb.toString();
   }
-  
-  public static void main(String[] args) {
-	  JSONObject[] k = null;
-	  try {
-		  k = fetchData();
-	  } catch (Exception e) {}
-	  
-	  System.out.println(k[0].getString("type_name"));
-  }
 }
