@@ -99,31 +99,6 @@ public class Scheduler {
 		return round;
 	}
 	
-	private void printSchedule(){
-		for(int i = 0; i<numRounds; i++){
-			System.out.println();
-			System.out.println("round "+i);
-			for(int u = 0; u<numMatchInRound; u++){
-				System.out.println(this.teamSchedule[i][u][0].getName()+" VS. "+this.teamSchedule[i][u][1].getName());
-			}
-			
-			System.out.println();
-			System.out.println("og svo fra getnextround:");
-			System.out.println();
-			FootballTeam[][] dot = getNextRoundSchedule();
-			
-		}
-	}
-	
-	private void printRound(){
-		
-		System.out.println("round "+this.index);
-		
-			for(int u = 0; u<numMatchInRound ; u++){
-				System.out.println(this.teamSchedule[this.index][u][0].getName()+" VS. "+this.teamSchedule[this.index][u][1].getName());
-			}
-	}
-	
 	public int getNumMatchInRound (){
 		return this.numMatchInRound;
 	}

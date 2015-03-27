@@ -4,9 +4,7 @@ import trunk.JSON.JSONObject;
 import trunk.JSON.JSON;
 import java.util.LinkedList;
 
-public class DataConnection
-{   
-    
+public class DataConnection {   
     public static FootballTeam[] createFootballTeams( ){
     	JSONObject[] data = null;
     	try{
@@ -149,7 +147,7 @@ public class DataConnection
 	}
     
     // post: Makes the names of players more suitable as filenames. "Jussi Jääskeläinen" would turn into "Jussi-Jaaskelainen"
-    public static String unformatName(String name) {
+    private static String unformatName(String name) {
     	String[] find    = {"Ö", "á", "é", "ü", "à", "ï", "ë", "í", "á", "Á", "è", "'", "ä", " "};
     	String[] replace = {"O", "a", "e", "u", "a", "i", "e", "i", "a", "A", "e", "",  "a", "-"};
     	

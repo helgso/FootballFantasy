@@ -8,7 +8,6 @@ public class Core {
 		fantasy = new Fantasy();
 		schedule = fantasy.getScheduler();
 	}
-
 	
 	// post: Returns five pairs of FootballTeams that will play the
 	//       next round. Example:
@@ -24,20 +23,12 @@ public class Core {
 		return schedule.getTotalSchedule();
 	}
 	
-	// post: getTeamLogo("Arsenal") would return "trunk/Pictures/Arsenal/Arsenal.png"
-	public String getTeamLogo(String FootballTeam) {
-		FootballTeam[] teamTotal = fantasy.getTeamTotal();
-		
-		for (FootballTeam team : teamTotal) {
-			if (team.getName().equals(FootballTeam)) {				
-				return team.getLogoPath();
-			}
-		}
-		return "";
-	}
-	
 	public void simulateNextRound() {
 		fantasy.simulateNextRound();
+	}
+	
+	public FootballTeam[] getAllFootballTeams() {
+		return fantasy.getTeamTotal();
 	}
 	
 	public FootballPlayer[] getAllFootballPlayers() {
@@ -53,11 +44,6 @@ public class Core {
 		return allPlayers;
 	}
 	
-	public MatchResults getMatchResults(int matchNumber) {
-		return fantasy.getMatchResults(matchNumber);
-	}
-	
-	
 	public FootballTeam getFootballTeam( String teamName ) throws IllegalArgumentException{
 		FootballTeam[] teamTotal = this.fantasy.getTeamTotal();
 		
@@ -70,19 +56,7 @@ public class Core {
 		throw new IllegalArgumentException("The teamName \"" + teamName + "\" doesn't exist. Call base.getAllTeamNames() for a full list of available teams");
 	}
 	
-	
-	public static void main(String[] args) {
-		Core core = new Core();
-		
-		FootballTeam team = core.getFootballTeam( "Liverpool" );
-		System.out.println(team.getName());
-		
-		
-		/*
-		FootballPlayer total = core.getAllFootballPlayers();
-		
-		for (FootballPlayer player : total) {
-			System.out.println(player.getName());
-		}*/
+	public MatchResults getMatchResults(int matchNumber) {
+		return fantasy.getMatchResults(matchNumber);
 	}
 }

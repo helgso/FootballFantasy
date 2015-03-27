@@ -12,15 +12,9 @@ public class Statistics {
 	private int goals;
 	private int saves;
 	
-	public Statistics(){
-		
-	}
-	
-	
 	public void incGoalsConceded( ){
 		this.goalsConceded++;
 	}
-	
 	public void incYellowCards(){
 		this.yellowCards++ ;
 	}
@@ -39,8 +33,6 @@ public class Statistics {
 	public void incSaves(){
 		this.saves++;
 	}
-	
-	
 	
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded= goalsConceded;

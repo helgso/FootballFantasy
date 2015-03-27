@@ -31,7 +31,6 @@ public class Fantasy {
 		roundsDone++;
 	}
 	
-	
 	// pre:  0 <= matchNumber <= 89
 	// post: Returns MatchResults from the game matchNumber.
 	public MatchResults getMatchResults(int matchNumber) {

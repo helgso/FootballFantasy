@@ -2,8 +2,8 @@ package trunk.Java;
 
 public class FootballPlayer {
 	
-	private final String teamName;
 	private final String name;
+	private final String teamName;
 	
 	public Statistics[] stats;
 	
@@ -21,7 +21,6 @@ public class FootballPlayer {
 	private int 	 goals;
 	private int 	 saves;
 	private int 	 minimumValue;
-	
 	
 	//
 	//CONSTUCTOR
@@ -66,7 +65,6 @@ public class FootballPlayer {
 		this.marketValueUpdate();
 	}
 	
-	
 	private void statsUpdate( int roundNumber ){
 		this.setGoalsConceded( this.stats[roundNumber].getGoalsConceded() + this.goalsConceded );
 		this.setYellowCards( this.stats[roundNumber].getYellowCards() + this.yellowCards );
@@ -76,9 +74,7 @@ public class FootballPlayer {
 		this.setAssists( this.stats[roundNumber].getAssists() + this.assists );
 		this.setGoals( this.stats[roundNumber].getGoals() + this.goals ); 
 		this.setSaves( this.stats[roundNumber].getSaves() + this.saves );
-	}
-	
-	
+	}	
 	
 	//Calculate football player value from all his statistics
 	private void marketValueUpdate(){
@@ -180,7 +176,6 @@ public class FootballPlayer {
 		return newScore;
 	}
 	
-	
 	//
 	//SET METHODS
 	//
@@ -190,21 +185,23 @@ public class FootballPlayer {
 	public void setPickProbability( double pickProbability ){
 		this.pickProbability = pickProbability;
 	}
-	
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded = goalsConceded;
 	}
 	public void setYellowCards( int yellowCards ){
 		this.yellowCards = yellowCards;
 	}
+	public void setRedCards( int redCards ){
+		this.redCards = redCards;
+	}
 	public void setMarketValue( int marketValue ){
 		this.marketValue  = marketValue;
 	}
+	public void setGoals( int goals ){
+		this.goals = goals;
+	}
 	public void setOwnGoals( int ownGoals ){
 		this.ownGoals = ownGoals;
-	}
-	public void setRedCards( int redCards ){
-		this.redCards = redCards;
 	}
 	public void setMinutes( int minutes ){
 		this.minutes = minutes;
@@ -212,17 +209,12 @@ public class FootballPlayer {
 	public void setAssists( int assists ){
 		this.assists = assists;
 	}
-	public void setGoals( int goals ){
-		this.goals = goals;
-	}
 	public void setSaves( int saves ){
 		this.saves = saves;
 	}
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
-
 
 	//
 	//GET METHODS
@@ -272,7 +264,6 @@ public class FootballPlayer {
 	public int getSaves( ){
 		return this.saves;
 	}
-
 	public int getScore() {
 		return this.score;
 	}

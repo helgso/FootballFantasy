@@ -22,7 +22,7 @@ public class Simulate {
 		return results;
 	}
 	
-	public static MatchResults pickScorers(MatchResults res, FootballPlayer[] team, int goals, int numRound,boolean isHome){
+	public static MatchResults pickScorers(MatchResults res, FootballPlayer[] team, int goals, int numRound, boolean isHome){
 		double sum_goals = 0;
 		double chances[] = new double[11];
 		
@@ -40,7 +40,6 @@ public class Simulate {
 		int index = 0;
 		
 		while(goals > 0 ){
-			//System.out.println("what the poop");
 			int i = Random.determineValue(chances);
 			if(isHome){
 				res.addHomeScorer(home[i]);
