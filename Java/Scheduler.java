@@ -77,7 +77,7 @@ public class Scheduler {
 		this.teamSchedule =shcedule;
 		
 	}
-	
+
 	public FootballTeam[][][] getTotalSchedule( ){
 		return this.teamSchedule;
 	}

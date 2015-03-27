@@ -12,7 +12,7 @@ public class Core {
 	// post: Returns five pairs of FootballTeams that will play the
 	//       next round. Example:
 	//       {"Arsenal - Chelsea", "Stoke - Southampton", ...} 5 strings.
-	public String[] getNextRoundSchedule() {
+	public String[] getScheduleForNextRound() {
 		FootballTeam[][] nextRoundSchedule = schedule.getNextRoundSchedule();
 		
 		String[] results = new String[5];
@@ -27,7 +27,7 @@ public class Core {
 	
 	// post: Same as getNextRoundSchedule but returns 90 pairs. All Matches.
 	//       Example: {"Arsenal - Chelsea", "Stoke - Southampton", ...} 90 strings.
-	public String[] getTotalSchedule() {
+	public String[] getScheduleForAllRounds() {
 		FootballTeam[][][] allRoundsSchedule = schedule.getTotalSchedule();
 		
 		String[] totalSchedule = new String[90];
@@ -73,13 +73,33 @@ public class Core {
 	public MatchResults getMatchResults(int matchNumber) {
 		return fantasy.getMatchResults(matchNumber);
 	}
+	
+	
+	public FootballTeam getFootballTeam( String teamName ) throws IllegalArgumentException{
+		FootballTeam[] teamTotal = this.fantasy.getTeamTotal();
+		
+		for(int i=0; i<teamTotal.length; i++){
+			FootballTeam tempTeam = teamTotal[i];
+			if( tempTeam.getName().equals( teamName )){
+				return tempTeam;
+			}
+		}
+		throw new IllegalArgumentException("The teamName \"" + teamName + "\" doesn't exist. Call base.getAllTeamNames() for a full list of available teams");
+	}
+	
+	
 	public static void main(String[] args) {
 		Core core = new Core();
 		
-		FootballPlayer[] total = core.getAllFootballPlayers();
+		FootballTeam team = core.getFootballTeam( "Liverpoo" );
+		System.out.println(team.getName());
+		
+		
+		/*
+		FootballPlayer total = core.getAllFootballPlayers();
 		
 		for (FootballPlayer player : total) {
 			System.out.println(player.getName());
-		}
+		}*/
 	}
 }
