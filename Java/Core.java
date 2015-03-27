@@ -30,6 +30,16 @@ public class Core {
 		return fantasy.getTeamTotal();
 	}
 	
+	public String[] getAllFootballTeamNames() {
+		String[] teams = new String[10];
+		FootballTeam[] teamTotal = fantasy.getTeamTotal();
+		
+		for (int i = 0; i < teamTotal.length; i++) {
+			teams[i] = teamTotal[i].getName();
+		}
+		return teams;
+	}
+	
 	public FootballPlayer[] getAllFootballPlayers() {
 		FootballTeam[] allTeams = fantasy.getTeamTotal();
 		FootballPlayer[] allPlayers = new FootballPlayer[240];
@@ -52,7 +62,7 @@ public class Core {
 				return tempTeam;
 			}
 		}
-		throw new IllegalArgumentException("The teamName \"" + teamName + "\" doesn't exist. Call base.getAllTeamNames() for a full list of available teams");
+		throw new IllegalArgumentException("The teamName \"" + teamName + "\" doesn't exist. Call base.getAllFootballTeamNames() for a full list of available teams");
 	}
 	
 	public MatchResults getMatchResults(int matchNumber) {
