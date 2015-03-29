@@ -68,4 +68,12 @@ public class Core {
 	public MatchResults getMatchResults(int matchNumber) {
 		return fantasy.getMatchResults(matchNumber);
 	}
+	
+	public void buyPlayer(FootballPlayer player) {
+		player.setMarketValue(player.getMarketValue() + 4);
+	}
+	
+	public void sellPlayer(FootballPlayer player) {
+		player.setMarketValue(player.getMarketValue() - 4);
+	}
 }
