@@ -41,31 +41,31 @@ public class DataConnection {
         	leikmenn[i] = player;
             
             int assists = data[i].getInt("assists");
-            leikmenn[i].setAssists(assists);
+            leikmenn[i].stats[0].setAssists(assists);
             
             int goals = data[i].getInt("goals_scored");
-            leikmenn[i].setGoals(goals);
+            leikmenn[i].stats[0].setGoals(goals);
             
             int goalsC = data[i].getInt("goals_conceded");
-            leikmenn[i].setGoalsConceded(goalsC);
+            leikmenn[i].stats[0].setGoalsConceded(goalsC);
             
             int value = 0;
             leikmenn[i].setMarketValue(value);
             
             int Ogoals = data[i].getInt("own_goals");
-            leikmenn[i].setOwnGoals(Ogoals);
+            leikmenn[i].stats[0].setOwnGoals(Ogoals);
             
             int RC = data[i].getInt("red_cards");
-            leikmenn[i].setRedCards(RC);
+            leikmenn[i].stats[0].setRedCards(RC);
             
             int minutes = data[i].getInt("minutes");
-            leikmenn[i].setMinutes(minutes);
+            leikmenn[i].stats[0].setMinutes(minutes);
             
             int saves = data[i].getInt("saves");
-            leikmenn[i].setSaves(saves);
+            leikmenn[i].stats[0].setSaves(saves);
             
             int YC = data[i].getInt("yellow_cards");
-            leikmenn[i].setYellowCards(YC);
+            leikmenn[i].stats[0].setYellowCards(YC);
             
         	leikmenn[i].updateFootballPlayer();
         }

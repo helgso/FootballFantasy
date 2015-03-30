@@ -8,18 +8,10 @@ public class FootballPlayer {
 	public Statistics[] stats;
 	
 	private double 	 pickProbability; //how likely is this player to be in final team squad.
-	private int 	 goalsConceded;
 	private int 	 marketValue;
 	private int		 score;
-	private int 	 yellowCards;
 	private Position position;
 	private String 	 picturePath;
-	private int		 ownGoals;
-	private int 	 redCards;
-	private int 	 minutes;
-	private int 	 assists;
-	private int 	 goals;
-	private int 	 saves;
 	private int 	 minimumValue;
 	
 	//
@@ -33,7 +25,9 @@ public class FootballPlayer {
 		
 		this.stats = new Statistics[18];
 		
-		for(int i = 0; i<18; i++){
+		// 0-ta hólf inniheldur gögn frá Premier League.
+		// 1-ta til og með 18-ta hólf eru stats fyrir round 1 til og með 18
+		for(int i = 0; i<19; i++){
 			this.stats[i] = new Statistics();
 		}
 		
@@ -57,7 +51,6 @@ public class FootballPlayer {
 	//UPDATE METHODS
 	//
 	public void updateFootballPlayer( int roundNumber){
-		this.statsUpdate( roundNumber );
 		this.scoreUpdate( roundNumber );
 	}
 	
@@ -65,22 +58,8 @@ public class FootballPlayer {
 		this.marketValueUpdate();
 	}
 	
-	private void statsUpdate( int roundNumber ){
-		this.setGoalsConceded( this.stats[roundNumber].getGoalsConceded() + this.goalsConceded );
-		this.setYellowCards( this.stats[roundNumber].getYellowCards() + this.yellowCards );
-		this.setOwnGoals( this.stats[roundNumber].getOwnGoals() + this.ownGoals );
-		this.setRedCards( this.stats[roundNumber].getRedCards() + this.redCards );
-		this.setMinutes( this.stats[roundNumber].getMinutes() + this.minutes );
-		this.setAssists( this.stats[roundNumber].getAssists() + this.assists );
-		this.setGoals( this.stats[roundNumber].getGoals() + this.goals ); 
-		this.setSaves( this.stats[roundNumber].getSaves() + this.saves );
-	}	
-	
 	//Calculate football player value from all his statistics
 	private void marketValueUpdate(){
-		if(this.minutes == 0){
-			this.minutes = 1;
-		}
 		
 		//Different coefficient Value for each position
 		double GKCoefficient = 1.3;
@@ -109,28 +88,29 @@ public class FootballPlayer {
 			marketValue += calcMarketValue( FW );
 		}
 		marketValue = (int) Math.floor( marketValue );
-		this.setMarketValue( marketValue  );
+		setMarketValue( marketValue  );
 	}
 	
-	//Algorithm for to calculate value for footballPlayer
-	private int calcMarketValue( int[] a ){
-		int goals_per_min = (int)((goals)/minutes);
-		int marketValue=(int)	(a[0]*goals
-								+a[1]*saves
-								+a[2]*assists
-								+a[3]*goals_per_min
-								-a[4]*redCards
-								-a[5]*yellowCards
-								-a[6]*goalsConceded
-								-a[7]*ownGoals);		
+	// Calculates a marketValue for this FootballPlayer.
+	// factors is an array of factors which helps to
+	// determine a different marketValue for a each
+	// FootballPlayer based on his stats and position
+	// (Forward, Midfielder, etc.)
+	private int calcMarketValue( int[] factors ){
+		int goals_per_min = (int)((stats[0].getGoals())/stats[0].getMinutes());
+		int marketValue=(int)	(factors[0]*stats[0].getGoals()
+								+factors[1]*stats[0].getSaves()
+								+factors[2]*stats[0].getAssists()
+								+factors[3]*goals_per_min
+								-factors[4]*stats[0].getRedCards()
+								-factors[5]*stats[0].getYellowCards()
+								-factors[6]*stats[0].getGoalsConceded()
+								-factors[7]*stats[0].getOwnGoals());		
 		return marketValue;
 	}
 
 	//Calculate football player score from last game statistics
 	private void scoreUpdate( int roundNumber ){
-		if(this.minutes == 0){
-			this.minutes = 1;
-		}
 		
 		//		goals|saves|assists|min|redC|yellowC|goalsC|ownG|bonusGoalsC
 		int[] GK={6,	3, 	  3,	45,  3, 	 1, 	 2, 	2,	 4};
@@ -160,7 +140,7 @@ public class FootballPlayer {
 		int newScore = 1;
 		
 		//Bonus score if player has no goals conceded
-		if(this.goalsConceded == 0){
+		if(stats[0].getGoalsConceded() == 0){
 			newScore += a[ a.length-1 ];
 		}
 		
@@ -185,35 +165,11 @@ public class FootballPlayer {
 	public void setPickProbability( double pickProbability ){
 		this.pickProbability = pickProbability;
 	}
-	public void setGoalsConceded( int goalsConceded ){
-		this.goalsConceded = goalsConceded;
-	}
-	public void setYellowCards( int yellowCards ){
-		this.yellowCards = yellowCards;
-	}
-	public void setRedCards( int redCards ){
-		this.redCards = redCards;
-	}
-	public void setMarketValue( int marketValue ){
-		this.marketValue  = marketValue;
-	}
-	public void setGoals( int goals ){
-		this.goals = goals;
-	}
-	public void setOwnGoals( int ownGoals ){
-		this.ownGoals = ownGoals;
-	}
-	public void setMinutes( int minutes ){
-		this.minutes = minutes;
-	}
-	public void setAssists( int assists ){
-		this.assists = assists;
-	}
-	public void setSaves( int saves ){
-		this.saves = saves;
-	}
 	public void setScore(int score) {
 		this.score = score;
+	}
+	public void setMarketValue(int value) {
+		this.marketValue = value;
 	}
 
 	//
@@ -222,20 +178,11 @@ public class FootballPlayer {
 	public double getPickProbability( ){
 		return this.pickProbability;
 	}
-	public int getGoalsConceded( ){
-		return this.goalsConceded;
-	}
-	public Statistics[] getStats( ){
-		return this.stats;
-	}
 	public int getMarketValue( ){
 		return this.marketValue;
 	}
 	public String getPicturePath( ){
 		return this.picturePath;
-	}
-	public int getYellowCards( ){
-		return this.yellowCards;
 	}
 	public String getTeamName( ){
 		return this.teamName;
@@ -243,28 +190,13 @@ public class FootballPlayer {
 	public Position getPosition( ){
 		return this.position;
 	}
-	public int getRedCards( ){
-		return this.redCards;
-	}
-	public int getOwnGoals( ){
-		return this.ownGoals;
-	}
-	public int getMinutes( ){
-		return this.minutes;
-	}
-	public int getAssists( ){
-		return this.assists;
-	}
 	public String getName( ){
 		return this.name;
 	}
-	public int getGoals( ){
-		return this.goals;
-	}
-	public int getSaves( ){
-		return this.saves;
-	}
 	public int getScore() {
 		return this.score;
+	}
+	public Statistics[] getStats() {
+		return this.stats;
 	}
 }

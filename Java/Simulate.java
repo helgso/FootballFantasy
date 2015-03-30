@@ -28,12 +28,12 @@ public class Simulate {
 		
 		FootballPlayer[] home = team; 
 		for(FootballPlayer x : home){
-			sum_goals += x.getGoals();
+			sum_goals += x.stats[0].getGoals();
 		}
 		
 		double x = 0;
 		for(int i = 0; i < 11; i++){
-			chances[i] =  (home[i].getGoals())/sum_goals;
+			chances[i] =  (home[i].stats[0].getGoals())/sum_goals;
 			x += chances[i];
 		}
 		

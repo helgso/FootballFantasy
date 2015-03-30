@@ -30,7 +30,7 @@ public class FootballTeam {
 		for(FootballPlayer x: players){
 			if(x.getPosition() == Position.GK){
 				for(int i = 0; i<1; i++){
-					if(x.getMinutes()>timeG[i]){
+					if(x.stats[0].getMinutes()>timeG[i]){
 						replaceLowest(timeG,goals,x);
 					}
 				}
@@ -38,21 +38,21 @@ public class FootballTeam {
 			}
 			else if(x.getPosition() == Position.DF){
 				for(int i = 0; i<4; i++){
-					if(x.getMinutes()>timeD[i]){
+					if(x.stats[0].getMinutes()>timeD[i]){
 						replaceLowest(timeD,def,x);
 						break;
 					}
 				}
 			}else if(x.getPosition() == Position.MF){
 				for(int i = 0; i<4; i++){
-					if(x.getMinutes()>timeM[i]){
+					if(x.stats[0].getMinutes()>timeM[i]){
 						replaceLowest(timeM,midf,x);
 						break;
 					}
 				}
 			}else{
 				for(int i = 0; i<2; i++){
-					if(x.getMinutes()>timeF[i]){
+					if(x.stats[0].getMinutes()>timeF[i]){
 						replaceLowest(timeF,frw,x);
 						break;
 					}
@@ -85,7 +85,7 @@ public class FootballTeam {
 			}
 		}
 		p[index] = x;
-		t[index] = x.getMinutes();
+		t[index] = x.stats[0].getMinutes();
 	}
 	
 	public double getFactor(){
