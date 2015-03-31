@@ -2,6 +2,7 @@ package trunk.Java;
 
 import trunk.JSON.JSONObject;
 import trunk.JSON.JSON;
+
 import java.util.LinkedList;
 
 public class DataConnection {   
@@ -49,9 +50,6 @@ public class DataConnection {
             int goalsC = data[i].getInt("goals_conceded");
             leikmenn[i].stats[0].setGoalsConceded(goalsC);
             
-            int value = 0;
-            leikmenn[i].setMarketValue(value);
-            
             int Ogoals = data[i].getInt("own_goals");
             leikmenn[i].stats[0].setOwnGoals(Ogoals);
             
@@ -67,7 +65,11 @@ public class DataConnection {
             int YC = data[i].getInt("yellow_cards");
             leikmenn[i].stats[0].setYellowCards(YC);
             
-        	leikmenn[i].updateFootballPlayer();
+            int value = marketValueUpdate(player);
+            leikmenn[i].setMarketValue(value);
+            
+            // pickProbability will be calculated at
+            // the bottom of this function
         }
 
         LinkedList<FootballPlayer> ArsenalTemp = new LinkedList<FootballPlayer>();
@@ -108,43 +110,43 @@ public class DataConnection {
         FootballPlayer[] WestHam = new FootballPlayer[23];
 
         for(int i = 0; i < Arsenal.length; i++){
-            Arsenal[i] = (FootballPlayer)ArsenalTemp.pop();
+        	Chelsea[i] = (FootballPlayer)ArsenalTemp.get(i);
         }
 
         for(int i = 0; i < Chelsea.length; i++){
-            Chelsea[i] = (FootballPlayer)ChelseaTemp.pop();
+            Chelsea[i] = (FootballPlayer)ChelseaTemp.get(i);
         }
 
         for(int i = 0; i < Liverpool.length; i++){
-            Liverpool[i] = (FootballPlayer)LiverpoolTemp.pop();
+            Liverpool[i] = (FootballPlayer)LiverpoolTemp.get(i);
         }
 
         for(int i = 0; i < ManCity.length; i++){
-            ManCity[i] = (FootballPlayer)ManCityTemp.pop();
+            ManCity[i] = (FootballPlayer)ManCityTemp.get(i);
         }
 
         for(int i = 0; i < ManUtd.length; i++){
-            ManUtd[i] = (FootballPlayer)ManUtdTemp.pop();
+            ManUtd[i] = (FootballPlayer)ManUtdTemp.get(i);
         }
 
         for(int i = 0; i < Southampton.length; i++){
-            Southampton[i] = (FootballPlayer)SouthamptonTemp.pop();
+            Southampton[i] = (FootballPlayer)SouthamptonTemp.get(i);
         }
 
         for(int i = 0; i < Spurs.length; i++){
-            Spurs[i] = (FootballPlayer)SpursTemp.pop();
+            Spurs[i] = (FootballPlayer)SpursTemp.get(i);
         }
 
         for(int i = 0; i < Stoke.length; i++){
-            Stoke[i] = (FootballPlayer)StokeTemp.pop();
+            Stoke[i] = (FootballPlayer)StokeTemp.get(i);
         }
 
         for(int i = 0; i < Swansea.length; i++){
-            Swansea[i] = (FootballPlayer)SwanseaTemp.pop();
+            Swansea[i] = (FootballPlayer)SwanseaTemp.get(i);
         }
 
         for(int i = 0; i < WestHam.length; i++){
-            WestHam[i] = (FootballPlayer)WestHamTemp.pop();
+            WestHam[i] = (FootballPlayer)WestHamTemp.get(i);
         }
 
         FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal", 0.5865385, "trunk/Pictures/Arsenal/Arsenal.png");
@@ -158,7 +160,19 @@ public class DataConnection {
         FootballTeam swansea = new FootballTeam(Swansea, "Swansea", 0.3173077, "trunk/Pictures/Swansea/Swansea.png");
         FootballTeam westHam = new FootballTeam(WestHam, "West Ham", 0.3173077, "trunk/Pictures/WestHam/WestHam.png");
 
-        return new FootballTeam[] {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};
+        FootballTeam[] teamTotal = {arsenal,chelsea,liverpool,manCity,manUtd,southampton,spurs,stoke,swansea,westHam};
+        
+        // This is the most sane place to calculate the
+        // pickProbability for each FootballPlayer
+        for (FootballTeam team : teamTotal) {
+        	int sumTeamMinutes = sumMinutes(team);
+        	
+        	for (FootballPlayer player : team.getFootballPlayers()) {
+        		player.setPickProbability(1.0*player.stats[0].getMinutes()/sumTeamMinutes);
+        	}
+        }
+        
+        return teamTotal;
 	}
     
     // post: Makes the names of players more suitable as filenames. "Jussi Jääskeläinen" would turn into "Jussi-Jaaskelainen"
@@ -171,5 +185,63 @@ public class DataConnection {
     	}
     	return name;
     }
+    
+    //Calculate football player value from all his statistics
+  	private static int marketValueUpdate(FootballPlayer player) {
+  		
+  		//Different coefficient Value for each position
+  		double GKCoefficient = 1.3;
+  		double DFCoefficient = 1.4;
+  		double MFCoefficient = 1.5;
+  		double FWCoefficient = 1.7;
+  		
+  		//			goals  saves	assists	goals/min  redC 	yellowC 	goalsC		ownG
+  		int[] GK = { 15,  	1, 		4, 		10000*1, 	5, 		2, 			1/15, 		0 };
+  		int[] DF = { 15,  	0,  	4,  	1000*1, 	5, 		2, 			1/20, 		0 };
+  		int[] MF = { 6,  	0,  	4,   	200*1, 		5, 		2, 			1/20, 		0 };
+  		int[] FW = { 5, 	0,  	4,   	200*1, 		5, 		2, 			1/30, 		0 };
+  		
+  		double marketValue = 100; // Minimum value is 100, let's add to that number
+  		if (player.getPosition() == Position.GK){
+  			marketValue *= GKCoefficient;
+  			marketValue += calcMarketValue( GK, player );
+  		} else if(player.getPosition() == Position.DF){
+  			marketValue *= DFCoefficient;
+  			marketValue += calcMarketValue( DF, player );
+  		} else if(player.getPosition() == Position.MF){			
+  			marketValue *= MFCoefficient;
+  			marketValue += calcMarketValue( MF, player );	
+  		} else if (player.getPosition() == Position.FW){
+  			marketValue *= FWCoefficient;
+  			marketValue += calcMarketValue( FW, player );
+  		}
+  		return (int) Math.round( marketValue );
+  	}
+  	
+  	// Calculates a marketValue for this FootballPlayer.
+  	// factors is an array of factors which helps to
+  	// determine a different marketValue for a each
+  	// FootballPlayer based on his stats and position
+  	// (Forward, Midfielder, etc.)
+  	private static int calcMarketValue( int[] factors, FootballPlayer player ){
+  		int goals_per_min = (int)((player.stats[0].getGoals())/player.stats[0].getMinutes());
+  		int marketValue=(int)	(factors[0]*player.stats[0].getGoals()
+  								+factors[1]*player.stats[0].getSaves()
+  								+factors[2]*player.stats[0].getAssists()
+  								+factors[3]*goals_per_min
+  								-factors[4]*player.stats[0].getRedCards()
+  								-factors[5]*player.stats[0].getYellowCards()
+  								-factors[6]*player.stats[0].getGoalsConceded()
+  								-factors[7]*player.stats[0].getOwnGoals());		
+  		return marketValue;
+  	}
+  	
+  	private static int sumMinutes(FootballTeam team) {
+  		int sum = 0;
+  		for (FootballPlayer player : team.getFootballPlayers()) {
+  			sum += player.stats[0].getMinutes();
+  		}
+  		return sum;
+  	}
 }
     

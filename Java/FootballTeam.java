@@ -1,7 +1,10 @@
 package trunk.Java;
 
+import java.util.Arrays; // For an easy comparison when picking players for the simulation team
+
 public class FootballTeam {
 	private FootballPlayer[] players;
+	private FootballPlayer[] simulationPlayers;
 	private String name;
 	private double factor;
 	private String logoPath;
@@ -9,85 +12,81 @@ public class FootballTeam {
 	//Constructor
 	public FootballTeam( FootballPlayer[] players, String teamName, double fact, String logoPath ){
 		this.players = players;
+		this.simulationPlayers = createSimulationTeam();
 		this.name = teamName;
 		this.factor = fact;
 		this.logoPath = logoPath;
 	}
 	
-	public FootballPlayer[] getSimulationTeam( ){
+	private FootballPlayer[] createSimulationTeam() {
 		FootballPlayer [] simulationTeam = new FootballPlayer[11];
 		
-		int[] timeG = new int[1];
-		int[] timeD = new int[4];
-		int[] timeM = new int[4];
-		int[] timeF = new int[2];
+		// Containers for 1 goalKeeper, 4 defenders, 4 midfielders and 2 forwarders
+		FootballPlayer[] GK  = new FootballPlayer[1]; int GKindex = 0;
+		FootballPlayer[] DFs = new FootballPlayer[4]; int DFindex = 0;
+		FootballPlayer[] MFs = new FootballPlayer[4]; int MFindex = 0;
+		FootballPlayer[] FWs = new FootballPlayer[2]; int FWindex = 0;
 		
-		FootballPlayer[] goals = new FootballPlayer[1];
-		FootballPlayer[] def = new FootballPlayer[4];
-		FootballPlayer[] midf = new FootballPlayer[4];
-		FootballPlayer[] frw = new FootballPlayer[2];
+		double[] chancesOfPick = new double[players.length];
+		for (int i = 0; i < players.length; i++) {
+			chancesOfPick[i] = players[i].getPickProbability();
+		}
 		
-		for(FootballPlayer x: players){
-			if(x.getPosition() == Position.GK){
-				for(int i = 0; i<1; i++){
-					if(x.stats[0].getMinutes()>timeG[i]){
-						replaceLowest(timeG,goals,x);
-					}
+		// While there's still a player left to
+		// be picked for the simulation team
+		while (GKindex + DFindex + MFindex + FWindex < 11) {
+			
+			// Pick a player for us based on the chancesOfPick array:
+			int pickedPlayerIndex = Random.determineValue(chancesOfPick);
+			FootballPlayer pickedPlayer = players[pickedPlayerIndex];
+			
+			// Based on the pickedPlayer's position, put him in his
+			// corresponding container. Also make sure we won't
+			// pick the same player twice
+			if (pickedPlayer.getPosition() == Position.GK) {
+				if (GKindex == 0) { // If no goal keeper has been picked until now
+					GK[0] = pickedPlayer;
+					GKindex++; // A goal keeper has been selected :D
 				}
-				
 			}
-			else if(x.getPosition() == Position.DF){
-				for(int i = 0; i<4; i++){
-					if(x.stats[0].getMinutes()>timeD[i]){
-						replaceLowest(timeD,def,x);
-						break;
-					}
+			if (pickedPlayer.getPosition() == Position.DF) {
+				if (DFindex != 4 && // If we have yet to pick 4 defenders
+				    !Arrays.asList(DFs).contains(pickedPlayer)) { // if we haven't picked this player until now
+					DFs[DFindex] = pickedPlayer;
+					DFindex++;
 				}
-			}else if(x.getPosition() == Position.MF){
-				for(int i = 0; i<4; i++){
-					if(x.stats[0].getMinutes()>timeM[i]){
-						replaceLowest(timeM,midf,x);
-						break;
-					}
+			}
+			if (pickedPlayer.getPosition() == Position.MF) {
+				if (MFindex != 4 &&
+				    !Arrays.asList(MFs).contains(pickedPlayer)) {
+					MFs[MFindex] = pickedPlayer;
+					MFindex++;
 				}
-			}else{
-				for(int i = 0; i<2; i++){
-					if(x.stats[0].getMinutes()>timeF[i]){
-						replaceLowest(timeF,frw,x);
-						break;
-					}
+			}
+			if (pickedPlayer.getPosition() == Position.FW) {
+				if (FWindex != 2 &&
+				    !Arrays.asList(FWs).contains(pickedPlayer)) {
+					FWs[FWindex] = pickedPlayer;
+					FWindex++;
 				}
 			}
 		}
 		
-		simulationTeam[0] = goals[0];
-		simulationTeam[1] = midf[0];
-		simulationTeam[2] = midf[1];
-		simulationTeam[3] = midf[2];
-		simulationTeam[4] = midf[3];
-		simulationTeam[5] = def[0];
-		simulationTeam[6] = def[1];
-		simulationTeam[7] = def[2];
-		simulationTeam[8] = def[3];
-		simulationTeam[9] = frw[0];
-		simulationTeam[10] = frw[1];
-		
+		FootballPlayer[][] simulationTeamTemp = {GK, DFs, MFs, FWs};
+		int i = 0;
+		for (FootballPlayer[] container : simulationTeamTemp) {
+			for (FootballPlayer player : container) {
+				simulationTeam[i] = player;
+				i++;
+			}
+		}
 		return simulationTeam;
 	}
 	
-	private void replaceLowest(int[] t, FootballPlayer[] p, FootballPlayer x){
-		int min = 10000000;
-		int index = 0;
-		for(int i = 0; i<t.length; i++){
-			if(t[i] < min){
-				min = t[i];
-				index = i;
-			}
-		}
-		p[index] = x;
-		t[index] = x.stats[0].getMinutes();
+	public FootballPlayer[] getSimulationTeam( ){
+		return this.simulationPlayers;
 	}
-	
+
 	public double getFactor(){
 		return this.factor;
 	}

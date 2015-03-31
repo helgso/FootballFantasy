@@ -12,7 +12,6 @@ public class FootballPlayer {
 	private int		 score;
 	private Position position;
 	private String 	 picturePath;
-	private int 	 minimumValue;
 	
 	//
 	//CONSTUCTOR
@@ -20,8 +19,6 @@ public class FootballPlayer {
 	public FootballPlayer( String name, String teamName, String pos ){
 		this.teamName = teamName;
 		this.name 	  = name;
-		
-		this.reset();
 		
 		this.stats = new Statistics[18];
 		
@@ -42,75 +39,11 @@ public class FootballPlayer {
 		}
 	}
 	
-	private void reset(){
-		this.score = 0;
-		this.minimumValue = 100;
-	}
-	
 	//
 	//UPDATE METHODS
 	//
-	public void updateFootballPlayer( int roundNumber){
-		this.scoreUpdate( roundNumber );
-	}
-	
-	public void updateFootballPlayer(){
-		this.marketValueUpdate();
-	}
-	
-	//Calculate football player value from all his statistics
-	private void marketValueUpdate(){
-		
-		//Different coefficient Value for each position
-		double GKCoefficient = 1.3;
-		double DFCoefficient = 1.4;
-		double MFCoefficient = 1.5;
-		double FWCoefficient = 1.7;
-		
-		//			goals  saves	assists	goals/min  redC 	yellowC 	goalsC		ownG
-		int[] GK = { 15,  	1, 		4, 		10000*1, 	5, 		2, 			1/15, 		0 };
-		int[] DF = { 15,  	0,  	4,  	1000*1, 	5, 		2, 			1/20, 		0 };
-		int[] MF = { 6,  	0,  	4,   	200*1, 		5, 		2, 			1/20, 		0 };
-		int[] FW = { 5, 	0,  	4,   	200*1, 		5, 		2, 			1/30, 		0 };
-		
-		int marketValue = minimumValue;
-		if(this.position == Position.GK){
-			marketValue *= GKCoefficient;
-			marketValue += calcMarketValue( GK );
-		} else if(this.position == Position.DF){
-			marketValue *= DFCoefficient;
-			marketValue += calcMarketValue( DF );
-		} else if(this.position == Position.MF){			
-			marketValue *= MFCoefficient;
-			marketValue += calcMarketValue( MF );	
-		} else if(this.position == Position.FW){
-			marketValue *= FWCoefficient;
-			marketValue += calcMarketValue( FW );
-		}
-		marketValue = (int) Math.floor( marketValue );
-		setMarketValue( marketValue  );
-	}
-	
-	// Calculates a marketValue for this FootballPlayer.
-	// factors is an array of factors which helps to
-	// determine a different marketValue for a each
-	// FootballPlayer based on his stats and position
-	// (Forward, Midfielder, etc.)
-	private int calcMarketValue( int[] factors ){
-		int goals_per_min = (int)((stats[0].getGoals())/stats[0].getMinutes());
-		int marketValue=(int)	(factors[0]*stats[0].getGoals()
-								+factors[1]*stats[0].getSaves()
-								+factors[2]*stats[0].getAssists()
-								+factors[3]*goals_per_min
-								-factors[4]*stats[0].getRedCards()
-								-factors[5]*stats[0].getYellowCards()
-								-factors[6]*stats[0].getGoalsConceded()
-								-factors[7]*stats[0].getOwnGoals());		
-		return marketValue;
-	}
-
 	//Calculate football player score from last game statistics
-	private void scoreUpdate( int roundNumber ){
+	public void scoreUpdate( int roundNumber ){
 		
 		//		goals|saves|assists|min|redC|yellowC|goalsC|ownG|bonusGoalsC
 		int[] GK={6,	3, 	  3,	45,  3, 	 1, 	 2, 	2,	 4};
@@ -135,7 +68,7 @@ public class FootballPlayer {
 	private int calcScore(int[] a, int roundNumber ){
 		
 		//Get last match statistics
-		Statistics lastGame = stats[ roundNumber ];
+		Statistics lastGame = stats[ roundNumber+1 ];
 		
 		int newScore = 1;
 		
