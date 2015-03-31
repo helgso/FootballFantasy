@@ -11,29 +11,38 @@ public class Statistics {
 	private int assists;
 	private int goals;
 	private int saves;
+
+	// ============
+	// Incrementers
+	// ============
+	public void incrGoalsConcededBy(int amount) {
+		this.yellowCards += amount;
+	}
+	public void incrYellowCardsBy(int amount) {
+		this.yellowCards += amount;
+	}
+	public void incrRedCardsBy(int amount){
+		this.redCards += amount;
+	}
+	public void incrOwnGoalsBy(int amount) {
+		this.ownGoals += amount;
+	}
+	public void incrAssistsBy(int amount) {
+		this.assists += amount;
+	}
+	public void incrGoalsBy(int amount) {
+		this.goals += amount;
+	}
+	public void incrSavesBy(int amount) {
+		this.saves += amount;
+	}
+	public void incrMinutesBy(int amount) {
+		this.saves += amount;
+	}
 	
-	public void incGoalsConceded( ){
-		this.goalsConceded++;
-	}
-	public void incYellowCards(){
-		this.yellowCards++ ;
-	}
-	public void incRedCards(){
-		this.redCards++;
-	}
-	public void incOwnGoals(){
-		this.ownGoals++;
-	}
-	public void incAssists(){
-		this.assists++;
-	}
-	public void incGoals(){
-		this.goals++;
-	}
-	public void incSaves(){
-		this.saves++;
-	}
-	
+	// =======
+	// Setters
+	// =======
 	public void setGoalsConceded( int goalsConceded ){
 		this.goalsConceded= goalsConceded;
 	}
@@ -62,6 +71,9 @@ public class Statistics {
 		this.saves = saves;
 	}
 	
+	// =======
+	// Getters
+	// =======
 	public boolean getCleanSheet( ){
 		return this.cleanSheet;
 	}

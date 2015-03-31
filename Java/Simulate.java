@@ -1,56 +1,104 @@
 package trunk.Java;
 
 public class Simulate {
-	public static MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam, int roundNum ){
+	private static int roundNum;
+	private static MatchResults results;
+	
+	public static MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam, int roundNumber ){
+		// Create results for this match
+		MatchResults matchResults = new MatchResults( homeTeam, awayTeam );
 		
-		// Initializing a MatchResults instance for this Match
-		MatchResults results = new MatchResults( homeTeam, awayTeam );
+		// Let's keep these variables in the global scope of this class
+		// to enable easier calls for future functions within Simulate.java 
+		roundNum = roundNumber;
+		results = matchResults;
 		
-		// Using Random, goals for homeTeam and awayTeam are determined
+		// Determine homeGoals and awayGoals
 		results.setHomeGoals(Random.homeGoals(homeTeam, awayTeam));
 		results.setAwayGoals(Random.awayGoals(homeTeam, awayTeam));
 		
-		// Next, using probability, assign each goal to the likeliest
-		// FootballPlayer of the corresponding team
-		FootballPlayer[] simulationHome = homeTeam.getSimulationTeam();
-		FootballPlayer[] simulationAway = awayTeam.getSimulationTeam();
+		// Update the statistics for each FootballPlayer
+		giveGoals();
+		giveYellowCards();	
+		giveRedCards();	
+		giveSaves();
+		giveGoalsConceded();
+		giveMinutes();
+		giveAssists();
 		
-		results = pickScorers(results, simulationHome, results.getHomeGoals(), roundNum, true);
-		results = pickScorers(results, simulationAway, results.getAwayGoals(), roundNum, false);
-		
-		
-		return results;
+		return matchResults;
 	}
 	
-	public static MatchResults pickScorers(MatchResults res, FootballPlayer[] team, int goals, int numRound, boolean isHome){
-		double sum_goals = 0;
-		double chances[] = new double[11];
-		
-		FootballPlayer[] home = team; 
-		for(FootballPlayer x : home){
-			sum_goals += x.stats[0].getGoals();
+	private static void giveGoals(){
+		if (results.getHomeGoals() > 0) distributeGoalsWithin("homeTeam");
+		if (results.getAwayGoals() > 0) distributeGoalsWithin("awayTeam");
+	}
+	
+	private static void distributeGoalsWithin(String team) {
+		FootballPlayer[] specifiedTeam = null;
+		int newGoals = 0;
+		if (team.equals("homeTeam")) {
+			specifiedTeam = results.getHomeTeam().getSimulationTeam();
+			newGoals = results.getHomeGoals();
+		}
+		if (team.equals("awayTeam")) {
+			specifiedTeam = results.getAwayTeam().getSimulationTeam();
+			newGoals = results.getAwayGoals();
 		}
 		
-		double x = 0;
-		for(int i = 0; i < 11; i++){
-			chances[i] =  (home[i].stats[0].getGoals())/sum_goals;
-			x += chances[i];
-		}
+		double chancesOfNewGoal[] = new double[specifiedTeam.length];
 		
-		int index = 0;
-		
-		while(goals > 0 ){
-			int i = Random.determineValue(chances);
-			if(isHome){
-				res.addHomeScorer(home[i]);
-			}else{
-				res.addAwayScorer(home[i]);
+		// i)  Store indiviual goals for each player in oldGoalsOfPlayer[]
+		// ii) Calculate the sum of i) and store in sum_oldGoalsOfAllPlayers
+		int sum_oldGoalsOfAllPlayers = 0;
+		int oldGoalsOfPlayer[] = new int[specifiedTeam.length];
+		for (int i = 0; i < specifiedTeam.length; i++) {
+			int sum_oldGoalsThisPlayer = 0;
+			for (int j = 0; j <= roundNum; j++) {
+				sum_oldGoalsThisPlayer += specifiedTeam[i].stats[j].getGoals();
 			}
-			Statistics[] temp = home[index].getStats();
-			temp[0].incGoals();
-			
-			goals--;	
+			oldGoalsOfPlayer[i] = sum_oldGoalsThisPlayer;
+			sum_oldGoalsOfAllPlayers += sum_oldGoalsThisPlayer;
 		}
-		return res;
+		
+		// Use the sum to construct an array of chances. chances[0] is how
+		// likely it is that the 0th TootballPlayer of specifiedTeam scores
+		// one of the goals of this match
+		for (int i = 0; i < specifiedTeam.length; i++){
+			chancesOfNewGoal[i] =  (1.0*oldGoalsOfPlayer[i])/sum_oldGoalsOfAllPlayers;
+		}
+		
+		// Finally, distribute all of the new goals to players of the specifiedTeam
+		while (newGoals > 0 ){
+			// Given the chances array, tell us which player actually scored that goal
+			int iScored = Random.determineValue(chancesOfNewGoal);
+			
+			// Add that scorer to matchResults
+			if (team.equals("homeTeam")) results.addHomeScorer(specifiedTeam[iScored]);
+			if (team.equals("awayTeam")) results.addAwayScorer(specifiedTeam[iScored]);
+			
+			// Also add that goal to the FootballPlayers statistics
+			specifiedTeam[iScored].stats[roundNum].incrGoalsBy(1);
+			
+			newGoals--;	
+		}
+	}
+
+	private static void giveYellowCards() {
+	}
+
+	private static void giveRedCards() {
+	}
+	
+	private static void giveSaves() {
+	}
+	
+	private static void giveGoalsConceded() {
+	}
+	
+	private static void giveMinutes() {
+	}
+	
+	private static void giveAssists() {
 	}
 }

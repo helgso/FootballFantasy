@@ -19,16 +19,22 @@ public class Fantasy {
 		matchResults = new MatchResults[ this.numAllMatches ];
 		numRoundMatches = schedule.getNumMatchInRound();
 		numRounds = schedule.getNumRounds();
-		//simulateNextRound();
 	}
 	
-	public void simulateNextRound( ){
+	// Simulate the next Round (5 matches) and return MatchResults for those
+	public MatchResults[] simulateNextRound( ){
 		FootballTeam[][] teams = schedule.getNextRoundSchedule();
 		int numMatch = numRoundMatches;
 		for (int i = 0; i < numMatch; i++) {
 			matchResults[roundsDone*numMatch+i]= Simulate.match(teams[i][0],teams[i][1],roundsDone);
 		}
+		MatchResults[] theseFiveMatches = new MatchResults[5];
+		for (int i = 0; i < 5; i++) {
+			theseFiveMatches[i] = matchResults[roundsDone*5 + i];
+		}
 		roundsDone++;
+		
+		return theseFiveMatches;
 	}
 	
 	// pre:  0 <= matchNumber <= 89

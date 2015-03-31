@@ -22,8 +22,8 @@ public class Core {
 		return schedule.getTotalSchedule();
 	}
 	
-	public void simulateNextRound() {
-		fantasy.simulateNextRound();
+	public MatchResults[] simulateNextRound() {
+		return fantasy.simulateNextRound();
 	}
 	
 	public FootballTeam[] getAllFootballTeams() {
