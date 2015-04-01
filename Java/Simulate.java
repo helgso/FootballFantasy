@@ -3,6 +3,8 @@ package trunk.Java;
 public class Simulate {
 	private static int roundNum;
 	private static MatchResults results;
+	private static FootballTeam home;
+	private static FootballTeam away;
 	
 	public static MatchResults match(FootballTeam homeTeam, FootballTeam awayTeam, int roundNumber ){
 		// Create results for this match
@@ -12,6 +14,8 @@ public class Simulate {
 		// to enable easier calls for future functions within Simulate.java 
 		roundNum = roundNumber;
 		results = matchResults;
+		home = homeTeam;
+		away = awayTeam;
 		
 		// Determine homeGoals and awayGoals
 		results.setHomeGoals(Random.homeGoals(homeTeam, awayTeam));
@@ -21,12 +25,12 @@ public class Simulate {
 		giveGoals();         // -> Ready for testing
 		giveYellowCards();   // -> Ready for testing	
 		giveRedCards();	     // -> Ready for testing
-		giveSaves();         // Not implemented yet
 		giveGoalsConceded(); // -> Ready for testing
-		giveMinutes();       // -> Ready for testing
 		giveAssists();       // Not implemented yet
-		giveCleanSheet();    // Not implemented yet
 		giveOwnGoals();      // Not implemented yet
+		giveCleanSheet();    // -> Ready for testing
+		giveSaves();         // Not implemented yet
+		giveMinutes();       // -> Ready for testing
 		
 		// Finally, update each player's score
 		for (FootballPlayer player : homeTeam.getSimulationTeam()) {
@@ -42,11 +46,13 @@ public class Simulate {
 	// ======
 	// Givers
 	// ======
+	// Give goals to homeTeam and awayTeam simulation players
 	private static void giveGoals(){
 		if (results.getHomeGoals() > 0) distributeGoalsWithin("homeTeam");
 		if (results.getAwayGoals() > 0) distributeGoalsWithin("awayTeam");
 	}
 	
+	// Give yellow cards to homeTeam and awayTeam simulation players
 	private static void giveYellowCards() {
 		int homeYCs = Random.yellowCards(); 
 		int awayYCs = Random.yellowCards();
@@ -55,6 +61,7 @@ public class Simulate {
 		if (awayYCs > 0) distributeYCsWithin("awayTeam", awayYCs);
 	}
 	
+	// Give red cards to homeTeam and awayTeam simulation players
 	private static void giveRedCards() {
 		int homeRCs = Random.redCards(); 
 		int awayRCs = Random.redCards();
@@ -63,42 +70,55 @@ public class Simulate {
 		if (awayRCs > 0) distributeRCsWithin("awayTeam", awayRCs);
 	}
 	
-	private static void giveSaves() {
-	}
-	
+	// Give goals conceded to homeTeam and awayTeam simulation players
 	private static void giveGoalsConceded() {		
-		for (FootballPlayer player : results.getHomeTeam().getSimulationTeam()) {
-			player.stats[roundNum+1].setGoalsConceded(results.getHomeGoals());
+		for (FootballPlayer player : home.getSimulationTeam()) {
+			player.stats[roundNum].setGoalsConceded(results.getHomeGoals());
 		}
-		for (FootballPlayer player : results.getAwayTeam().getSimulationTeam()) {
-			player.stats[roundNum+1].setGoalsConceded(results.getAwayGoals());
+		for (FootballPlayer player : away.getSimulationTeam()) {
+			player.stats[roundNum].setGoalsConceded(results.getAwayGoals());
 		}
 	}
 	
-	private static void giveMinutes() {
-		for (FootballPlayer player : results.getHomeTeam().getSimulationTeam()) {
-			if (player.stats[roundNum+1].getYellowCards() < 2
-					&& player.stats[roundNum+1].getRedCards() < 1) {
-				player.stats[roundNum+1].setMinutes(90);
-			} else {
-				int minutes = (int)(Math.random()*91);
-				player.stats[roundNum+1].setMinutes(minutes);
+	// Give assists to homeTeam and awayTeam simulation players
+	private static void giveAssists() {
+	}
+	
+	// Give ownGoals to homeTeam and awayTeam simulation players
+	private static void giveOwnGoals() {
+	}
+	
+	// Give clean sheets to homeTeam and awayTeam simulation players
+	private static void giveCleanSheet() {
+		if (results.getHomeGoals() == 0) {
+			for (FootballPlayer player : home.getSimulationTeam()) {
+				player.stats[roundNum].setCleanSheet(true);
+			}
+		}
+		if (results.getAwayGoals() == 0) {
+			for (FootballPlayer player : away.getSimulationTeam()) {
+				player.stats[roundNum].setCleanSheet(true);
 			}
 		}
 	}
 	
-	private static void giveAssists() {
+	// Give saves to homeTeam and awayTeam simulation players
+	private static void giveSaves() {
 	}
 	
-	private static void giveCleanSheet() {
-	}
-	
-	private static void giveOwnGoals() {
+	// Give minutes to homeTeam and awayTeam simulation players
+	private static void giveMinutes() {
+		distributeMinutesWithin(home);
+		distributeMinutesWithin(away);
 	}
 	
 	// ============
 	// Distributers
 	// ============
+	// -> team is either "homeTeam" or "awayTeam". That will be the "specified team".
+	// 		Distribute the goals randomly within the specified team. However, make it
+	// more likely that a player that has scored in the past will score one of
+	// these new goals
 	private static void distributeGoalsWithin(String team) {
 		FootballPlayer[] specifiedTeam = null;
 		int newGoals = 0;
@@ -135,12 +155,17 @@ public class Simulate {
 			if (team.equals("awayTeam")) results.addAwayScorer(specifiedTeam[iScored]);
 			
 			// Also add that goal to the FootballPlayers statistics
-			specifiedTeam[iScored].stats[roundNum+1].incrGoalsBy(1);
+			specifiedTeam[iScored].stats[roundNum].incrGoalsBy(1);
 			
 			newGoals--;	
 		}
 	}
 	
+	// -> team is either "homeTeam" or "awayTeam". That will be the "specified team".
+	// -> amountOfCards is the amount of yellow cards to be distributed.
+	// 		Distribute the cards randomly within the specified team. However, make it
+	// more likely that a player that has received a yellow card in the past will
+	// get on of these new yellow cards
 	private static void distributeYCsWithin(String team, int amountOfCards) {
 		FootballPlayer[] specifiedTeam = null;
 		if (team.equals("homeTeam")) {
@@ -164,12 +189,17 @@ public class Simulate {
 			// Player #playerIndex receives a yellow card
 			int playerIndex = Random.determineValue(chancesOfNewYCs);
 			
-			specifiedTeam[playerIndex].stats[roundNum+1].incrYellowCardsBy(1);
+			specifiedTeam[playerIndex].stats[roundNum].incrYellowCardsBy(1);
 			
 			amountOfCards--;
 		}
 	}
 	
+	// -> team is either "homeTeam" or "awayTeam". That will be the "specified team".
+	// -> amountOfCards is the amount of red cards to be distributed.
+	// 		Distribute the cards randomly within the specified team. However, make it
+	// more likely that a player that has received a red card in the past will
+	// get on of these new red cards
 	private static void distributeRCsWithin(String team, int amountOfCards) {
 		FootballPlayer[] specifiedTeam = null;
 		if (team.equals("homeTeam")) {
@@ -193,15 +223,33 @@ public class Simulate {
 			// Player #playerIndex receives a red card
 			int playerIndex = Random.determineValue(chancesOfNewRCs);
 			
-			specifiedTeam[playerIndex].stats[roundNum+1].incrRedCardsBy(1);
+			specifiedTeam[playerIndex].stats[roundNum].incrRedCardsBy(1);
 			
 			amountOfCards--;
+		}
+	}
+	
+	// pre: giveYellowCards and giveRedCards have to be called.
+	// -> specifiedTeam is either "homeTeam" or "awayTeam".
+	// 		A player that has received 2 or more yellow cards
+	// or one red card will only receive a random amount of minutes
+	// on the interval [0;90]. The rest will receive 90 minutes.
+	private static void distributeMinutesWithin(FootballTeam specifiedTeam) {
+		for (FootballPlayer player : specifiedTeam.getSimulationTeam()) {
+			if (player.stats[roundNum].getYellowCards() < 2
+					&& player.stats[roundNum].getRedCards() < 1) {
+				player.stats[roundNum].setMinutes(90);
+			} else {
+				int minutes = (int)(Math.random()*91);
+				player.stats[roundNum].setMinutes(minutes);
+			}
 		}
 	}
 	
 	// =============
 	// Sum functions
 	// =============
+	// Returns the sum of array
 	private static int sumOf(int[] array) {
 		int sum = 0;
 		for (int num : array) {
@@ -210,11 +258,13 @@ public class Simulate {
 		return sum;
 	}
 	
+	// Returns an array of goal amounts for each
+	// player in players up until this round
 	private static int[] playerGoals(FootballPlayer[] players) {
 		int playerGoals[] = new int[players.length];
 		for (int i = 0; i < players.length; i++) {
 			int thisPlayerGoals = 0;
-			for (int j = 0; j <= roundNum; j++) {
+			for (int j = 0; j < roundNum; j++) {
 				thisPlayerGoals += players[i].stats[j].getGoals();
 			}
 			playerGoals[i] = thisPlayerGoals;
@@ -222,11 +272,13 @@ public class Simulate {
 		return playerGoals;		
 	}
 	
+	// Returns an array of yellow card amounts for each
+	// player in players up until this round
 	private static int[] playerYellowCards(FootballPlayer[] players) {
 		int playerYellowCards[] = new int[players.length];
 		for (int i = 0; i < players.length; i++) {
 			int thisPlayerYellowCards = 0;
-			for (int j = 0; j <= roundNum; j++) {
+			for (int j = 0; j < roundNum; j++) {
 				thisPlayerYellowCards += players[i].stats[j].getYellowCards();
 			}
 			playerYellowCards[i] = thisPlayerYellowCards;
@@ -234,11 +286,13 @@ public class Simulate {
 		return playerYellowCards;		
 	}
 	
+	// Returns an array of red card amounts for each
+	// player in players up until this round
 	private static int[] playerRedCards(FootballPlayer[] players) {
 		int playerRedCards[] = new int[players.length];
 		for (int i = 0; i < players.length; i++) {
 			int thisPlayerRedCards = 0;
-			for (int j = 0; j <= roundNum; j++) {
+			for (int j = 0; j < roundNum; j++) {
 				thisPlayerRedCards += players[i].stats[j].getRedCards();
 			}
 			playerRedCards[i] = thisPlayerRedCards;
