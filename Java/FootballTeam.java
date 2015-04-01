@@ -12,13 +12,12 @@ public class FootballTeam {
 	//Constructor
 	public FootballTeam( FootballPlayer[] players, String teamName, double fact, String logoPath ){
 		this.players = players;
-		this.simulationPlayers = createSimulationTeam();
 		this.name = teamName;
 		this.factor = fact;
 		this.logoPath = logoPath;
 	}
 	
-	private FootballPlayer[] createSimulationTeam() {
+	public void createSimulationTeam() {
 		FootballPlayer [] simulationTeam = new FootballPlayer[11];
 		
 		// Containers for 1 goalKeeper, 4 defenders, 4 midfielders and 2 forwarders
@@ -80,9 +79,11 @@ public class FootballTeam {
 				i++;
 			}
 		}
-		return simulationTeam;
+		
+		this.simulationPlayers = simulationTeam;
 	}
 	
+	// pre: DataConnection calls createSimulationTeam()
 	public FootballPlayer[] getSimulationTeam( ){
 		return this.simulationPlayers;
 	}

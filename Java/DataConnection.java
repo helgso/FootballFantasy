@@ -98,55 +98,55 @@ public class DataConnection {
             else {WestHamTemp.add(leikmenn[i]);}
         }
 
-        FootballPlayer[] Arsenal = new FootballPlayer[27] ;
-        FootballPlayer[] Chelsea = new FootballPlayer[21] ;
-        FootballPlayer[] Liverpool = new FootballPlayer[25];
-        FootballPlayer[] ManCity = new FootballPlayer[23];
-        FootballPlayer[] ManUtd = new FootballPlayer[28];
-        FootballPlayer[] Southampton = new FootballPlayer[24];
-        FootballPlayer[] Spurs = new FootballPlayer[23];
-        FootballPlayer[] Stoke = new FootballPlayer[21];
-        FootballPlayer[] Swansea = new FootballPlayer[25];
-        FootballPlayer[] WestHam = new FootballPlayer[23];
+        FootballPlayer[] Arsenal = new FootballPlayer[ArsenalTemp.size()] ;
+        FootballPlayer[] Chelsea = new FootballPlayer[ChelseaTemp.size()] ;
+        FootballPlayer[] Liverpool = new FootballPlayer[LiverpoolTemp.size()];
+        FootballPlayer[] ManCity = new FootballPlayer[ManCityTemp.size()];
+        FootballPlayer[] ManUtd = new FootballPlayer[ManUtdTemp.size()];
+        FootballPlayer[] Southampton = new FootballPlayer[SouthamptonTemp.size()];
+        FootballPlayer[] Spurs = new FootballPlayer[SpursTemp.size()];
+        FootballPlayer[] Stoke = new FootballPlayer[StokeTemp.size()];
+        FootballPlayer[] Swansea = new FootballPlayer[SwanseaTemp.size()];
+        FootballPlayer[] WestHam = new FootballPlayer[WestHamTemp.size()];
 
         for(int i = 0; i < Arsenal.length; i++){
-        	Chelsea[i] = (FootballPlayer)ArsenalTemp.get(i);
+        	Arsenal[i] = (FootballPlayer)ArsenalTemp.pop();
         }
 
         for(int i = 0; i < Chelsea.length; i++){
-            Chelsea[i] = (FootballPlayer)ChelseaTemp.get(i);
+            Chelsea[i] = (FootballPlayer)ChelseaTemp.pop();
         }
 
         for(int i = 0; i < Liverpool.length; i++){
-            Liverpool[i] = (FootballPlayer)LiverpoolTemp.get(i);
+            Liverpool[i] = (FootballPlayer)LiverpoolTemp.pop();
         }
 
         for(int i = 0; i < ManCity.length; i++){
-            ManCity[i] = (FootballPlayer)ManCityTemp.get(i);
+            ManCity[i] = (FootballPlayer)ManCityTemp.pop();
         }
 
         for(int i = 0; i < ManUtd.length; i++){
-            ManUtd[i] = (FootballPlayer)ManUtdTemp.get(i);
+            ManUtd[i] = (FootballPlayer)ManUtdTemp.pop();
         }
 
         for(int i = 0; i < Southampton.length; i++){
-            Southampton[i] = (FootballPlayer)SouthamptonTemp.get(i);
+            Southampton[i] = (FootballPlayer)SouthamptonTemp.pop();
         }
 
         for(int i = 0; i < Spurs.length; i++){
-            Spurs[i] = (FootballPlayer)SpursTemp.get(i);
+            Spurs[i] = (FootballPlayer)SpursTemp.pop();
         }
 
         for(int i = 0; i < Stoke.length; i++){
-            Stoke[i] = (FootballPlayer)StokeTemp.get(i);
+            Stoke[i] = (FootballPlayer)StokeTemp.pop();
         }
 
         for(int i = 0; i < Swansea.length; i++){
-            Swansea[i] = (FootballPlayer)SwanseaTemp.get(i);
+            Swansea[i] = (FootballPlayer)SwanseaTemp.pop();
         }
 
         for(int i = 0; i < WestHam.length; i++){
-            WestHam[i] = (FootballPlayer)WestHamTemp.get(i);
+            WestHam[i] = (FootballPlayer)WestHamTemp.pop();
         }
 
         FootballTeam arsenal = new FootballTeam(Arsenal, "Arsenal", 0.5865385, "trunk/Pictures/Arsenal/Arsenal.png");
@@ -170,6 +170,7 @@ public class DataConnection {
         	for (FootballPlayer player : team.getFootballPlayers()) {
         		player.setPickProbability(1.0*player.stats[0].getMinutes()/sumTeamMinutes);
         	}
+        	team.createSimulationTeam(); // With the pickProbabilities in place, we can finally create the simulation team
         }
         
         return teamTotal;

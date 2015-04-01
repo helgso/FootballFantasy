@@ -20,7 +20,7 @@ public class FootballPlayer {
 		this.teamName = teamName;
 		this.name 	  = name;
 		
-		this.stats = new Statistics[18];
+		this.stats = new Statistics[19];
 		
 		// 0-ta hólf inniheldur gögn frá Premier League.
 		// 1-ta til og með 18-ta hólf eru stats fyrir round 1 til og með 18
@@ -47,9 +47,9 @@ public class FootballPlayer {
 		
 		//		goals|saves|assists|min|redC|yellowC|goalsC|ownG|bonusGoalsC
 		int[] GK={6,	3, 	  3,	45,  3, 	 1, 	 2, 	2,	 4};
-		int[] DF={6,    0,    3,    45,  3, 	 1, 	 2, 	2,	 4};
-		int[] MF={5,    0,    3,    45,  3, 	 1, 	 1, 	2, 	 1};
-		int[] FW={4,	0,    3,    45,  3, 	 1, 	 1, 	2,	 0};
+		int[] DF={6,    1,    3,    45,  3, 	 1, 	 2, 	2,	 4};
+		int[] MF={5,    1,    3,    45,  3, 	 1, 	 1, 	2, 	 1};
+		int[] FW={4,	1,    3,    45,  3, 	 1, 	 1, 	2,	 0};
 		
 		int newScore = this.score;
 		if(this.position == Position.GK){

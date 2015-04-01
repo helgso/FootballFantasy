@@ -76,4 +76,82 @@ public class Core {
 	public void sellPlayer(FootballPlayer player) {
 		player.setMarketValue(player.getMarketValue() - 4);
 	}
+	
+	// ==============
+	// TEST TEST TEST
+	// ==============
+	public static void main(String[] args) {
+		/*
+		Core base = new Core();
+		
+		FootballTeam[][] schal = base.getScheduleForNextRound();
+		
+		System.err.println("Schedule for next round:");
+		for (FootballTeam[] match : schal) {
+			System.err.println("-> " + match[0].getName() + " vs. " + match[1].getName());
+		} System.err.println();
+		
+		FootballTeam A = base.getFootballTeam(schal[0][0].getName());
+		FootballTeam B = base.getFootballTeam(schal[0][1].getName());
+
+		String[] ABefore = new String[11];
+		int i = 0;
+		for (FootballPlayer player : A.getSimulationTeam()) {
+			ABefore[i] = player.getName() + "|" + player.stats[1].getMinutes() + "|" + player.stats[1].getAssists() + "|" +
+		                 player.stats[1].getGoals() + "|" + player.stats[1].getGoalsConceded() + "|" +
+					     player.stats[1].getOwnGoals() + "|" + player.stats[1].getCleanSheet() + "|" +
+		                 player.stats[1].getYellowCards() + "|"+ "|" + player.stats[1].getRedCards();
+		    i++;
+		}
+		String[] BBefore = new String[11];
+		i = 0;
+		for (FootballPlayer player : B.getSimulationTeam()) {
+			BBefore[i] = player.getName() + "|" + player.stats[1].getMinutes() + "|" + player.stats[1].getAssists() + "|" +
+		                 player.stats[1].getGoals() + "|" + player.stats[1].getGoalsConceded() + "|" +
+					     player.stats[1].getOwnGoals() + "|" + player.stats[1].getCleanSheet() + "|" +
+		                 player.stats[1].getYellowCards() + "|"+ "|" + player.stats[1].getRedCards();
+		    i++;
+		}
+
+		MatchResults[] results = base.simulateNextRound();
+		
+		String[] AAfter = new String[11];
+		i = 0;
+		for (FootballPlayer player : A.getSimulationTeam()) {
+			AAfter[i] = player.getName() + "|" + player.stats[1].getMinutes() + "|" + player.stats[1].getAssists() + "|" +
+		                 player.stats[1].getGoals() + "|" + player.stats[1].getGoalsConceded() + "|" +
+					     player.stats[1].getOwnGoals() + "|" + player.stats[1].getCleanSheet() + "|" +
+		                 player.stats[1].getYellowCards() + "|"+ "|" + player.stats[1].getRedCards();
+		    i++;
+		}
+		String[] BAfter = new String[11];
+		i = 0;
+		for (FootballPlayer player : B.getSimulationTeam()) {
+			BAfter[i] = player.getName() + "|" + player.stats[1].getMinutes() + "|" + player.stats[1].getAssists() + "|" +
+		                 player.stats[1].getGoals() + "|" + player.stats[1].getGoalsConceded() + "|" +
+					     player.stats[1].getOwnGoals() + "|" + player.stats[1].getCleanSheet() + "|" +
+		                 player.stats[1].getYellowCards() + "|"+ "|" + player.stats[1].getRedCards();
+		    i++;
+		}
+		
+		System.err.println("name|minutes|assists|goals|goalsConceded|ownGoals|cleanSheet|YC|RC");
+		for (int j = 0; j < 11; j++) {
+			System.err.println(ABefore[j]);
+			System.err.println(AAfter[j]);
+			System.err.println("\n");
+			System.err.println(BBefore[j]);
+			System.err.println(BAfter[j]);
+		}
+		
+		
+		System.err.println("\n\nAre the 5 match results equal?");
+		for (int j = 0; j < 5; j++) {
+			System.err.println(results[j] == base.getMatchResults(j));
+		}
+		
+		System.err.println("\n Results are:");
+		for (int j = 0; j < 5; j++) {
+			System.err.println(results[j].displayResults());
+		}*/
+	}
 }

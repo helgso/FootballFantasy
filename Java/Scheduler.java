@@ -93,9 +93,6 @@ public class Scheduler {
 			round[i][1] = this.teamSchedule[this.index][i][1];
 			
 		}
-		
-		//increment the round counter
-		this.index++;
 		return round;
 	}
 	
