@@ -77,11 +77,11 @@ public class Core {
 		player.setMarketValue(player.getMarketValue() - 4);
 	}
 	
-	// ==============
-	// TEST TEST TEST
-	// ==============
-	public static void main(String[] args) {
-		/*
+	// ======================
+	// 1 TEST 1 TEST 1 TEST 1
+	// ======================
+	/*public static void main(String[] args) {
+		
 		Core base = new Core();
 		
 		FootballTeam[][] schal = base.getScheduleForNextRound();
@@ -152,6 +152,82 @@ public class Core {
 		System.err.println("\n Results are:");
 		for (int j = 0; j < 5; j++) {
 			System.err.println(results[j].displayResults());
-		}*/
-	}
+		}
+	}*/
+	
+	// ======================
+	// 2 TEST 2 TEST 2 TEST 2
+	// ======================
+	/*public static void main(String[] args) {
+		
+		Core base = new Core();
+		
+		FootballTeam[] teams = base.getAllFootballTeams();
+		
+		for (int j = 0; j < teams.length; j++) {
+			FootballPlayer[] players = teams[j].getFootballPlayers(); 
+			int sumOwnGoals = 0;
+			int sumGoals = 0;
+			for (int i = 0; i < players.length; i++) {
+				sumGoals += players[i].stats[0].getGoals();
+				sumOwnGoals += players[i].stats[0].getOwnGoals();
+			}
+			
+			System.out.println(teams[j].getName() + " has sumOwnGoals: " + sumOwnGoals + ", sumGoals: " + sumGoals + ", ratio: " + (1.0*sumOwnGoals)/sumGoals);
+		}
+	}*/
+	
+	// ======================
+	// 3 TEST 3 TEST 3 TEST 3
+	// ======================
+	/*public static void main(String[] args) {
+		
+		Core base = new Core();
+		
+		FootballTeam[] teams = base.getAllFootballTeams();
+		
+		int sumsumAss = 0;
+		int sumsumGKAss = 0;
+		int sumsumDFAss = 0;
+		int sumsumMFAss = 0;
+		int sumsumFWAss = 0;
+		int sumsumGoals = 0;
+		for (int j = 0; j < teams.length; j++) {
+			FootballPlayer[] players = teams[j].getFootballPlayers(); 
+			int sumAss = 0;
+			int sumGKAss = 0;
+			int sumDFAss = 0;
+			int sumMFAss = 0;
+			int sumFWAss = 0;
+			int sumGoals = 0;
+			for (int i = 0; i < players.length; i++) {
+				sumGoals += players[i].stats[0].getGoals();
+				sumAss += players[i].stats[0].getAssists();
+				
+				if (players[i].getPosition() == Position.GK)
+					sumGKAss += players[i].stats[0].getAssists();
+				if (players[i].getPosition() == Position.DF)
+					sumDFAss += players[i].stats[0].getAssists();
+				if (players[i].getPosition() == Position.MF)
+					sumMFAss += players[i].stats[0].getAssists();
+				if (players[i].getPosition() == Position.FW)
+					sumFWAss += players[i].stats[0].getAssists();
+			}
+			
+			sumsumAss += sumAss;
+			sumsumGKAss += sumGKAss;
+			sumsumDFAss += sumDFAss;
+			sumsumMFAss += sumMFAss;
+			sumsumFWAss += sumFWAss;
+			sumsumGoals += sumGoals;
+			
+			//System.out.println(teams[j].getName() + ":");
+			//System.out.println("GKAss: " + sumGKAss + ", DFAss: " + sumDFAss + ", MFAss: " + sumMFAss + ", FDAss: " + sumFWAss);
+			//System.out.println("TotalAss: " + sumAss + ", TotalGoals: " + sumGoals + ", ratio: " + (1.0*sumAss)/sumGoals + "\n");
+		}
+		
+		System.out.println("==========================================");
+		System.out.println("sumsumGKAss: " + sumsumGKAss + ", sumsumDFAss: " + sumsumDFAss + ", sumsumMFAss: " + sumsumMFAss + ", sumsumFWAss: " + sumsumFWAss);
+		System.out.println("sumsumAss: " + sumsumAss + ", sumsumGoals: " + sumsumGoals + ", ratio: " + (1.0*sumsumAss)/sumsumGoals);
+	}*/
 }

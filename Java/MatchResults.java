@@ -70,10 +70,12 @@ public class MatchResults {
 	
 	public void addHomeScorer( FootballPlayer scorer ){
 		this.homeScoringPlayers.add(scorer);
+		this.homeGoals++;
 	}
 	
 	public void addAwayScorer( FootballPlayer scorer ){
 		this.awayScoringPlayers.add(scorer);
+		this.awayGoals++;
 	}
 	
 	public void setHomeGoals(int amount) {
