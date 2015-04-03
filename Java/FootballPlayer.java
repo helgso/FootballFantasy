@@ -61,14 +61,14 @@ public class FootballPlayer {
 		}else if(this.position == Position.FW){
 			newScore += this.calcScore(FW, roundNumber);
 		}
-		this.setScore( this.score + newScore );
+		this.setScore( newScore );
 	}
 	
-	// returns calculate score from LAST match
+	// returns calculate score from the round that has just been simulated
 	private int calcScore(int[] a, int roundNumber ){
 		
 		//Get last match statistics
-		Statistics lastGame = stats[ roundNumber+1 ];
+		Statistics lastGame = stats[ roundNumber ];
 		
 		int newScore = 1;
 		
@@ -84,7 +84,7 @@ public class FootballPlayer {
 						+1/a[3]*lastGame.getMinutes()
 						-  a[4]*lastGame.getRedCards()
 						-  a[5]*lastGame.getYellowCards()
-						-1/a[6]*lastGame.getGoalsConceded()
+						+1/a[6]*lastGame.getGoalsConceded()
 						-  a[7]*lastGame.getOwnGoals());
 		return newScore;
 	}

@@ -327,4 +327,62 @@ public class Core {
 		for (int i = 0; i < gkSaves.size(); i++) {
 			System.out.print(1.0*gkSaves.get(i)/gkMinutes.get(i) + ", ");
 		}*/
+	
+	// ======================
+	// 6 TEST 6 TEST 6 TEST 6
+	// ======================
+	/*public static void main(String[] args) {
+		
+		Core base = new Core();
+		
+		FootballTeam[][][] schal = base.getScheduleForAllRounds();
+		
+		for (int u = 0; u < 18; u++) {
+			base.simulateNextRound();
+			for (int k = 0; k < 5; k++) {
+				FootballTeam A = base.getFootballTeam(schal[u][k][0].getName());
+				FootballTeam B = base.getFootballTeam(schal[u][k][1].getName());
+				
+				String[] AAfter = new String[11];
+				int i = 0;
+				for (FootballPlayer player : A.getSimulationTeam()) {
+					AAfter[i] = player.getName() + "|m:" + player.stats[u+1].getMinutes() + "|a:" + player.stats[u+1].getAssists() + "|g:" +
+				                 player.stats[u+1].getGoals() + "|gc:" + player.stats[u+1].getGoalsConceded() + "|og:" +
+							     player.stats[u+1].getOwnGoals() + "|cs:" + player.stats[u+1].getCleanSheet() + "|yc:" +
+				                 player.stats[u+1].getYellowCards() + "|rc:" + player.stats[u+1].getRedCards() + "|sc:" + player.getScore();
+				    i++;
+				}
+				String[] BAfter = new String[11];
+				i = 0;
+				for (FootballPlayer player : B.getSimulationTeam()) {
+					BAfter[i] = player.getName() + "|m:" + player.stats[u+1].getMinutes() + "|a:" + player.stats[u+1].getAssists() + "|g:" +
+			                 player.stats[u+1].getGoals() + "|gc:" + player.stats[u+1].getGoalsConceded() + "|og:" +
+						     player.stats[u+1].getOwnGoals() + "|cs:" + player.stats[u+1].getCleanSheet() + "|yc:" +
+			                 player.stats[u+1].getYellowCards() + "|rc:" + player.stats[u+1].getRedCards() + "|sc:" + player.getScore();
+				    i++;
+				}
+				
+				System.out.println(base.getMatchResults(u*5+k).displayResults());
+				FootballPlayer[] homeScoringPlayers = base.getMatchResults(u*5+k).getHomeScoringPlayers();
+				FootballPlayer[] awayScoringPlayers = base.getMatchResults(u*5+k).getAwayScoringPlayers();
+				for (int p = 0; p < homeScoringPlayers.length; p++) {
+					System.out.print(homeScoringPlayers[p].getName() + ", ");
+				} System.out.print(" - ");
+				for (int p = 0; p < awayScoringPlayers.length; p++) {
+					System.out.print(awayScoringPlayers[p].getName() + ", ");
+				} System.out.println("\n");
+				System.out.println("name|minutes|assists|goals|goalsConceded|ownGoals|cleanSheet|YC|RC|SC");
+				for (int j = 0; j < 11; j++) {
+					System.out.println(AAfter[j]);
+				}System.out.println();
+				for (int j = 0; j < 11; j++) {
+					System.out.println(BAfter[j]);
+				}
+				System.out.println("\n=====================================\n");
+			}
+			System.out.println("\n=====================================");
+			System.out.println("==|=====|=======|======|======|======");
+			System.out.println("=====================================\n");
+		}
+	}*/
 }

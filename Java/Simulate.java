@@ -52,7 +52,7 @@ public class Simulate {
 		double[] ownGoalProbs = {0.98, 0.02};
 		for (int i = 0; i < homeGoals; i++) {
 			// If Random picks the 0.02 chances, it returns 1 which
-			// increments homeGoals by one
+			// increments homeOwnGoals by one
 			homeOwnGoals += Random.determineValue(ownGoalProbs);
 		}
 		for (int i = 0; i < awayGoals; i++) {
@@ -241,7 +241,7 @@ public class Simulate {
 			// Make it 80% likely that a defender scored the
 			// ownGoal and 20% likely that a midfielder did
 			int whichTypeScored = Random.determineValue(new double[] {0.8, 0.2});
-			int whichPlayerScored = (int)(Math.random()*5);
+			int whichPlayerScored = (int)(Math.random()*4);
 			
 			FootballPlayer itsHim = players[whichTypeScored][whichPlayerScored];
 			
@@ -318,13 +318,12 @@ public class Simulate {
 	
 	// pre: giveYellowAndRedCards is called.
 	// -> team is either home or away.
-	// 		A player that has received 2 or more yellow cards
-	// or one red card will only receive a random amount of minutes
+	// 		A player that has received a red card
+	// will only receive a random amount of minutes
 	// on the interval [0;90]. The rest will receive 90 minutes.
 	private static void distributeMinutesWithin(FootballTeam team) {
 		for (FootballPlayer player : team.getSimulationTeam()) {
-			if (player.stats[roundNum].getYellowCards() < 2
-					&& player.stats[roundNum].getRedCards() < 1) {
+			if (player.stats[roundNum].getRedCards() != 1) {
 				player.stats[roundNum].setMinutes(90);
 			} else {
 				int minutes = (int)(Math.random()*91);
@@ -340,7 +339,7 @@ public class Simulate {
 		FootballPlayer[] specifiedTeam = team.getSimulationTeam();
 		
 		// Probability of assists from:
-		double[] probsOfAssist = {0,                   // a goalkeeper
+		double[] probsOfAssist = {//0,                 // a goalkeeper
 				                  0.1479713603818616,  // a defender
 				                  0.6491646778042959,  // a midfielder
 				                  0.2028639618138425}; // a forwarder
@@ -371,10 +370,12 @@ public class Simulate {
 			int whichTypeAssisted = Random.determineValue(probsOfAssist);
 			
 			int whichPlayerAssisted = 0;
-			if (whichTypeAssisted != 3)
-				whichPlayerAssisted = (int)(Math.random()*5);
-			else
-				whichPlayerAssisted = (int)(Math.random()*3);
+			if (whichTypeAssisted == 2) {
+				whichPlayerAssisted = (int)(Math.random()*2);
+			}
+			else {
+				whichPlayerAssisted = (int)(Math.random()*4);
+			}
 			
 			FootballPlayer itsHim = players[whichTypeAssisted][whichPlayerAssisted];
 			

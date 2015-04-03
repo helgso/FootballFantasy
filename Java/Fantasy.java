@@ -29,7 +29,7 @@ public class Fantasy {
 			matchResults[roundsDone*numMatch+i]= Simulate.match(teams[i][0],teams[i][1],roundsDone+1);
 		}
 		MatchResults[] theseFiveMatches = new MatchResults[5];
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < numMatch; i++) {
 			theseFiveMatches[i] = matchResults[roundsDone*5 + i];
 		}
 		roundsDone++;
