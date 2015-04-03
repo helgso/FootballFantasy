@@ -68,7 +68,7 @@ public class DataConnection {
             int YC = data[i].getInt("yellow_cards");
             leikmenn[i].stats[0].setYellowCards(YC);
             
-            int value = marketValueUpdate(player);
+            int value = makeMarketValue(player);
             leikmenn[i].setMarketValue(value);
             
             // pickProbability will be calculated at
@@ -191,7 +191,7 @@ public class DataConnection {
     }
     
     //Calculate football player value from all his statistics
-  	private static int marketValueUpdate(FootballPlayer player) {
+  	private static int makeMarketValue(FootballPlayer player) {
   		
   		//Different coefficient Value for each position
   		double GKCoefficient = 1.3;
