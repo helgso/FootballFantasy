@@ -29,6 +29,9 @@ public class DataConnection {
         	
             String name = data[i].getString("first_name") + " " + data[i].getString("second_name"); 
             String team = data[i].getString("team_name");
+            if (team.equals("Man City")) team = "Manchester City";
+            if (team.equals("Man Utd")) team = "Manchester United";
+            
             String pos = data[i].getString("type_name");
             
         	FootballPlayer player = new FootballPlayer(name, team, pos);

@@ -23,7 +23,7 @@ public class Simulate {
 		giveGoalsConceded();     // -> Ready for testing
 		giveAssists();           // -> Ready for testing
 		giveCleanSheet();        // Tested -> OK
-		giveSaves();             // Not implemented yet
+		giveSaves();             // -> Ready for testing
 		giveMinutes();           // Tested -> OK
 		
 		// Finally, update each player's score
@@ -133,8 +133,39 @@ public class Simulate {
 		}
 	}
 	
-	// Give saves to home and away simulation players
+	// Give saves to home and away simulation goalkeepers
+	// Apparently, no one else gets saves in the English Premier league
 	private static void giveSaves() {
+		// According to Skyrsla.pdf, the average of saves each match is 2.63 saves
+		// So we try to make the probs array in such a way that the numbers will
+		// generally have the average of 2.63
+		
+		// Probability of 0, 1, 2, 3, 4, 5 saves
+		double[] probs = {0.15, 0.10, 0.15, 0.27, 0.23, 0.10};
+		
+		// When the probs above are tested for 1 million iterations, the average
+		// of the produced random numbers is 2.628925. Looks sufficient.
+		
+		int homeGKSaves = Random.determineValue(probs);
+		int awayGKSaves = Random.determineValue(probs);
+		
+		// Let's find the goalkeeper of the home team
+		for (FootballPlayer player : home.getSimulationTeam()) {
+			if (player.getPosition() == Position.GK) {
+				// and assign the homeGKSaves to him
+				player.stats[roundNum].setSaves(homeGKSaves);
+				break;
+			}
+		}
+		
+		// Let's find the goalkeeper of the home team
+		for (FootballPlayer player : away.getSimulationTeam()) {
+			if (player.getPosition() == Position.GK) {
+				// and assign the awayGKSaves to him
+				player.stats[roundNum].setSaves(awayGKSaves);
+				break;
+			}
+		}
 	}
 	
 	// Give minutes to home and away simulation players

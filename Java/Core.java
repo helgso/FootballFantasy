@@ -230,4 +230,101 @@ public class Core {
 		System.out.println("sumsumGKAss: " + sumsumGKAss + ", sumsumDFAss: " + sumsumDFAss + ", sumsumMFAss: " + sumsumMFAss + ", sumsumFWAss: " + sumsumFWAss);
 		System.out.println("sumsumAss: " + sumsumAss + ", sumsumGoals: " + sumsumGoals + ", ratio: " + (1.0*sumsumAss)/sumsumGoals);
 	}*/
+	
+	// ======================
+	// 4 TEST 4 TEST 4 TEST 4
+	// ======================
+	/*public static void main(String[] args) {
+		
+		Core base = new Core();
+		
+		FootballTeam[] teams = base.getAllFootballTeams();
+		
+		int sumsumSaves = 0;
+		int sumsumGKSaves = 0;
+		int sumsumDFSaves = 0;
+		int sumsumMFSaves = 0;
+		int sumsumFWSaves = 0;
+		for (int j = 0; j < teams.length; j++) {
+			FootballPlayer[] players = teams[j].getFootballPlayers(); 
+			int sumSaves = 0;
+			int sumGKSaves = 0;
+			int sumDFSaves = 0;
+			int sumMFSaves = 0;
+			int sumFWSaves = 0;
+			for (int i = 0; i < players.length; i++) {
+				sumSaves += players[i].stats[0].getSaves();
+				
+				if (players[i].getPosition() == Position.GK)
+					sumGKSaves += players[i].stats[0].getSaves();
+				if (players[i].getPosition() == Position.DF)
+					sumDFSaves += players[i].stats[0].getSaves();
+				if (players[i].getPosition() == Position.MF)
+					sumMFSaves += players[i].stats[0].getSaves();
+				if (players[i].getPosition() == Position.FW)
+					sumFWSaves += players[i].stats[0].getSaves();
+			}
+			
+			sumsumSaves += sumSaves;
+			sumsumGKSaves += sumGKSaves;
+			sumsumDFSaves += sumDFSaves;
+			sumsumMFSaves += sumMFSaves;
+			sumsumFWSaves += sumFWSaves;
+		}
+		
+		System.out.println("sumsumGKSaves: " + sumsumGKSaves + ", sumsumDFSaves: " + sumsumDFSaves + ", sumsumMFSaves: " + sumsumMFSaves + ", sumsumFWSaves: " + sumsumFWSaves);
+		System.out.println("sumsumSaves: " + sumsumSaves + ", games played: 30, average saves per game: " + (1.0*sumsumSaves)/(10*30));
+	}*/
+	
+	// ======================
+	// 5 TEST 5 TEST 5 TEST 5
+	// ======================
+	/*public static void main(String[] args) {
+		
+		Core base = new Core();
+		
+		FootballTeam[] teams = base.getAllFootballTeams();
+		
+		LinkedList<Integer> gkSaves = new LinkedList<Integer>();
+		LinkedList<Integer> gkMinutes = new LinkedList<Integer>();
+		LinkedList<Double> gkTeamFactor = new LinkedList<Double>();
+		
+		for (int j = 0; j < teams.length; j++) {
+			FootballPlayer[] players = teams[j].getFootballPlayers(); 
+
+			for (int i = 0; i < players.length; i++) {
+				if (players[i].getPosition() == Position.GK) {
+					gkSaves.add(players[i].stats[0].getSaves());
+					gkMinutes.add(players[i].stats[0].getMinutes());
+					gkTeamFactor.add(base.getFootballTeam(players[i].getTeamName()).getFactor());
+				}
+			}
+		}
+		
+		for (int i = 0; i < 1; i++) {
+			System.out.print(gkSaves.get(i));
+			System.out.println(gkMinutes.get(i));
+			System.out.println(gkTeamFactor.get(i));
+		}
+		
+		/*for (int i = 0; i < gkSaves.size(); i++) {
+			System.out.print(1.0*gkSaves.get(i)/gkMinutes.get(i) + ", ");
+		} System.out.println();
+		System.out.println();
+		for (int i = 0; i < gkSaves.size(); i++) {
+			System.out.print(gkTeamFactor.get(i) + ", ");
+		}
+		System.out.println();*/
+	
+		/*for (int entity : gkSaves) {
+			System.out.print(entity/30.0 + ",\t ");
+		}*/
+		/*System.out.println("\n\nminutes: ");
+		for (int entity : gkMinutes) {
+			System.out.print(entity + ",\t ");
+		}
+		System.out.println("\n\nratio: ");
+		for (int i = 0; i < gkSaves.size(); i++) {
+			System.out.print(1.0*gkSaves.get(i)/gkMinutes.get(i) + ", ");
+		}*/
 }
