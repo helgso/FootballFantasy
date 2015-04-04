@@ -18,12 +18,12 @@ public class Simulate {
 		away = awayTeam;
 		
 		// Update the statistics for each FootballPlayer in this match
-		giveGoalsAndOwnGoals();  // -> Ready for testing
-		giveYellowAndRedCards(); // -> Ready for testing
-		giveGoalsConceded();     // -> Ready for testing
-		giveAssists();           // -> Ready for testing
+		giveGoalsAndOwnGoals();  // Tested -> OK
+		giveYellowAndRedCards(); // Tested -> OK
+		giveGoalsConceded();     // Tested -> OK
+		giveAssists();           // Tested -> OK
 		giveCleanSheet();        // Tested -> OK
-		giveSaves();             // -> Ready for testing
+		giveSaves();             // Tested -> OK
 		giveMinutes();           // Tested -> OK
 		
 		// Finally, update each player's score

@@ -71,6 +71,8 @@ public class DataConnection {
             int value = makeMarketValue(player);
             leikmenn[i].setMarketValue(value);
             
+            leikmenn[i].stats[0].setScore(0);
+            
             // pickProbability will be calculated at
             // the bottom of this function
         }

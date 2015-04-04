@@ -9,7 +9,6 @@ public class FootballPlayer {
 	
 	private double 	 pickProbability; //how likely is this player to be in final team squad.
 	private int 	 marketValue;
-	private int		 score;
 	private Position position;
 	private String 	 picturePath;
 	
@@ -51,17 +50,18 @@ public class FootballPlayer {
 		int[] MF={5,    1,    3,    45,  3, 	 1, 	 1, 	2, 	 1};
 		int[] FW={4,	1,    3,    45,  3, 	 1, 	 1, 	2,	 0};
 		
-		int newScore = this.score;
-		if(this.position == Position.GK){
-			newScore += this.calcScore(GK, roundNumber);
-		} else if(this.position == Position.DF){
-			newScore += this.calcScore(DF, roundNumber);
-		}else if(this.position == Position.MF){
-			newScore += this.calcScore(MF, roundNumber);
-		}else if(this.position == Position.FW){
-			newScore += this.calcScore(FW, roundNumber);
+		int newScore = 0;
+		if (this.position == Position.GK){
+			newScore = this.calcScore(GK, roundNumber);
+		} else if (this.position == Position.DF){
+			newScore = this.calcScore(DF, roundNumber);
+		} else if (this.position == Position.MF){
+			newScore = this.calcScore(MF, roundNumber);
+		} else if (this.position == Position.FW){
+			newScore = this.calcScore(FW, roundNumber);
 		}
-		this.setScore( newScore );
+		
+		this.stats[roundNumber].setScore( newScore );
 	}
 	
 	// returns calculate score from the round that has just been simulated
@@ -98,9 +98,6 @@ public class FootballPlayer {
 	public void setPickProbability( double pickProbability ){
 		this.pickProbability = pickProbability;
 	}
-	public void setScore(int score) {
-		this.score = score;
-	}
 	public void setMarketValue(int value) {
 		this.marketValue = value;
 	}
@@ -125,9 +122,6 @@ public class FootballPlayer {
 	}
 	public String getName( ){
 		return this.name;
-	}
-	public int getScore() {
-		return this.score;
 	}
 	public Statistics[] getStats() {
 		return this.stats;

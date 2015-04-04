@@ -11,6 +11,7 @@ public class Statistics {
 	private int assists;
 	private int goals;
 	private int saves;
+	private int score;
 
 	// ============
 	// Incrementers
@@ -38,6 +39,9 @@ public class Statistics {
 	}
 	public void incrMinutesBy(int amount) {
 		this.saves += amount;
+	}
+	public void incrScoreBy(int amount) {
+		this.score += amount;
 	}
 	
 	// =======
@@ -70,6 +74,9 @@ public class Statistics {
 	public void setSaves( int saves ){
 		this.saves = saves;
 	}
+	public void setScore( int score ){
+		this.score = score;
+	}
 	
 	// =======
 	// Getters
@@ -100,5 +107,8 @@ public class Statistics {
 	}
 	public int getSaves( ){
 		return this.saves;
+	}
+	public int getScore( ){
+		return this.score;
 	}
 }
