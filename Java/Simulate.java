@@ -91,9 +91,11 @@ public class Simulate {
 	private static void giveGoalsConceded() {		
 		for (FootballPlayer player : home.getSimulationTeam()) {
 			player.stats[roundNum].setGoalsConceded(results.getHomeGoals());
+			player.incrGoalsConcededBy(results.getHomeGoals());
 		}
 		for (FootballPlayer player : away.getSimulationTeam()) {
 			player.stats[roundNum].setGoalsConceded(results.getAwayGoals());
+			player.incrGoalsConcededBy(results.getAwayGoals());
 		}
 	}
 	
@@ -124,11 +126,13 @@ public class Simulate {
 		if (results.getAwayGoals() == 0) {
 			for (FootballPlayer player : home.getSimulationTeam()) {
 				player.stats[roundNum].setCleanSheet(true);
+				player.incrCleanSheetsBy(1);
 			}
 		}
 		if (results.getHomeGoals() == 0) {
 			for (FootballPlayer player : away.getSimulationTeam()) {
 				player.stats[roundNum].setCleanSheet(true);
+				player.incrCleanSheetsBy(1);
 			}
 		}
 	}
@@ -154,6 +158,7 @@ public class Simulate {
 			if (player.getPosition() == Position.GK) {
 				// and assign the homeGKSaves to him
 				player.stats[roundNum].setSaves(homeGKSaves);
+				player.incrSavesBy(homeGKSaves);
 				break;
 			}
 		}
@@ -163,6 +168,7 @@ public class Simulate {
 			if (player.getPosition() == Position.GK) {
 				// and assign the awayGKSaves to him
 				player.stats[roundNum].setSaves(awayGKSaves);
+				player.incrSavesBy(awayGKSaves);
 				break;
 			}
 		}
@@ -209,6 +215,7 @@ public class Simulate {
 			
 			// Also add that goal to the FootballPlayer's own statistics
 			specifiedTeam[thisManScored].stats[roundNum].incrGoalsBy(1);
+			specifiedTeam[thisManScored].incrGoalsBy(1);
 			
 			amountOfGoals--;	
 		}
@@ -246,6 +253,7 @@ public class Simulate {
 			FootballPlayer itsHim = players[whichTypeScored][whichPlayerScored];
 			
 			itsHim.stats[roundNum].incrOwnGoalsBy(1);
+			itsHim.incrOwnGoalsBy(1);
 			
 			if (team == home) results.addAwayScorer(itsHim);
 			if (team == away) results.addHomeScorer(itsHim);
@@ -280,7 +288,9 @@ public class Simulate {
 			if (specifiedTeam[playerIndex].stats[roundNum].getRedCards() != 1) {
 				
 				specifiedTeam[playerIndex].stats[roundNum].setRedCards(1);
+				specifiedTeam[playerIndex].incrRedCardsBy(1);
 				specifiedTeam[playerIndex].stats[roundNum].setYellowCards(1);
+				specifiedTeam[playerIndex].incrYellowCardsBy(1);
 				amountOfRCs--;
 			}
 		}
@@ -311,6 +321,7 @@ public class Simulate {
 			if (specifiedTeam[playerIndex].stats[roundNum].getYellowCards() == 0) {
 				
 				specifiedTeam[playerIndex].stats[roundNum].setYellowCards(1);
+				specifiedTeam[playerIndex].incrYellowCardsBy(1);
 				amountOfYCs--;
 			}
 		}
@@ -325,9 +336,11 @@ public class Simulate {
 		for (FootballPlayer player : team.getSimulationTeam()) {
 			if (player.stats[roundNum].getRedCards() != 1) {
 				player.stats[roundNum].setMinutes(90);
+				player.incrMinutesBy(90);
 			} else {
 				int minutes = (int)(Math.random()*91);
 				player.stats[roundNum].setMinutes(minutes);
+				player.incrMinutesBy(minutes);
 			}
 		}
 	}
@@ -380,6 +393,7 @@ public class Simulate {
 			FootballPlayer itsHim = players[whichTypeAssisted][whichPlayerAssisted];
 			
 			itsHim.stats[roundNum].incrAssistsBy(1);
+			itsHim.incrAssistsBy(1);
 			
 			amountOfAssists--;
 		}

@@ -12,6 +12,18 @@ public class FootballPlayer {
 	private Position position;
 	private String 	 picturePath;
 	
+	// The sum of all the round statistics:
+	private int cleanSheets;
+	private int goalsConceded;
+	private int yellowCards;
+	private int ownGoals;
+	private int redCards;
+	private int minutes;
+	private int assists;
+	private int goals;
+	private int saves;
+	private int score;
+	
 	//
 	//CONSTUCTOR
 	//
@@ -62,6 +74,7 @@ public class FootballPlayer {
 		}
 		
 		this.stats[roundNumber].setScore( newScore );
+		incrScoreBy( newScore );
 	}
 	
 	// returns calculate score from the round that has just been simulated
@@ -101,6 +114,37 @@ public class FootballPlayer {
 	public void setMarketValue(int value) {
 		this.marketValue = value;
 	}
+	
+	public void setCleanSheets(int value) {
+		cleanSheets = value;
+	}
+	public void setGoalsConceded(int value) {
+		goalsConceded = value;
+	}
+	public void setYellowCards(int value) {
+		yellowCards = value;
+	}
+	public void setOwnGoals(int value) {
+		ownGoals = value;
+	}
+	public void setRedCards(int value) {
+		redCards = value;
+	}
+	public void setMinutes(int value) {
+		minutes = value;
+	}
+	public void setAssists(int value) {
+		assists = value;
+	}
+	public void setGoals(int value) {
+		goals = value;
+	}
+	public void setSaves(int value) {
+		saves = value;
+	}
+	public void setScore(int value) {
+		score = value;
+	}
 
 	//
 	//GET METHODS
@@ -125,5 +169,68 @@ public class FootballPlayer {
 	}
 	public Statistics[] getStats() {
 		return this.stats;
+	}
+	
+	public int getCleanSheets() {
+		return cleanSheets;
+	}
+	public int getGoalsConceded() {
+		return goalsConceded;
+	}
+	public int getYellowCards() {
+		return yellowCards;
+	}
+	public int getOwnGoals() {
+		return ownGoals;
+	}
+	public int getRedCards() {
+		return redCards;
+	}
+	public int getMinutes() {
+		return minutes;
+	}
+	public int getAssists() {
+		return assists;
+	}
+	public int getGoals() {
+		return goals;
+	}
+	public int getSaves() {
+		return saves;
+	}
+	public int getScore() {
+		return score;
+	}
+	
+	// Incrementers
+	public void incrCleanSheetsBy(int amount) {
+		cleanSheets += amount;
+	}
+	public void incrGoalsConcededBy(int amount) {
+		goalsConceded += amount;
+	}
+	public void incrYellowCardsBy(int amount) {
+		yellowCards += amount;
+	}
+	public void incrOwnGoalsBy(int amount) {
+		ownGoals += amount;
+	}
+	public void incrRedCardsBy(int amount) {
+		redCards += amount;
+	}
+	public void incrMinutesBy(int amount) {
+		minutes += amount;
+	}
+	public void incrAssistsBy(int amount) {
+		assists += amount;
+	}
+	public void incrGoalsBy(int amount) {
+		goals += amount;
+	}
+	public void incrSavesBy(int amount) {
+		saves += amount;
+	}
+	public void incrScoreBy(int amount) {
+		score += amount;
 	}
 }
